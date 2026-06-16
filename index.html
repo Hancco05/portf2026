@@ -1,12 +1,697 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <h1>holaaaaaaaaaaaaaaaaaaaaa</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NexusCore | Portfolio Avanzado - Informática & Automatización</title>
+    <!-- Font Awesome 6 (Iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter + JetBrains Mono para estilo técnico -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0A0C0F;
+            font-family: 'Inter', sans-serif;
+            color: #E5E9F0;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scroll */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1E1E2E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4F46E5;
+            border-radius: 8px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Sección general */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            border-left: 5px solid #6C63FF;
+            padding-left: 1rem;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #B9B4FF 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .card-glass {
+            background: rgba(18, 22, 28, 0.85);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: 28px;
+            padding: 1.5rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 12px 28px -8px rgba(0,0,0,0.5);
+        }
+
+        .card-glass:hover {
+            border-color: #6C63FF;
+            box-shadow: 0 20px 32px -12px rgba(108, 99, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #F0F3FF, #A9A5FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .badge-role {
+            background: #1E1F2C;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-left: 2px solid #6C63FF;
+        }
+
+        /* SKILLS GRID (todas las tecnologías) */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(25, 30, 38, 0.7);
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid #2A2E3A;
+            transition: 0.2s;
+        }
+        .skill-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .level {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 30px;
+            background: #1E1F2C;
+        }
+        .level.advanced {
+            background: #2B2B44;
+            color: #C084FC;
+            border-left: 2px solid #C084FC;
+        }
+        .level.intermediate {
+            background: #232530;
+            color: #90E0EF;
+            border-left: 2px solid #48CAE4;
+        }
+
+        /* Proyectos GitHub (Portafolio de prueba) */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+        .project-card {
+            background: #111317;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #2A2E3A;
+            transition: all 0.2s;
+        }
+        .project-card:hover {
+            border-color: #6C63FF;
+        }
+        .project-info {
+            padding: 1.5rem;
+        }
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .project-desc {
+            color: #B5C0D0;
+            font-size: 0.85rem;
+            margin: 0.7rem 0;
+        }
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 1rem 0;
+        }
+        .tech-tags span {
+            background: #202430;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2A2F3F;
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .github-link:hover {
+            background: #4F46E5;
+            gap: 12px;
+        }
+
+        /* Contacto + Enlaces footer */
+        .contact-footer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            background: #0C0F15;
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid #2C2F3A;
+        }
+        .contact-form h3, .social-block h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        input, textarea {
+            width: 100%;
+            background: #1A1E26;
+            border: 1px solid #32363F;
+            padding: 12px 16px;
+            border-radius: 20px;
+            color: #F0F3FA;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: 0.2s;
+        }
+        input:focus, textarea:focus {
+            border-color: #6C63FF;
+        }
+        .btn-send {
+            background: #6C63FF;
+            border: none;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-send:hover {
+            background: #877eff;
+            transform: scale(1.01);
+        }
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            background: #1A1E28;
+            width: 48px;
+            height: 48px;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: #C3CDEF;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            background: #6C63FF;
+            color: white;
+            transform: translateY(-4px);
+        }
+        .phone-item, .mail-direct {
+            margin: 12px 0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* CHATBOT (bot automatizado) */
+        .chatbot-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+        }
+        .chat-toggle {
+            background: #6C63FF;
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
+            transition: all 0.2s;
+            border: none;
+            color: white;
+        }
+        .chat-toggle:hover {
+            transform: scale(1.05);
+            background: #5A52E0;
+        }
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 340px;
+            background: #11151E;
+            border-radius: 28px;
+            border: 1px solid #333A4A;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            backdrop-filter: blur(16px);
+        }
+        .chat-header {
+            background: #1E2432;
+            padding: 14px 18px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #2B3240;
+        }
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .bot-msg, .user-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .bot-msg {
+            background: #252B38;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .user-msg {
+            background: #4F46E5;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-input-area {
+            display: flex;
+            border-top: 1px solid #2A303E;
+            padding: 10px;
+            gap: 8px;
+        }
+        .chat-input-area input {
+            flex: 1;
+            background: #1A1F28;
+            border-radius: 40px;
+            padding: 10px 15px;
+            font-size: 0.8rem;
+        }
+        .chat-send {
+            background: #6C63FF;
+            border: none;
+            border-radius: 40px;
+            width: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #6F7A8C;
+        }
+        @media (max-width: 680px) {
+            .container {
+                padding: 1rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .chat-window {
+                width: 290px;
+                right: -10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+
+<div class="container">
+    <!-- Hero / Nombre -->
+    <div class="hero">
+        <div class="badge-role"><i class="fas fa-terminal"></i>  Arquitecto Full Stack & Automatización</div>
+        <h1>Elias M. Cordero</h1>
+        <p style="font-size: 1.1rem; color: #B7C2DA;">Especialista en infraestructura de pruebas, ecosistemas Microsoft, desarrollo avanzado y soluciones cloud. <br> +8 años construyendo sistemas robustos y eficientes.</p>
+    </div>
+
+    <!-- SECCIÓN DE HABILIDADES / DOMINIO COMPLETO -->
+    <section>
+        <h2><i class="fas fa-microchip"></i> Dominio técnico</h2>
+        <div class="skills-grid" id="skillsContainer"></div>
+    </section>
+
+    <!-- SISTEMAS DE PORTAFOLIO (GitHub) -->
+    <section>
+        <h2><i class="fab fa-github"></i> Portafolio de sistemas · GitHub en acción</h2>
+        <div class="projects-grid" id="githubProjects">
+            <!-- Proyectos cargados via JS dinámico pero también estático seguro -->
+        </div>
+    </section>
+
+    <!-- CONTACTO + ENLACES: correo, celular, github, web juego, linkedin -->
+    <div class="contact-footer">
+        <div class="contact-form">
+            <h3><i class="fas fa-envelope"></i> Enviar correo electrónico</h3>
+            <form id="emailForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Tu nombre" id="userName" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Tu correo electrónico" id="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="3" placeholder="Mensaje / Consulta profesional..." id="userMsg" required></textarea>
+                </div>
+                <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
+            </form>
+        </div>
+        <div class="social-block">
+            <h3><i class="fas fa-address-card"></i> Contacto directo</h3>
+            <div class="phone-item"><i class="fas fa-phone-alt"></i> +52 55 7890 1234</div>
+            <div class="mail-direct"><i class="fas fa-inbox"></i> elias.cordero@nexuscore.dev</div>
+            <div class="social-icons">
+                <a href="https://github.com/eliascordero-dev" target="_blank" class="social-icon" id="githubLinkDemo"><i class="fab fa-github"></i></a>
+                <a href="https://mi-videojuego-nexus.itch.io" target="_blank" class="social-icon" id="gameLinkDemo"><i class="fas fa-gamepad"></i></a>
+                <a href="https://linkedin.com/in/elias-cordero-tech" target="_blank" class="social-icon" id="linkedinLinkDemo"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.8rem;"><i class="fas fa-code-branch"></i> GitHub personal: /eliascordero-dev | Videojuego propio: "Nexus: Overdrive" | LinkedIn activo</p>
+        </div>
+    </div>
+    <footer>
+        © 2025 Elias Cordero - Portfolio de alto rendimiento | Automatización, desarrollo ágil y arquitectura TI
+    </footer>
+</div>
+
+<!-- CHATBOT (Bot automático) -->
+<div class="chatbot-container">
+    <div class="chat-toggle" id="chatToggleBtn">
+        <i class="fas fa-robot"></i>
+    </div>
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span><i class="fas fa-comment-dots"></i> Asistente IA · Resuelve dudas</span>
+            <i class="fas fa-times" id="closeChat" style="cursor:pointer;"></i>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-msg">🤖 ¡Hola! Soy el bot automatizado. Pregúntame sobre habilidades, experiencia con PHP, Selenium, React, Docker, proyectos, etc.</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
+            <button class="chat-send" id="chatSendBtn"><i class="fas fa-arrow-up"></i></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // -------------------------------------------------------------
+    // 1. Lista completa de habilidades según requerimientos
+    // -------------------------------------------------------------
+    const skillsData = [
+        { name: "PHP", level: "Avanzado", levelClass: "advanced" },
+        { name: "MS Office", level: "Avanzado", levelClass: "advanced" },
+        { name: "Power Platforms", level: "Avanzado", levelClass: "advanced" },
+        { name: "WordPress", level: "Avanzado", levelClass: "advanced" },
+        { name: "Selenium", level: "Avanzado", levelClass: "advanced" },
+        { name: "Gherkin / Cucumber", level: "Intermedio", levelClass: "intermediate" },
+        { name: "React / Node / JS / HTML5-CSS3", level: "Intermedio", levelClass: "intermediate" },
+        { name: "Python / Java / C#", level: "Intermedio", levelClass: "intermediate" },
+        { name: "SQL Server / MySQL / Oracle / MongoDB", level: "Intermedio", levelClass: "intermediate" },
+        { name: "Git / GitHub / Docker / Jenkins / AWS / Azure", level: "Intermedio", levelClass: "intermediate" },
+        { name: "MS Power BI / SAP", level: "Intermedio", levelClass: "intermediate" }
+    ];
+
+    function renderSkills() {
+        const container = document.getElementById('skillsContainer');
+        if(!container) return;
+        container.innerHTML = '';
+        skillsData.forEach(skill => {
+            const div = document.createElement('div');
+            div.className = 'skill-item';
+            div.innerHTML = `
+                <div class="skill-name"><i class="fas fa-code"></i> ${skill.name}</div>
+                <span class="level ${skill.levelClass}">${skill.level}</span>
+            `;
+            container.appendChild(div);
+        });
+    }
+    renderSkills();
+
+    // -------------------------------------------------------------
+    // 2. Proyectos de portafolio (github) - sistemas de prueba
+    // -------------------------------------------------------------
+    const reposPortfolio = [
+        {
+            title: "QA Suite Selenium + Cucumber",
+            desc: "Framework híbrido de automatización con Selenium WebDriver, Gherkin, reportes Allure y ejecución en Jenkins.",
+            tech: ["Java", "Selenium", "Cucumber", "Jenkins"],
+            repoUrl: "https://github.com/eliascordero-dev/qa-selenium-cucumber"
+        },
+        {
+            title: "Power Platform RPA & Automatización",
+            desc: "Soluciones con Power Automate, Power Apps y flujos avanzados integrados con SharePoint y Dataverse.",
+            tech: ["Power Platforms", "Power Automate", "Dataverse"],
+            repoUrl: "https://github.com/eliascordero-dev/powerplatform-automation"
+        },
+        {
+            title: "React Node Ecosistema - GameHub",
+            desc: "Portal interactivo para videojuegos con React, Node.js, MongoDB y despliegue en AWS (EC2).",
+            tech: ["React", "Node.js", "MongoDB", "AWS"],
+            repoUrl: "https://github.com/eliascordero-dev/gamehub-react-node"
+        },
+        {
+            title: "Microservicios Docker + Azure + GitHub Actions",
+            desc: "Arquitectura de microservicios con .NET/C#, Azure Container Registry, CI/CD con GitHub Actions.",
+            tech: ["C#", "Docker", "Azure", "GitHub Actions"],
+            repoUrl: "https://github.com/eliascordero-dev/ms-azure-docker"
+        }
+    ];
+
+    function renderProjects() {
+        const projectsContainer = document.getElementById('githubProjects');
+        if(!projectsContainer) return;
+        projectsContainer.innerHTML = '';
+        reposPortfolio.forEach(proj => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.innerHTML = `
+                <div class="project-info">
+                    <div class="project-title"><i class="fab fa-github-alt"></i> ${proj.title}</div>
+                    <div class="project-desc">${proj.desc}</div>
+                    <div class="tech-tags">
+                        ${proj.tech.map(t => `<span>${t}</span>`).join('')}
+                    </div>
+                    <a href="${proj.repoUrl}" target="_blank" class="github-link"><i class="fab fa-github"></i> Ver repositorio</a>
+                </div>
+            `;
+            projectsContainer.appendChild(card);
+        });
+    }
+    renderProjects();
+
+    // -------------------------------------------------------------
+    // 3. Funcionalidad para enviar correo (usando mailto con datos)
+    // -------------------------------------------------------------
+    const emailForm = document.getElementById('emailForm');
+    if(emailForm) {
+        emailForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('userName').value.trim();
+            const senderEmail = document.getElementById('userEmail').value.trim();
+            const message = document.getElementById('userMsg').value.trim();
+            if(!name || !senderEmail || !message) {
+                alert("Por favor completa todos los campos para enviar el correo.");
+                return;
+            }
+            const recipient = "elias.cordero@nexuscore.dev";
+            const subject = `Contacto portfolio: ${name} quiere comunicarse`;
+            const body = `Nombre: ${name}%0AEmail: ${senderEmail}%0AMensaje:%0A${message}%0A%0A--- Enviado desde portafolio web ---`;
+            window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${body}`;
+            // feedback adicional
+            alert("Se abrirá tu cliente de correo. ¡Gracias por tu mensaje! Revisaré tu consulta.");
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 4. CHATBOT AUTOMATIZADO (respuesta a dudas)
+    // -------------------------------------------------------------
+    const chatToggle = document.getElementById('chatToggleBtn');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const chatMessagesDiv = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+
+    function openChat() {
+        chatWindow.style.display = 'flex';
+    }
+    function closeChatWindow() {
+        chatWindow.style.display = 'none';
+    }
+    chatToggle.addEventListener('click', () => {
+        if(chatWindow.style.display === 'flex') closeChatWindow();
+        else openChat();
+    });
+    closeChat.addEventListener('click', closeChatWindow);
+
+    // Respuestas inteligentes del bot
+    function getBotResponse(userQuestion) {
+        const q = userQuestion.toLowerCase().trim();
+        // Detección de palabras clave
+        if(q.includes('php') || q.includes('nivel php')) {
+            return "💡 PHP: Nivel Avanzado. Desarrollo de sistemas complejos, frameworks Laravel, arquitectura MVC, y APIs RESTful. He liderado proyectos de alto tráfico.";
+        }
+        if(q.includes('selenium') || q.includes('automatización web')) {
+            return "🧪 Selenium: Avanzado. Implemento frameworks con Page Object Model, grid distribuido, integración continua y paralelización de pruebas.";
+        }
+        if(q.includes('wordpress') || q.includes('wp')) {
+            return "📌 WordPress: Nivel Avanzado. Desarrollo de temas personalizados, plugins, optimización de rendimiento y WooCommerce.";
+        }
+        if(q.includes('react') || q.includes('node') || q.includes('frontend')) {
+            return "⚛️ React / Node: Nivel Intermedio. Construcción de SPA, componentes funcionales, hooks, Express.js y APIs integradas con bases de datos.";
+        }
+        if(q.includes('python') || q.includes('java') || q.includes('c#')) {
+            return "🐍 Python, Java, C#: nivel intermedio. Desarrollo de scripts, microservicios, automatización de tareas y aplicaciones empresariales.";
+        }
+        if(q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) {
+            return "🐳 DevOps: Docker, Jenkins, AWS, Azure nivel intermedio. Experiencia en CI/CD pipelines, contenedores, despliegues en cloud y orquestación.";
+        }
+        if(q.includes('sql') || q.includes('oracle') || q.includes('mongodb')) {
+            return "🗄️ Bases de datos: SQL Server, MySQL, Oracle PL/SQL, MongoDB nivel intermedio. Modelado, consultas optimizadas, procedimientos almacenados y agregaciones NoSQL.";
+        }
+        if(q.includes('power bi') || q.includes('sap')) {
+            return "📊 Power BI: Nivel intermedio. Creación de dashboards interactivos, DAX avanzado, conexiones SAP y modelado de datos empresariales.";
+        }
+        if(q.includes('proyecto') || q.includes('portafolio') || q.includes('github') ) {
+            return "🚀 Mis proyectos destacados están en GitHub: Frameworks de automatización, microservicios, React, Power Platform. Revisa la sección 'Portafolio de sistemas' arriba.";
+        }
+        if(q.includes('hola') || q.includes('buenas') || q.includes('saludo')) {
+            return "¡Hola! Soy el asistente automatizado. Puedo resolver dudas sobre tecnologías: PHP, Selenium, React, Docker, Power Platforms, etc. ¿Qué deseas saber?";
+        }
+        if(q.includes('experiencia') || q.includes('trayectoria')) {
+            return "👨‍💻 Más de 8 años en desarrollo full stack, automatización de pruebas y consultoría tecnológica. He trabajado con equipos internacionales y proyectos de alto rendimiento.";
+        }
+        return "🔍 No tengo información específica sobre eso, pero puedes preguntarme por tecnologías como PHP, Selenium, WordPress, React, Python, SQL, DevOps, Power BI o ver mis proyectos en GitHub. 😊";
+    }
+
+    function addMessage(text, isUser = false) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = isUser ? 'user-msg' : 'bot-msg';
+        msgDiv.innerHTML = isUser ? `<i class="fas fa-user"></i> ${text}` : `<i class="fas fa-robot"></i> ${text}`;
+        chatMessagesDiv.appendChild(msgDiv);
+        chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
+    }
+
+    function handleUserMessage() {
+        const userMsg = chatInput.value.trim();
+        if(userMsg === "") return;
+        addMessage(userMsg, true);
+        chatInput.value = "";
+        // Simular respuesta del bot con un mínimo delay natural
+        setTimeout(() => {
+            const botAnswer = getBotResponse(userMsg);
+            addMessage(botAnswer, false);
+        }, 300);
+    }
+
+    chatSendBtn.addEventListener('click', handleUserMessage);
+    chatInput.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') handleUserMessage();
+    });
+
+    // Pequeño ajuste: si se abre la primera vez mostrar mensaje bienvenida si no hay mensajes previos (ya existe)
+    // Prevenir duplicado pero está bien.
+
+    // Opcional: links demostrativos funcionales de github, juego, linkedin (los href ya están pero mostramos)
+    // Aseguramos que los enlaces del footer tengan url realistas pero el usuario puede editar
+    // Para cumplir con requerimiento de 'sitio web de videojuego propio' y 'github' y 'linkedin'
+    // Los enlaces ya están y se abren en nueva pestaña.
+    // También si el usuario desea cambiar fácilmente las URLs, pueden editar los id.
+    // Mejor agregar interactividad simple: confirmación de que se dirigen a portafolio real
+    const gitLink = document.getElementById('githubLinkDemo');
+    const gameLink = document.getElementById('gameLinkDemo');
+    const linkedinLink = document.getElementById('linkedinLinkDemo');
+    if(gitLink) gitLink.addEventListener('click', (e) => { console.log("Accediendo a GitHub"); });
+    if(gameLink) gameLink.addEventListener('click', (e) => { console.log("Juego propio: Nexux: Overdrive"); });
+    if(linkedinLink) linkedinLink.addEventListener('click', (e) => { console.log("Perfil LinkedIn"); });
+
+    // Ajuste para mostrar correctamente el bot automatizado y que responda dudas.
+    // También incluye funcionalidad de 'celular' en el bloque social con ícono.
+    // todos los requisitos concluídos.
+</script>
 </body>
 </html>
