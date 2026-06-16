@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>NexusCore | Portfolio Avanzado - Informática & Automatización</title>
-    <!-- Font Awesome 6 (Iconos) -->
+    <title>NexusCore | Portfolio Técnico - Logos & Herramientas</title>
+    <!-- Font Awesome 6 (Iconos completos para tecnologías) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Inter + JetBrains Mono para estilo técnico -->
+    <!-- Google Fonts: Inter + JetBrains Mono -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
@@ -23,7 +23,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Custom scroll */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -41,7 +40,6 @@
             padding: 2rem 1.5rem;
         }
 
-        /* Sección general */
         section {
             margin-bottom: 4rem;
         }
@@ -69,13 +67,6 @@
             box-shadow: 0 12px 28px -8px rgba(0,0,0,0.5);
         }
 
-        .card-glass:hover {
-            border-color: #6C63FF;
-            box-shadow: 0 20px 32px -12px rgba(108, 99, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        /* Hero */
         .hero {
             display: flex;
             flex-direction: column;
@@ -100,48 +91,43 @@
             border-left: 2px solid #6C63FF;
         }
 
-        /* SKILLS GRID (todas las tecnologías) */
+        /* SKILLS GRID - SOLO NOMBRES CON LOGOS (sin niveles) */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1rem;
         }
         .skill-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 12px;
             background: rgba(25, 30, 38, 0.7);
             padding: 0.8rem 1.2rem;
             border-radius: 60px;
             border: 1px solid #2A2E3A;
             transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .skill-item i, .skill-item .custom-icon {
+            font-size: 1.4rem;
+            width: 32px;
+            text-align: center;
+            color: #B9B4FF;
+        }
+        .skill-item:hover {
+            border-color: #6C63FF;
+            background: #1A1E2A;
+            transform: translateX(4px);
         }
         .skill-name {
-            font-weight: 600;
-            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-        .level {
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 30px;
-            background: #1E1F2C;
-        }
-        .level.advanced {
-            background: #2B2B44;
-            color: #C084FC;
-            border-left: 2px solid #C084FC;
-        }
-        .level.intermediate {
-            background: #232530;
-            color: #90E0EF;
-            border-left: 2px solid #48CAE4;
+            flex-wrap: wrap;
         }
 
-        /* Proyectos GitHub (Portafolio de prueba) */
+        /* Proyectos GitHub */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -205,7 +191,7 @@
             gap: 12px;
         }
 
-        /* Contacto + Enlaces footer */
+        /* Contacto y footer */
         .contact-footer {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -285,7 +271,7 @@
             gap: 12px;
         }
 
-        /* CHATBOT (bot automatizado) */
+        /* CHATBOT */
         .chatbot-container {
             position: fixed;
             bottom: 24px;
@@ -385,6 +371,7 @@
             font-size: 0.75rem;
             color: #6F7A8C;
         }
+
         @media (max-width: 680px) {
             .container {
                 padding: 1rem;
@@ -396,37 +383,38 @@
                 width: 290px;
                 right: -10px;
             }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Hero / Nombre -->
+    <!-- Hero -->
     <div class="hero">
-        <div class="badge-role"><i class="fas fa-terminal"></i>  Arquitecto Full Stack & Automatización</div>
+        <div class="badge-role"><i class="fas fa-microchip"></i>  Ingeniero Full Stack & Automatización</div>
         <h1>Elias M. Cordero</h1>
-        <p style="font-size: 1.1rem; color: #B7C2DA;">Especialista en infraestructura de pruebas, ecosistemas Microsoft, desarrollo avanzado y soluciones cloud. <br> +8 años construyendo sistemas robustos y eficientes.</p>
+        <p style="font-size: 1.1rem; color: #B7C2DA;">Especialista en ecosistemas Microsoft, pruebas automatizadas, desarrollo cloud y arquitectura DevOps. <br> +8 años integrando soluciones empresariales de alto rendimiento.</p>
     </div>
 
-    <!-- SECCIÓN DE HABILIDADES / DOMINIO COMPLETO -->
+    <!-- SECCIÓN DE HABILIDADES CON LOGOS (sin niveles) -->
     <section>
-        <h2><i class="fas fa-microchip"></i> Dominio técnico</h2>
+        <h2><i class="fas fa-cogs"></i> Stack Tecnológico & Herramientas</h2>
         <div class="skills-grid" id="skillsContainer"></div>
     </section>
 
-    <!-- SISTEMAS DE PORTAFOLIO (GitHub) -->
+    <!-- PORTAFOLIO DE SISTEMAS EN GITHUB -->
     <section>
-        <h2><i class="fab fa-github"></i> Portafolio de sistemas · GitHub en acción</h2>
-        <div class="projects-grid" id="githubProjects">
-            <!-- Proyectos cargados via JS dinámico pero también estático seguro -->
-        </div>
+        <h2><i class="fab fa-github"></i> Sistemas Destacados · GitHub</h2>
+        <div class="projects-grid" id="githubProjects"></div>
     </section>
 
-    <!-- CONTACTO + ENLACES: correo, celular, github, web juego, linkedin -->
+    <!-- CONTACTO + ENLACES: correo, teléfono, github, juego propio, linkedin -->
     <div class="contact-footer">
         <div class="contact-form">
-            <h3><i class="fas fa-envelope"></i> Enviar correo electrónico</h3>
+            <h3><i class="fas fa-envelope"></i> Envíame un mensaje</h3>
             <form id="emailForm">
                 <div class="form-group">
                     <input type="text" placeholder="Tu nombre" id="userName" required>
@@ -437,7 +425,7 @@
                 <div class="form-group">
                     <textarea rows="3" placeholder="Mensaje / Consulta profesional..." id="userMsg" required></textarea>
                 </div>
-                <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
+                <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar correo</button>
             </form>
         </div>
         <div class="social-block">
@@ -445,19 +433,19 @@
             <div class="phone-item"><i class="fas fa-phone-alt"></i> +52 55 7890 1234</div>
             <div class="mail-direct"><i class="fas fa-inbox"></i> elias.cordero@nexuscore.dev</div>
             <div class="social-icons">
-                <a href="https://github.com/eliascordero-dev" target="_blank" class="social-icon" id="githubLinkDemo"><i class="fab fa-github"></i></a>
-                <a href="https://mi-videojuego-nexus.itch.io" target="_blank" class="social-icon" id="gameLinkDemo"><i class="fas fa-gamepad"></i></a>
-                <a href="https://linkedin.com/in/elias-cordero-tech" target="_blank" class="social-icon" id="linkedinLinkDemo"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/eliascordero-dev" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="https://mi-videojuego-nexus.itch.io" target="_blank" class="social-icon"><i class="fas fa-gamepad"></i></a>
+                <a href="https://linkedin.com/in/elias-cordero-tech" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
             </div>
-            <p style="margin-top: 1rem; font-size: 0.8rem;"><i class="fas fa-code-branch"></i> GitHub personal: /eliascordero-dev | Videojuego propio: "Nexus: Overdrive" | LinkedIn activo</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;"><i class="fas fa-code-branch"></i> GitHub: /eliascordero-dev | Videojuego: "Nexus: Overdrive" | LinkedIn activo</p>
         </div>
     </div>
     <footer>
-        © 2025 Elias Cordero - Portfolio de alto rendimiento | Automatización, desarrollo ágil y arquitectura TI
+        © 2025 Elias Cordero · Portafolio con iconos técnicos · Automatización, Desarrollo Full Stack & Cloud.
     </footer>
 </div>
 
-<!-- CHATBOT (Bot automático) -->
+<!-- CHATBOT AUTOMÁTICO -->
 <div class="chatbot-container">
     <div class="chat-toggle" id="chatToggleBtn">
         <i class="fas fa-robot"></i>
@@ -468,7 +456,7 @@
             <i class="fas fa-times" id="closeChat" style="cursor:pointer;"></i>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="bot-msg">🤖 ¡Hola! Soy el bot automatizado. Pregúntame sobre habilidades, experiencia con PHP, Selenium, React, Docker, proyectos, etc.</div>
+            <div class="bot-msg">🤖 ¡Hola! Soy el bot técnico. Pregúntame sobre PHP, Selenium, React, Docker, Power Platforms, o cualquiera de mis habilidades. También sobre mi dominio de inglés técnico.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
@@ -479,63 +467,67 @@
 
 <script>
     // -------------------------------------------------------------
-    // 1. Lista completa de habilidades según requerimientos
+    // LISTA DE TECNOLOGÍAS CON LOGOS (Íconos FA y personalizados) - SIN NIVELES
+    // Se agregó "Inglés (Técnico/Intermedio)" como dominio de idioma
     // -------------------------------------------------------------
-    const skillsData = [
-        { name: "PHP", level: "Avanzado", levelClass: "advanced" },
-        { name: "MS Office", level: "Avanzado", levelClass: "advanced" },
-        { name: "Power Platforms", level: "Avanzado", levelClass: "advanced" },
-        { name: "WordPress", level: "Avanzado", levelClass: "advanced" },
-        { name: "Selenium", level: "Avanzado", levelClass: "advanced" },
-        { name: "Gherkin / Cucumber", level: "Intermedio", levelClass: "intermediate" },
-        { name: "React / Node / JS / HTML5-CSS3", level: "Intermedio", levelClass: "intermediate" },
-        { name: "Python / Java / C#", level: "Intermedio", levelClass: "intermediate" },
-        { name: "SQL Server / MySQL / Oracle / MongoDB", level: "Intermedio", levelClass: "intermediate" },
-        { name: "Git / GitHub / Docker / Jenkins / AWS / Azure", level: "Intermedio", levelClass: "intermediate" },
-        { name: "MS Power BI / SAP", level: "Intermedio", levelClass: "intermediate" }
+    const skillsWithIcons = [
+        { name: "PHP", icon: "fab fa-php" },
+        { name: "MS Office", icon: "fas fa-file-excel" },
+        { name: "Power Platforms", icon: "fas fa-chalkboard-user" },
+        { name: "WordPress", icon: "fab fa-wordpress" },
+        { name: "Selenium", icon: "fas fa-robot" },
+        { name: "Gherkin / Cucumber", icon: "fas fa-comment-dots" },
+        { name: "React / Node / JS / HTML5-CSS3", icon: "fab fa-react" },
+        { name: "Python / Java / C#", icon: "fab fa-python" },
+        { name: "SQL Server / MySQL / Oracle / MongoDB", icon: "fas fa-database" },
+        { name: "Git / GitHub / Docker / Jenkins / AWS / Azure", icon: "fab fa-docker" },
+        { name: "MS Power BI / SAP", icon: "fas fa-chart-line" },
+        // Agregamos dominio de inglés técnico
+        { name: "Inglés Técnico (Intermedio/Avanzado)", icon: "fas fa-language" }
     ];
 
-    function renderSkills() {
+    function renderSkillsWithLogos() {
         const container = document.getElementById('skillsContainer');
-        if(!container) return;
+        if (!container) return;
         container.innerHTML = '';
-        skillsData.forEach(skill => {
+        skillsWithIcons.forEach(skill => {
             const div = document.createElement('div');
             div.className = 'skill-item';
+            // Utilizamos el icono correspondiente, si es clase especial de font awesome va directo
             div.innerHTML = `
-                <div class="skill-name"><i class="fas fa-code"></i> ${skill.name}</div>
-                <span class="level ${skill.levelClass}">${skill.level}</span>
+                <i class="${skill.icon}"></i>
+                <span class="skill-name">${skill.name}</span>
             `;
             container.appendChild(div);
         });
     }
-    renderSkills();
+    renderSkillsWithLogos();
 
     // -------------------------------------------------------------
-    // 2. Proyectos de portafolio (github) - sistemas de prueba
+    // PROYECTOS PORTAFOLIO (sistemas de prueba)
     // -------------------------------------------------------------
     const reposPortfolio = [
         {
             title: "QA Suite Selenium + Cucumber",
-            desc: "Framework híbrido de automatización con Selenium WebDriver, Gherkin, reportes Allure y ejecución en Jenkins.",
+            desc: "Framework avanzado de automatización con Selenium WebDriver, Gherkin, reportes Allure y CI/CD con Jenkins. Pruebas end-to-end robustas.",
             tech: ["Java", "Selenium", "Cucumber", "Jenkins"],
             repoUrl: "https://github.com/eliascordero-dev/qa-selenium-cucumber"
         },
         {
             title: "Power Platform RPA & Automatización",
-            desc: "Soluciones con Power Automate, Power Apps y flujos avanzados integrados con SharePoint y Dataverse.",
+            desc: "Flujos de Power Automate, Power Apps conectados a SharePoint, Dataverse y automatización de procesos empresariales.",
             tech: ["Power Platforms", "Power Automate", "Dataverse"],
             repoUrl: "https://github.com/eliascordero-dev/powerplatform-automation"
         },
         {
             title: "React Node Ecosistema - GameHub",
-            desc: "Portal interactivo para videojuegos con React, Node.js, MongoDB y despliegue en AWS (EC2).",
+            desc: "Portal interactivo para gestión de videojuegos con React, Node.js, MongoDB, despliegue en AWS EC2 e integración continua.",
             tech: ["React", "Node.js", "MongoDB", "AWS"],
             repoUrl: "https://github.com/eliascordero-dev/gamehub-react-node"
         },
         {
             title: "Microservicios Docker + Azure + GitHub Actions",
-            desc: "Arquitectura de microservicios con .NET/C#, Azure Container Registry, CI/CD con GitHub Actions.",
+            desc: "Arquitectura de microservicios con .NET/C#, Azure Container Registry, GitHub Actions y monitoreo con Application Insights.",
             tech: ["C#", "Docker", "Azure", "GitHub Actions"],
             repoUrl: "https://github.com/eliascordero-dev/ms-azure-docker"
         }
@@ -543,7 +535,7 @@
 
     function renderProjects() {
         const projectsContainer = document.getElementById('githubProjects');
-        if(!projectsContainer) return;
+        if (!projectsContainer) return;
         projectsContainer.innerHTML = '';
         reposPortfolio.forEach(proj => {
             const card = document.createElement('div');
@@ -564,30 +556,29 @@
     renderProjects();
 
     // -------------------------------------------------------------
-    // 3. Funcionalidad para enviar correo (usando mailto con datos)
+    // FUNCIONALIDAD DE ENVÍO DE CORREO (mailto)
     // -------------------------------------------------------------
     const emailForm = document.getElementById('emailForm');
-    if(emailForm) {
+    if (emailForm) {
         emailForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const name = document.getElementById('userName').value.trim();
             const senderEmail = document.getElementById('userEmail').value.trim();
             const message = document.getElementById('userMsg').value.trim();
-            if(!name || !senderEmail || !message) {
-                alert("Por favor completa todos los campos para enviar el correo.");
+            if (!name || !senderEmail || !message) {
+                alert("Por favor, completa todos los campos para enviar el correo.");
                 return;
             }
             const recipient = "elias.cordero@nexuscore.dev";
             const subject = `Contacto portfolio: ${name} quiere comunicarse`;
-            const body = `Nombre: ${name}%0AEmail: ${senderEmail}%0AMensaje:%0A${message}%0A%0A--- Enviado desde portafolio web ---`;
+            const body = `Nombre: ${name}%0AEmail: ${senderEmail}%0AMensaje:%0A${message}%0A%0A--- Desde portafolio web ---`;
             window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${body}`;
-            // feedback adicional
-            alert("Se abrirá tu cliente de correo. ¡Gracias por tu mensaje! Revisaré tu consulta.");
+            alert("Se abrirá tu cliente de correo. ¡Gracias por tu mensaje!");
         });
     }
 
     // -------------------------------------------------------------
-    // 4. CHATBOT AUTOMATIZADO (respuesta a dudas)
+    // CHATBOT AUTOMATIZADO (responde dudas y ahora también sobre inglés técnico)
     // -------------------------------------------------------------
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -603,49 +594,51 @@
         chatWindow.style.display = 'none';
     }
     chatToggle.addEventListener('click', () => {
-        if(chatWindow.style.display === 'flex') closeChatWindow();
+        if (chatWindow.style.display === 'flex') closeChatWindow();
         else openChat();
     });
     closeChat.addEventListener('click', closeChatWindow);
 
-    // Respuestas inteligentes del bot
+    // Respuestas del bot actualizadas con inglés técnico y logos conceptuales
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
-        // Detección de palabras clave
-        if(q.includes('php') || q.includes('nivel php')) {
-            return "💡 PHP: Nivel Avanzado. Desarrollo de sistemas complejos, frameworks Laravel, arquitectura MVC, y APIs RESTful. He liderado proyectos de alto tráfico.";
+        if (q.includes('php')) {
+            return "💡 PHP: dominio avanzado en frameworks Laravel, Symfony, desarrollo de APIs y sistemas de alta concurrencia.";
         }
-        if(q.includes('selenium') || q.includes('automatización web')) {
-            return "🧪 Selenium: Avanzado. Implemento frameworks con Page Object Model, grid distribuido, integración continua y paralelización de pruebas.";
+        if (q.includes('selenium') || q.includes('automatización web')) {
+            return "🧪 Selenium: implementación de pruebas cross-browser, Grid, Page Object Model y pipelines de integración continua.";
         }
-        if(q.includes('wordpress') || q.includes('wp')) {
-            return "📌 WordPress: Nivel Avanzado. Desarrollo de temas personalizados, plugins, optimización de rendimiento y WooCommerce.";
+        if (q.includes('wordpress')) {
+            return "📌 WordPress: temas personalizados, plugins, WooCommerce y optimización avanzada de rendimiento.";
         }
-        if(q.includes('react') || q.includes('node') || q.includes('frontend')) {
-            return "⚛️ React / Node: Nivel Intermedio. Construcción de SPA, componentes funcionales, hooks, Express.js y APIs integradas con bases de datos.";
+        if (q.includes('react') || q.includes('node')) {
+            return "⚛️ React / Node: desarrollo de SPAs, componentes funcionales, Express.js y conexión con bases de datos SQL/NoSQL.";
         }
-        if(q.includes('python') || q.includes('java') || q.includes('c#')) {
-            return "🐍 Python, Java, C#: nivel intermedio. Desarrollo de scripts, microservicios, automatización de tareas y aplicaciones empresariales.";
+        if (q.includes('python') || q.includes('java') || q.includes('c#')) {
+            return "🐍 Python, Java, C#: nivel intermedio, con proyectos en microservicios, automatización y scripts de procesamiento.";
         }
-        if(q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) {
-            return "🐳 DevOps: Docker, Jenkins, AWS, Azure nivel intermedio. Experiencia en CI/CD pipelines, contenedores, despliegues en cloud y orquestación.";
+        if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) {
+            return "🐳 DevOps: Docker, Jenkins, AWS, Azure — pipelines CI/CD, infraestructura como código y despliegues en cloud.";
         }
-        if(q.includes('sql') || q.includes('oracle') || q.includes('mongodb')) {
-            return "🗄️ Bases de datos: SQL Server, MySQL, Oracle PL/SQL, MongoDB nivel intermedio. Modelado, consultas optimizadas, procedimientos almacenados y agregaciones NoSQL.";
+        if (q.includes('sql') || q.includes('oracle') || q.includes('mongodb')) {
+            return "🗄️ Bases de datos: SQL Server, MySQL, Oracle PL/SQL, MongoDB — modelado, consultas optimizadas y procedimientos almacenados.";
         }
-        if(q.includes('power bi') || q.includes('sap')) {
-            return "📊 Power BI: Nivel intermedio. Creación de dashboards interactivos, DAX avanzado, conexiones SAP y modelado de datos empresariales.";
+        if (q.includes('power bi') || q.includes('sap')) {
+            return "📊 Power BI y SAP: dashboards interactivos, DAX avanzado e integración con sistemas SAP para reporting ejecutivo.";
         }
-        if(q.includes('proyecto') || q.includes('portafolio') || q.includes('github') ) {
-            return "🚀 Mis proyectos destacados están en GitHub: Frameworks de automatización, microservicios, React, Power Platform. Revisa la sección 'Portafolio de sistemas' arriba.";
+        if (q.includes('ingles') || q.includes('english') || q.includes('idioma')) {
+            return "🇬🇧 Inglés Técnico: Nivel Intermedio/Avanzado (B2-C1 técnico). Capacidad para mantener reuniones, documentación técnica, code reviews y comunicación fluida en entornos internacionales.";
         }
-        if(q.includes('hola') || q.includes('buenas') || q.includes('saludo')) {
-            return "¡Hola! Soy el asistente automatizado. Puedo resolver dudas sobre tecnologías: PHP, Selenium, React, Docker, Power Platforms, etc. ¿Qué deseas saber?";
+        if (q.includes('proyecto') || q.includes('portafolio') || q.includes('github')) {
+            return "🚀 Mis repositorios activos incluyen automatización con Selenium, Power Platform, React + Node, microservicios en Azure. Revisa la sección de 'Sistemas Destacados'.";
         }
-        if(q.includes('experiencia') || q.includes('trayectoria')) {
-            return "👨‍💻 Más de 8 años en desarrollo full stack, automatización de pruebas y consultoría tecnológica. He trabajado con equipos internacionales y proyectos de alto rendimiento.";
+        if (q.includes('hola') || q.includes('buenas') || q.includes('saludo')) {
+            return "¡Hola! Soy el asistente técnico. Pregúntame sobre PHP, Selenium, React, Docker, Power Platforms, o sobre mi nivel de inglés técnico. ¿En qué puedo ayudarte?";
         }
-        return "🔍 No tengo información específica sobre eso, pero puedes preguntarme por tecnologías como PHP, Selenium, WordPress, React, Python, SQL, DevOps, Power BI o ver mis proyectos en GitHub. 😊";
+        if (q.includes('experiencia') || q.includes('trayectoria')) {
+            return "👨‍💻 Más de 8 años en desarrollo full stack, automatización de pruebas, Power Platform y liderazgo técnico. He trabajado con equipos de EEUU y Europa.";
+        }
+        return "🔍 Puedes preguntarme sobre cualquiera de mis habilidades técnicas: PHP, MS Office, Power Platforms, WordPress, Selenium, React, Python, SQL, DevOps, Power BI e inglés técnico. ¡También ver mis proyectos en GitHub!";
     }
 
     function addMessage(text, isUser = false) {
@@ -658,40 +651,19 @@
 
     function handleUserMessage() {
         const userMsg = chatInput.value.trim();
-        if(userMsg === "") return;
+        if (userMsg === "") return;
         addMessage(userMsg, true);
         chatInput.value = "";
-        // Simular respuesta del bot con un mínimo delay natural
         setTimeout(() => {
             const botAnswer = getBotResponse(userMsg);
             addMessage(botAnswer, false);
-        }, 300);
+        }, 280);
     }
 
     chatSendBtn.addEventListener('click', handleUserMessage);
     chatInput.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter') handleUserMessage();
+        if (e.key === 'Enter') handleUserMessage();
     });
-
-    // Pequeño ajuste: si se abre la primera vez mostrar mensaje bienvenida si no hay mensajes previos (ya existe)
-    // Prevenir duplicado pero está bien.
-
-    // Opcional: links demostrativos funcionales de github, juego, linkedin (los href ya están pero mostramos)
-    // Aseguramos que los enlaces del footer tengan url realistas pero el usuario puede editar
-    // Para cumplir con requerimiento de 'sitio web de videojuego propio' y 'github' y 'linkedin'
-    // Los enlaces ya están y se abren en nueva pestaña.
-    // También si el usuario desea cambiar fácilmente las URLs, pueden editar los id.
-    // Mejor agregar interactividad simple: confirmación de que se dirigen a portafolio reeal1
-    const gitLink = document.getElementById('githubLinkDemo');
-    const gameLink = document.getElementById('gameLinkDemo');
-    const linkedinLink = document.getElementById('linkedinLinkDemo');
-    if(gitLink) gitLink.addEventListener('click', (e) => { console.log("Accediendo a GitHub"); });
-    if(gameLink) gameLink.addEventListener('click', (e) => { console.log("Juego propio: Nexux: Overdrive"); });
-    if(linkedinLink) linkedinLink.addEventListener('click', (e) => { console.log("Perfil LinkedIn"); });
-
-    // Ajuste para mostrar correctamente el bot automatizado y que responda dudas.
-    // También incluye funcionalidad de 'celular' en el bloque social con ícono.
-    // todos los requisitos concluídos.
 </script>
 </body>
 </html>
