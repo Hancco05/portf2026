@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>NexusCore | Portfolio Técnico - Logos & Herramientas</title>
-    <!-- Font Awesome 6 (Iconos completos para tecnologías) -->
+    <title>NexusCore | Portfolio Dinámico - Animaciones + Fecha Actual</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Inter + JetBrains Mono -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
@@ -21,7 +21,53 @@
             color: #E5E9F0;
             line-height: 1.5;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
+
+        /* Partículas de fondo sutiles */
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image: radial-gradient(circle at 20% 40%, rgba(108, 99, 255, 0.08) 1px, transparent 1px),
+                              radial-gradient(circle at 80% 70%, rgba(192, 132, 252, 0.06) 1px, transparent 1px);
+            background-size: 50px 50px, 80px 80px;
+            animation: drift 40s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 100px 100px, 150px 150px; }
+        }
+
+        /* Animaciones globales */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-section {
+            animation: fadeUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+        }
+
+        section, .hero, .contact-footer {
+            opacity: 0;
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        .contact-footer { animation-delay: 0.3s; }
 
         ::-webkit-scrollbar {
             width: 6px;
@@ -30,7 +76,7 @@
             background: #1E1E2E;
         }
         ::-webkit-scrollbar-thumb {
-            background: #4F46E5;
+            background: #6C63FF;
             border-radius: 8px;
         }
 
@@ -38,10 +84,8 @@
             max-width: 1300px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
-        }
-
-        section {
-            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
         }
 
         h2 {
@@ -57,46 +101,62 @@
             color: transparent;
         }
 
-        .card-glass {
-            background: rgba(18, 22, 28, 0.85);
-            backdrop-filter: blur(2px);
-            border: 1px solid rgba(108, 99, 255, 0.2);
-            border-radius: 28px;
-            padding: 1.5rem;
-            transition: all 0.25s ease;
-            box-shadow: 0 12px 28px -8px rgba(0,0,0,0.5);
+        /* Glow cards mejorado */
+        .card-glass, .project-card, .skill-item, .contact-footer {
+            transition: all 0.3s ease;
         }
 
-        .hero {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .project-card, .skill-item {
+            transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.2s;
         }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -12px rgba(108, 99, 255, 0.3);
+            border-color: #6C63FF;
+        }
+
+        .skill-item:hover {
+            transform: translateX(6px) scale(1.01);
+            background: #1E2332;
+            box-shadow: 0 8px 18px rgba(108, 99, 255, 0.2);
+        }
+
+        /* Hero highlight */
         .hero h1 {
             font-size: 3.2rem;
             font-weight: 800;
-            background: linear-gradient(to right, #F0F3FF, #A9A5FF);
-            -webkit-background-clip: text;
+            background: linear-gradient(135deg, #F0F3FF, #B9B4FF, #A970FF);
+            background-size: 200% auto;
             background-clip: text;
+            -webkit-background-clip: text;
             color: transparent;
+            animation: shimmer 5s linear infinite;
         }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
         .badge-role {
             background: #1E1F2C;
             display: inline-block;
-            padding: 0.3rem 1rem;
+            padding: 0.3rem 1.2rem;
             border-radius: 40px;
             font-size: 0.85rem;
             font-weight: 500;
             border-left: 2px solid #6C63FF;
+            backdrop-filter: blur(4px);
         }
 
-        /* SKILLS GRID - SOLO NOMBRES CON LOGOS (sin niveles) */
+        /* Skills grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1rem;
         }
+
         .skill-item {
             display: flex;
             align-items: center;
@@ -105,74 +165,58 @@
             padding: 0.8rem 1.2rem;
             border-radius: 60px;
             border: 1px solid #2A2E3A;
-            transition: 0.2s;
             font-weight: 500;
             font-size: 0.95rem;
+            backdrop-filter: blur(2px);
         }
-        .skill-item i, .skill-item .custom-icon {
+
+        .skill-item i {
             font-size: 1.4rem;
             width: 32px;
             text-align: center;
-            color: #B9B4FF;
-        }
-        .skill-item:hover {
-            border-color: #6C63FF;
-            background: #1A1E2A;
-            transform: translateX(4px);
-        }
-        .skill-name {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
+            color: #C084FC;
+            transition: transform 0.2s;
         }
 
-        /* Proyectos GitHub */
+        .skill-item:hover i {
+            transform: rotate(3deg) scale(1.1);
+            color: #A78BFA;
+        }
+
+        /* Project cards mejoradas */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.8rem;
             margin-top: 1rem;
         }
+
         .project-card {
             background: #111317;
             border-radius: 24px;
             overflow: hidden;
             border: 1px solid #2A2E3A;
-            transition: all 0.2s;
+            position: relative;
+            transition: all 0.3s;
         }
-        .project-card:hover {
-            border-color: #6C63FF;
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(108, 99, 255, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
         }
-        .project-info {
-            padding: 1.5rem;
+
+        .project-card:hover::after {
+            opacity: 1;
         }
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .project-desc {
-            color: #B5C0D0;
-            font-size: 0.85rem;
-            margin: 0.7rem 0;
-        }
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 1rem 0;
-        }
-        .tech-tags span {
-            background: #202430;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
+
         .github-link {
             display: inline-flex;
             align-items: center;
@@ -186,12 +230,14 @@
             font-size: 0.8rem;
             transition: 0.2s;
         }
+
         .github-link:hover {
-            background: #4F46E5;
+            background: #6C63FF;
             gap: 12px;
+            box-shadow: 0 4px 12px rgba(108, 99, 255, 0.4);
         }
 
-        /* Contacto y footer */
+        /* Contacto */
         .contact-footer {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -200,28 +246,9 @@
             border-radius: 32px;
             padding: 2rem;
             border: 1px solid #2C2F3A;
+            backdrop-filter: blur(4px);
         }
-        .contact-form h3, .social-block h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        input, textarea {
-            width: 100%;
-            background: #1A1E26;
-            border: 1px solid #32363F;
-            padding: 12px 16px;
-            border-radius: 20px;
-            color: #F0F3FA;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: 0.2s;
-        }
-        input:focus, textarea:focus {
-            border-color: #6C63FF;
-        }
+
         .btn-send {
             background: #6C63FF;
             border: none;
@@ -230,21 +257,18 @@
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
+
         .btn-send:hover {
             background: #877eff;
-            transform: scale(1.01);
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(108, 99, 255, 0.3);
         }
-        .social-icons {
-            display: flex;
-            gap: 1.2rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
+
         .social-icon {
             background: #1A1E28;
             width: 48px;
@@ -255,29 +279,17 @@
             justify-content: center;
             font-size: 1.6rem;
             color: #C3CDEF;
-            transition: 0.2s;
+            transition: all 0.2s;
             text-decoration: none;
         }
+
         .social-icon:hover {
             background: #6C63FF;
             color: white;
-            transform: translateY(-4px);
-        }
-        .phone-item, .mail-direct {
-            margin: 12px 0;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            transform: translateY(-6px) rotate(3deg);
         }
 
-        /* CHATBOT */
-        .chatbot-container {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 1000;
-        }
+        /* Bot chatbot animado */
         .chat-toggle {
             background: #6C63FF;
             width: 60px;
@@ -288,88 +300,33 @@
             justify-content: center;
             font-size: 28px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
-            transition: all 0.2s;
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5);
+            transition: all 0.25s;
             border: none;
             color: white;
-        }
-        .chat-toggle:hover {
-            transform: scale(1.05);
-            background: #5A52E0;
-        }
-        .chat-window {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 340px;
-            background: #11151E;
-            border-radius: 28px;
-            border: 1px solid #333A4A;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
-            overflow: hidden;
-            display: none;
-            flex-direction: column;
-            backdrop-filter: blur(16px);
-        }
-        .chat-header {
-            background: #1E2432;
-            padding: 14px 18px;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #2B3240;
-        }
-        .chat-messages {
-            height: 300px;
-            overflow-y: auto;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .bot-msg, .user-msg {
-            max-width: 85%;
-            padding: 10px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-        .bot-msg {
-            background: #252B38;
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-        .user-msg {
-            background: #4F46E5;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-        .chat-input-area {
-            display: flex;
-            border-top: 1px solid #2A303E;
-            padding: 10px;
-            gap: 8px;
-        }
-        .chat-input-area input {
-            flex: 1;
-            background: #1A1F28;
-            border-radius: 40px;
-            padding: 10px 15px;
-            font-size: 0.8rem;
-        }
-        .chat-send {
-            background: #6C63FF;
-            border: none;
-            border-radius: 40px;
-            width: 40px;
-            color: white;
-            cursor: pointer;
+            animation: pulseGlow 2s infinite;
         }
 
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(108, 99, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0); }
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.08);
+            background: #5A52E0;
+            animation: none;
+        }
+
+        /* Footer dinámico */
         footer {
             text-align: center;
             margin-top: 2rem;
-            font-size: 0.75rem;
-            color: #6F7A8C;
+            font-size: 0.8rem;
+            color: #8F9BB3;
+            padding: 1rem;
+            border-top: 1px solid rgba(108, 99, 255, 0.2);
         }
 
         @media (max-width: 680px) {
@@ -379,39 +336,32 @@
             .hero h1 {
                 font-size: 2.2rem;
             }
-            .chat-window {
-                width: 290px;
-                right: -10px;
-            }
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 <body>
-
+<div class="particles-bg"></div>
 <div class="container">
     <!-- Hero -->
-    <div class="hero">
+    <div class="hero animate-section" style="animation-delay: 0s;">
         <div class="badge-role"><i class="fas fa-microchip"></i>  Ingeniero Full Stack & Automatización</div>
         <h1>Elias M. Cordero</h1>
         <p style="font-size: 1.1rem; color: #B7C2DA;">Especialista en ecosistemas Microsoft, pruebas automatizadas, desarrollo cloud y arquitectura DevOps. <br> +8 años integrando soluciones empresariales de alto rendimiento.</p>
     </div>
 
-    <!-- SECCIÓN DE HABILIDADES CON LOGOS (sin niveles) -->
+    <!-- Habilidades con logos -->
     <section>
         <h2><i class="fas fa-cogs"></i> Stack Tecnológico & Herramientas</h2>
         <div class="skills-grid" id="skillsContainer"></div>
     </section>
 
-    <!-- PORTAFOLIO DE SISTEMAS EN GITHUB -->
+    <!-- Portafolio GitHub -->
     <section>
         <h2><i class="fab fa-github"></i> Sistemas Destacados · GitHub</h2>
         <div class="projects-grid" id="githubProjects"></div>
     </section>
 
-    <!-- CONTACTO + ENLACES: correo, teléfono, github, juego propio, linkedin -->
+    <!-- Contacto + enlaces -->
     <div class="contact-footer">
         <div class="contact-form">
             <h3><i class="fas fa-envelope"></i> Envíame un mensaje</h3>
@@ -440,12 +390,12 @@
             <p style="margin-top: 1rem; font-size: 0.8rem;"><i class="fas fa-code-branch"></i> GitHub: /eliascordero-dev | Videojuego: "Nexus: Overdrive" | LinkedIn activo</p>
         </div>
     </div>
-    <footer>
-        © 2025 Elias Cordero · Portafolio con iconos técnicos · Automatización, Desarrollo Full Stack & Cloud.
+    <footer id="dynamicFooter">
+        <!-- El año y mes se actualizan automáticamente con JS -->
     </footer>
 </div>
 
-<!-- CHATBOT AUTOMÁTICO -->
+<!-- Chatbot -->
 <div class="chatbot-container">
     <div class="chat-toggle" id="chatToggleBtn">
         <i class="fas fa-robot"></i>
@@ -456,7 +406,7 @@
             <i class="fas fa-times" id="closeChat" style="cursor:pointer;"></i>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="bot-msg">🤖 ¡Hola! Soy el bot técnico. Pregúntame sobre PHP, Selenium, React, Docker, Power Platforms, o cualquiera de mis habilidades. También sobre mi dominio de inglés técnico.</div>
+            <div class="bot-msg">🤖 ¡Hola! Soy el bot técnico. Pregúntame sobre PHP, Selenium, React, Docker, Power Platforms, o mi dominio de inglés técnico.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
@@ -467,8 +417,7 @@
 
 <script>
     // -------------------------------------------------------------
-    // LISTA DE TECNOLOGÍAS CON LOGOS (Íconos FA y personalizados) - SIN NIVELES
-    // Se agregó "Inglés (Técnico/Intermedio)" como dominio de idioma
+    // 1. LISTA DE TECNOLOGÍAS CON LOGOS (SIN NIVELES + Inglés técnico)
     // -------------------------------------------------------------
     const skillsWithIcons = [
         { name: "PHP", icon: "fab fa-php" },
@@ -482,81 +431,74 @@
         { name: "SQL Server / MySQL / Oracle / MongoDB", icon: "fas fa-database" },
         { name: "Git / GitHub / Docker / Jenkins / AWS / Azure", icon: "fab fa-docker" },
         { name: "MS Power BI / SAP", icon: "fas fa-chart-line" },
-        // Agregamos dominio de inglés técnico
         { name: "Inglés Técnico (Intermedio/Avanzado)", icon: "fas fa-language" }
     ];
 
-    function renderSkillsWithLogos() {
+    function renderSkills() {
         const container = document.getElementById('skillsContainer');
         if (!container) return;
         container.innerHTML = '';
         skillsWithIcons.forEach(skill => {
             const div = document.createElement('div');
             div.className = 'skill-item';
-            // Utilizamos el icono correspondiente, si es clase especial de font awesome va directo
-            div.innerHTML = `
-                <i class="${skill.icon}"></i>
-                <span class="skill-name">${skill.name}</span>
-            `;
+            div.innerHTML = `<i class="${skill.icon}"></i><span class="skill-name">${skill.name}</span>`;
             container.appendChild(div);
         });
     }
-    renderSkillsWithLogos();
+    renderSkills();
 
     // -------------------------------------------------------------
-    // PROYECTOS PORTAFOLIO (sistemas de prueba)
+    // 2. PROYECTOS DE PORTAFOLIO (GitHub)
     // -------------------------------------------------------------
     const reposPortfolio = [
         {
             title: "QA Suite Selenium + Cucumber",
-            desc: "Framework avanzado de automatización con Selenium WebDriver, Gherkin, reportes Allure y CI/CD con Jenkins. Pruebas end-to-end robustas.",
+            desc: "Framework avanzado de automatización con Selenium WebDriver, Gherkin, reportes Allure y CI/CD con Jenkins.",
             tech: ["Java", "Selenium", "Cucumber", "Jenkins"],
             repoUrl: "https://github.com/eliascordero-dev/qa-selenium-cucumber"
         },
         {
             title: "Power Platform RPA & Automatización",
-            desc: "Flujos de Power Automate, Power Apps conectados a SharePoint, Dataverse y automatización de procesos empresariales.",
+            desc: "Flujos de Power Automate, Power Apps conectados a SharePoint, Dataverse y automatización empresarial.",
             tech: ["Power Platforms", "Power Automate", "Dataverse"],
             repoUrl: "https://github.com/eliascordero-dev/powerplatform-automation"
         },
         {
             title: "React Node Ecosistema - GameHub",
-            desc: "Portal interactivo para gestión de videojuegos con React, Node.js, MongoDB, despliegue en AWS EC2 e integración continua.",
+            desc: "Portal interactivo para gestión de videojuegos con React, Node.js, MongoDB, despliegue en AWS EC2.",
             tech: ["React", "Node.js", "MongoDB", "AWS"],
             repoUrl: "https://github.com/eliascordero-dev/gamehub-react-node"
         },
         {
             title: "Microservicios Docker + Azure + GitHub Actions",
-            desc: "Arquitectura de microservicios con .NET/C#, Azure Container Registry, GitHub Actions y monitoreo con Application Insights.",
+            desc: "Arquitectura de microservicios con .NET/C#, Azure Container Registry, GitHub Actions y monitoreo.",
             tech: ["C#", "Docker", "Azure", "GitHub Actions"],
             repoUrl: "https://github.com/eliascordero-dev/ms-azure-docker"
         }
     ];
 
     function renderProjects() {
-        const projectsContainer = document.getElementById('githubProjects');
-        if (!projectsContainer) return;
-        projectsContainer.innerHTML = '';
+        const container = document.getElementById('githubProjects');
+        if (!container) return;
+        container.innerHTML = '';
         reposPortfolio.forEach(proj => {
             const card = document.createElement('div');
             card.className = 'project-card';
             card.innerHTML = `
-                <div class="project-info">
+                <div class="project-info" style="padding:1.5rem;">
                     <div class="project-title"><i class="fab fa-github-alt"></i> ${proj.title}</div>
                     <div class="project-desc">${proj.desc}</div>
-                    <div class="tech-tags">
-                        ${proj.tech.map(t => `<span>${t}</span>`).join('')}
-                    </div>
+                    <div class="tech-tags">${proj.tech.map(t => `<span>${t}</span>`).join('')}</div>
                     <a href="${proj.repoUrl}" target="_blank" class="github-link"><i class="fab fa-github"></i> Ver repositorio</a>
                 </div>
             `;
-            projectsContainer.appendChild(card);
+            container.appendChild(card);
         });
     }
     renderProjects();
 
     // -------------------------------------------------------------
-    // FUNCIONALIDAD DE ENVÍO DE CORREO (mailto)
+    // 3. ENVÍO DE CORREO (mailto)
     // -------------------------------------------------------------
     const emailForm = document.getElementById('emailForm');
     if (emailForm) {
@@ -566,19 +508,19 @@
             const senderEmail = document.getElementById('userEmail').value.trim();
             const message = document.getElementById('userMsg').value.trim();
             if (!name || !senderEmail || !message) {
-                alert("Por favor, completa todos los campos para enviar el correo.");
+                alert("Completa todos los campos.");
                 return;
             }
             const recipient = "elias.cordero@nexuscore.dev";
-            const subject = `Contacto portfolio: ${name} quiere comunicarse`;
-            const body = `Nombre: ${name}%0AEmail: ${senderEmail}%0AMensaje:%0A${message}%0A%0A--- Desde portafolio web ---`;
+            const subject = `Contacto portfolio: ${name}`;
+            const body = `Nombre: ${name}%0AEmail: ${senderEmail}%0AMensaje:%0A${message}%0A%0A-- Web --`;
             window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${body}`;
-            alert("Se abrirá tu cliente de correo. ¡Gracias por tu mensaje!");
+            alert("Se abrirá tu cliente de correo. ¡Gracias!");
         });
     }
 
     // -------------------------------------------------------------
-    // CHATBOT AUTOMATIZADO (responde dudas y ahora también sobre inglés técnico)
+    // 4. CHATBOT AUTOMÁTICO
     // -------------------------------------------------------------
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -587,58 +529,28 @@
     const chatInput = document.getElementById('chatInput');
     const chatSendBtn = document.getElementById('chatSendBtn');
 
-    function openChat() {
-        chatWindow.style.display = 'flex';
-    }
-    function closeChatWindow() {
-        chatWindow.style.display = 'none';
-    }
+    function openChat() { chatWindow.style.display = 'flex'; }
+    function closeChatWindow() { chatWindow.style.display = 'none'; }
     chatToggle.addEventListener('click', () => {
         if (chatWindow.style.display === 'flex') closeChatWindow();
         else openChat();
     });
     closeChat.addEventListener('click', closeChatWindow);
 
-    // Respuestas del bot actualizadas con inglés técnico y logos conceptuales
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
-        if (q.includes('php')) {
-            return "💡 PHP: dominio avanzado en frameworks Laravel, Symfony, desarrollo de APIs y sistemas de alta concurrencia.";
-        }
-        if (q.includes('selenium') || q.includes('automatización web')) {
-            return "🧪 Selenium: implementación de pruebas cross-browser, Grid, Page Object Model y pipelines de integración continua.";
-        }
-        if (q.includes('wordpress')) {
-            return "📌 WordPress: temas personalizados, plugins, WooCommerce y optimización avanzada de rendimiento.";
-        }
-        if (q.includes('react') || q.includes('node')) {
-            return "⚛️ React / Node: desarrollo de SPAs, componentes funcionales, Express.js y conexión con bases de datos SQL/NoSQL.";
-        }
-        if (q.includes('python') || q.includes('java') || q.includes('c#')) {
-            return "🐍 Python, Java, C#: nivel intermedio, con proyectos en microservicios, automatización y scripts de procesamiento.";
-        }
-        if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) {
-            return "🐳 DevOps: Docker, Jenkins, AWS, Azure — pipelines CI/CD, infraestructura como código y despliegues en cloud.";
-        }
-        if (q.includes('sql') || q.includes('oracle') || q.includes('mongodb')) {
-            return "🗄️ Bases de datos: SQL Server, MySQL, Oracle PL/SQL, MongoDB — modelado, consultas optimizadas y procedimientos almacenados.";
-        }
-        if (q.includes('power bi') || q.includes('sap')) {
-            return "📊 Power BI y SAP: dashboards interactivos, DAX avanzado e integración con sistemas SAP para reporting ejecutivo.";
-        }
-        if (q.includes('ingles') || q.includes('english') || q.includes('idioma')) {
-            return "🇬🇧 Inglés Técnico: Nivel Intermedio/Avanzado (B2-C1 técnico). Capacidad para mantener reuniones, documentación técnica, code reviews y comunicación fluida en entornos internacionales.";
-        }
-        if (q.includes('proyecto') || q.includes('portafolio') || q.includes('github')) {
-            return "🚀 Mis repositorios activos incluyen automatización con Selenium, Power Platform, React + Node, microservicios en Azure. Revisa la sección de 'Sistemas Destacados'.";
-        }
-        if (q.includes('hola') || q.includes('buenas') || q.includes('saludo')) {
-            return "¡Hola! Soy el asistente técnico. Pregúntame sobre PHP, Selenium, React, Docker, Power Platforms, o sobre mi nivel de inglés técnico. ¿En qué puedo ayudarte?";
-        }
-        if (q.includes('experiencia') || q.includes('trayectoria')) {
-            return "👨‍💻 Más de 8 años en desarrollo full stack, automatización de pruebas, Power Platform y liderazgo técnico. He trabajado con equipos de EEUU y Europa.";
-        }
-        return "🔍 Puedes preguntarme sobre cualquiera de mis habilidades técnicas: PHP, MS Office, Power Platforms, WordPress, Selenium, React, Python, SQL, DevOps, Power BI e inglés técnico. ¡También ver mis proyectos en GitHub!";
+        if (q.includes('php')) return "💡 PHP: frameworks Laravel, APIs, sistemas escalables.";
+        if (q.includes('selenium')) return "🧪 Selenium: automatización cross-browser, Grid y Page Object Model.";
+        if (q.includes('wordpress')) return "📌 WordPress: temas avanzados, plugins y optimización.";
+        if (q.includes('react') || q.includes('node')) return "⚛️ React/Node: SPAs, Express, integración con SQL/NoSQL.";
+        if (q.includes('python') || q.includes('java') || q.includes('c#')) return "🐍 Python, Java, C#: microservicios y automatización nivel intermedio.";
+        if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) return "🐳 DevOps: Docker, Jenkins, AWS, Azure - pipelines CI/CD robustos.";
+        if (q.includes('sql') || q.includes('mongodb')) return "🗄️ Bases de datos: SQL Server, MySQL, Oracle, MongoDB - modelado avanzado.";
+        if (q.includes('power bi') || q.includes('sap')) return "📊 Power BI + SAP: dashboards interactivos, DAX, integración empresarial.";
+        if (q.includes('ingles') || q.includes('english')) return "🇬🇧 Inglés Técnico: Nivel B2-C1 técnico. Reuniones, documentación, code reviews.";
+        if (q.includes('proyecto') || q.includes('portafolio')) return "🚀 Revisa mis proyectos destacados en la sección de GitHub: Selenium, Power Platform, React, microservicios.";
+        if (q.includes('hola')) return "¡Hola! Soy el asistente técnico. Pregúntame sobre PHP, Selenium, React, Docker, Power Platforms o inglés.";
+        return "🔍 Puedes consultar por PHP, Selenium, React, Python, SQL, DevOps, Power BI e inglés técnico. ¿Alguna duda específica?";
     }
 
     function addMessage(text, isUser = false) {
@@ -651,19 +563,32 @@
 
     function handleUserMessage() {
         const userMsg = chatInput.value.trim();
-        if (userMsg === "") return;
+        if (!userMsg) return;
         addMessage(userMsg, true);
         chatInput.value = "";
         setTimeout(() => {
-            const botAnswer = getBotResponse(userMsg);
-            addMessage(botAnswer, false);
+            const reply = getBotResponse(userMsg);
+            addMessage(reply, false);
         }, 280);
     }
-
     chatSendBtn.addEventListener('click', handleUserMessage);
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleUserMessage();
-    });
+    chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+
+    // -------------------------------------------------------------
+    // 5. FECHA DINÁMICA: AÑO Y MES ACTUAL (siempre actualizado)
+    // -------------------------------------------------------------
+    function updateFooterDate() {
+        const footer = document.getElementById('dynamicFooter');
+        if (footer) {
+            const now = new Date();
+            const year = now.getFullYear();
+            const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const monthName = months[now.getMonth()];
+            footer.innerHTML = `© ${year} - ${monthName} · Elias Cordero · Portfolio dinámico con animaciones | Automatización, Full Stack & Cloud`;
+        }
+    }
+    updateFooterDate();
+    // También se puede actualizar cada día si se desea, pero no es necesario, solo al cargar.
 </script>
 </body>
 </html>
