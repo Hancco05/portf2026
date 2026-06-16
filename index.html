@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>NexusCore | Portfolio Dinámico - Modo Diurno/Nocturno</title>
-    <!-- Font Awesome 6 -->
+    <title>NexusCore | Portfolio Profesional · Informática</title>
+    <!-- Bootstrap 5 + Font Awesome 6 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-                   1. RESET Y VARIABLES CSS (modo oscuro por defecto)
+                   VARIABLES Y ESTILOS GLOBALES (modo oscuro por defecto)
                    ============================================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
             --bg-primary: #0A0C0F;
             --bg-secondary: #111317;
@@ -37,6 +32,8 @@
             --toggle-icon: #C084FC;
             --particles-color1: rgba(108, 99, 255, 0.08);
             --particles-color2: rgba(192, 132, 252, 0.06);
+            --bs-body-bg: var(--bg-primary);
+            --bs-body-color: var(--text-primary);
         }
 
         /* Modo claro */
@@ -59,22 +56,25 @@
             --toggle-icon: #6C63FF;
             --particles-color1: rgba(108, 99, 255, 0.06);
             --particles-color2: rgba(90, 80, 200, 0.04);
+            --bs-body-bg: var(--bg-primary);
+            --bs-body-color: var(--text-primary);
         }
 
-        /* ============================================================
-                   2. ESTILOS BASE Y GLOBALES
-                   ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.5;
-            scroll-behavior: smooth;
             transition: background 0.4s ease, color 0.3s ease;
             overflow-x: hidden;
         }
 
-        /* Partículas de fondo */
+        /* Fondo de partículas */
         .particles-bg {
             position: fixed;
             top: 0;
@@ -106,16 +106,14 @@
             border-radius: 8px;
         }
 
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
+        .main-container {
             position: relative;
             z-index: 2;
+            padding-top: 1rem;
         }
 
         /* ============================================================
-                   3. ANIMACIONES DE APARICIÓN
+                   ANIMACIONES DE APARICIÓN
                    ============================================================ */
         @keyframes fadeUp {
             from {
@@ -132,16 +130,41 @@
             animation: fadeUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
         }
 
-        section, .hero, .contact-footer {
+        section, .hero, .contact-section, .stats-section, .testimonials-section {
             opacity: 0;
             animation: fadeUp 0.7s ease forwards;
         }
         section:nth-child(1) { animation-delay: 0.1s; }
         section:nth-child(2) { animation-delay: 0.2s; }
-        .contact-footer { animation-delay: 0.3s; }
+        section:nth-child(3) { animation-delay: 0.25s; }
+        .contact-section { animation-delay: 0.3s; }
+        .stats-section { animation-delay: 0.35s; }
+        .testimonials-section { animation-delay: 0.4s; }
 
         /* ============================================================
-                   4. HEADER CON TOGGLE DE TEMA
+                   NAVBAR (sticky con toggle)
+                   ============================================================ */
+        .navbar-custom {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            transition: background 0.3s;
+        }
+        .navbar-custom .nav-link {
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .navbar-custom .nav-link:hover {
+            color: #6C63FF;
+        }
+        .navbar-custom .navbar-brand {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* ============================================================
+                   TOGGLE DE TEMA
                    ============================================================ */
         .theme-toggle-wrapper {
             display: flex;
@@ -154,13 +177,13 @@
             align-items: center;
             gap: 10px;
             background: var(--toggle-bg);
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 40px;
             cursor: pointer;
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
             user-select: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         .theme-toggle:hover {
@@ -169,20 +192,20 @@
         }
 
         .theme-toggle i {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--toggle-icon);
             transition: transform 0.4s ease;
         }
 
         .theme-toggle span {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             color: var(--text-secondary);
         }
 
         .theme-toggle .toggle-track {
-            width: 40px;
-            height: 22px;
+            width: 36px;
+            height: 20px;
             background: var(--border-color);
             border-radius: 30px;
             position: relative;
@@ -190,8 +213,8 @@
         }
 
         .theme-toggle .toggle-track .toggle-thumb {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             background: #6C63FF;
             border-radius: 50%;
             position: absolute;
@@ -202,7 +225,7 @@
         }
 
         [data-theme="light"] .theme-toggle .toggle-track .toggle-thumb {
-            transform: translateX(18px);
+            transform: translateX(16px);
         }
 
         [data-theme="light"] .theme-toggle .toggle-track {
@@ -210,24 +233,8 @@
         }
 
         /* ============================================================
-                   5. HERO
+                   HERO
                    ============================================================ */
-        .hero {
-            margin-bottom: 2rem;
-        }
-
-        .badge-role {
-            background: var(--bg-skill);
-            display: inline-block;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-left: 2px solid #6C63FF;
-            backdrop-filter: blur(4px);
-            color: var(--text-secondary);
-        }
-
         .hero h1 {
             font-size: 3.2rem;
             font-weight: 800;
@@ -244,15 +251,31 @@
             100% { background-position: 200% 0%; }
         }
 
-        .hero p {
-            font-size: 1.1rem;
+        .badge-role {
+            background: var(--bg-skill);
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-left: 2px solid #6C63FF;
+            backdrop-filter: blur(4px);
             color: var(--text-secondary);
         }
 
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #6C63FF;
+            box-shadow: 0 8px 24px var(--glow-color);
+        }
+
         /* ============================================================
-                   6. TÍTULOS DE SECCIÓN
+                   TÍTULOS DE SECCIÓN
                    ============================================================ */
-        h2 {
+        .section-title {
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 1.8rem;
@@ -266,14 +289,8 @@
         }
 
         /* ============================================================
-                   7. SKILLS (con logos)
+                   SKILLS (con logos)
                    ============================================================ */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1rem;
-        }
-
         .skill-item {
             display: flex;
             align-items: center;
@@ -287,6 +304,7 @@
             backdrop-filter: blur(2px);
             transition: all 0.3s ease;
             color: var(--text-primary);
+            height: 100%;
         }
 
         .skill-item i {
@@ -310,36 +328,41 @@
         }
 
         /* ============================================================
-                   8. PROYECTOS (GitHub)
+                   EXPERIENCIA LABORAL
                    ============================================================ */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.8rem;
-            margin-top: 1rem;
+        .exp-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .exp-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--glow-color);
+            border-color: var(--card-hover-border);
+        }
+        .exp-card .company {
+            color: #6C63FF;
+            font-weight: 600;
+        }
+        .exp-card .date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
+        /* ============================================================
+                   PROYECTOS - cards de Bootstrap
+                   ============================================================ */
         .project-card {
             background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 24px;
             overflow: hidden;
-            border: 1px solid var(--border-color);
             transition: all 0.35s ease;
-            position: relative;
-            box-shadow: 0 4px 12px var(--shadow-color);
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 20%, var(--glow-color), transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         .project-card:hover {
@@ -348,14 +371,8 @@
             border-color: var(--card-hover-border);
         }
 
-        .project-card:hover::after {
-            opacity: 1;
-        }
-
-        .project-info {
+        .project-card .card-body {
             padding: 1.5rem;
-            position: relative;
-            z-index: 1;
         }
 
         .project-title {
@@ -415,45 +432,104 @@
         }
 
         /* ============================================================
-                   9. CONTACTO Y FOOTER
+                   SERVICIOS
                    ============================================================ */
-        .contact-footer {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+        .service-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px var(--glow-color);
+            border-color: var(--card-hover-border);
+        }
+        .service-card i {
+            font-size: 2.8rem;
+            color: #6C63FF;
+            margin-bottom: 1rem;
+        }
+        .service-card h5 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ============================================================
+                   ESTADÍSTICAS
+                   ============================================================ */
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        .stat-item .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #6C63FF;
+        }
+        .stat-item .label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================================
+                   TESTIMONIOS
+                   ============================================================ */
+        .testimonial-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .testimonial-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 8px 20px var(--glow-color);
+            border-color: var(--card-hover-border);
+        }
+        .testimonial-card .quote {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        .testimonial-card .author {
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        .testimonial-card .role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ============================================================
+                   CONTACTO
+                   ============================================================ */
+        .contact-section {
             background: var(--bg-secondary);
             border-radius: 32px;
             padding: 2rem;
             border: 1px solid var(--border-color);
             backdrop-filter: blur(4px);
-            transition: background 0.3s ease, border-color 0.3s;
+            transition: background 0.3s, border-color 0.3s;
         }
 
-        .contact-form h3, .social-block h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        input, textarea {
-            width: 100%;
+        .form-control {
             background: var(--bg-input);
             border: 1px solid var(--border-color);
-            padding: 12px 16px;
-            border-radius: 20px;
             color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            outline: none;
+            border-radius: 20px;
+            padding: 12px 16px;
             transition: border 0.2s, box-shadow 0.2s;
         }
 
-        input:focus, textarea:focus {
+        .form-control:focus {
             border-color: #6C63FF;
             box-shadow: 0 0 0 3px var(--glow-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
         }
 
         .btn-send {
@@ -485,19 +561,12 @@
             color: var(--text-secondary);
         }
 
-        .social-icons {
-            display: flex;
-            gap: 1.2rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
-
         .social-icon {
             background: var(--bg-skill);
             width: 48px;
             height: 48px;
             border-radius: 32px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             font-size: 1.6rem;
@@ -515,18 +584,21 @@
             border-color: #6C63FF;
         }
 
-        footer {
+        /* ============================================================
+                   FOOTER
+                   ============================================================ */
+        .footer {
             text-align: center;
-            margin-top: 2rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            padding: 1rem;
+            margin-top: 2.5rem;
+            padding: 1rem 0;
             border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.8rem;
             transition: color 0.3s, border-color 0.3s;
         }
 
         /* ============================================================
-                   10. CHATBOT (siempre visible)
+                   CHATBOT
                    ============================================================ */
         .chatbot-container {
             position: fixed;
@@ -577,7 +649,6 @@
             display: none;
             flex-direction: column;
             backdrop-filter: blur(16px);
-            transition: background 0.3s;
         }
 
         .chat-header {
@@ -653,27 +724,28 @@
         }
 
         /* ============================================================
-                   11. RESPONSIVE
+                   RESPONSIVE AJUSTES
                    ============================================================ */
-        @media (max-width: 680px) {
-            .container {
-                padding: 1rem;
-            }
+        @media (max-width: 576px) {
             .hero h1 {
                 font-size: 2.2rem;
+            }
+            .theme-toggle span {
+                display: none;
             }
             .chat-window {
                 width: 290px;
                 right: -10px;
             }
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .contact-section {
+                padding: 1.5rem;
             }
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .profile-img {
+                width: 100px;
+                height: 100px;
             }
-            .theme-toggle span {
-                display: none;
+            .stat-item .number {
+                font-size: 2rem;
             }
         }
     </style>
@@ -681,7 +753,29 @@
 <body>
 <div class="particles-bg"></div>
 
-<div class="container">
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar navbar-expand-md navbar-custom sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>NexusCore</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">Sobre mí</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Habilidades</a></li>
+                <li class="nav-item"><a class="nav-link" href="#experience">Experiencia</a></li>
+                <li class="nav-item"><a class="nav-link" href="#education">Educación</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container main-container">
     <!-- ==================== TOGGLE TEMA ==================== -->
     <div class="theme-toggle-wrapper">
         <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Cambiar tema">
@@ -696,57 +790,249 @@
 
     <!-- ==================== HERO ==================== -->
     <div class="hero animate-section" style="animation-delay: 0s;">
-        <div class="badge-role"><i class="fas fa-microchip"></i>  Ingeniero Full Stack & Automatización</div>
-        <h1>Elias M. Cordero</h1>
-        <p>Especialista en ecosistemas Microsoft, pruebas automatizadas, desarrollo cloud y arquitectura DevOps. <br> +8 años integrando soluciones empresariales de alto rendimiento.</p>
+        <div class="row align-items-center g-4">
+            <div class="col-md-8">
+                <div class="badge-role mb-3"><i class="fas fa-microchip"></i>  Ingeniero Full Stack & Automatización</div>
+                <h1 class="display-4 fw-bold">Elias M. Cordero</h1>
+                <p class="fs-5" style="color: var(--text-secondary);">
+                    Especialista en ecosistemas Microsoft, pruebas automatizadas, desarrollo cloud y arquitectura DevOps. <br> +8 años integrando soluciones empresariales de alto rendimiento.
+                </p>
+                <div class="d-flex gap-3 mt-3 flex-wrap">
+                    <a href="#contact" class="btn btn-primary rounded-pill px-4" style="background:#6C63FF; border:none;">Contáctame</a>
+                    <a href="#projects" class="btn btn-outline-secondary rounded-pill px-4" style="border-color: var(--border-color); color: var(--text-secondary);">Ver proyectos</a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="https://ui-avatars.com/api/?name=Elias+Cordero&size=150&background=6C63FF&color=fff&bold=true" alt="Elias Cordero" class="profile-img">
+            </div>
+        </div>
     </div>
 
-    <!-- ==================== HABILIDADES ==================== -->
-    <section>
-        <h2><i class="fas fa-cogs"></i> Stack Tecnológico & Herramientas</h2>
-        <div class="skills-grid" id="skillsContainer"></div>
+    <!-- ==================== SOBRE MÍ ==================== -->
+    <section id="about" class="mt-5">
+        <h2 class="section-title"><i class="fas fa-user-astronaut me-2"></i> Sobre Mí</h2>
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <p style="color: var(--text-secondary); font-size: 1.05rem;">
+                    Ingeniero en Sistemas con más de 8 años de experiencia en el desarrollo de soluciones tecnológicas integrales. 
+                    Apasionado por la automatización, la optimización de procesos y la arquitectura de software escalable. 
+                    He liderado equipos multidisciplinarios y he implementado proyectos en sectores como banca, retail y salud.
+                </p>
+                <p style="color: var(--text-secondary);">
+                    <strong>Valores:</strong> Calidad, innovación, trabajo en equipo y mejora continua. 
+                    Creo en la tecnología como motor de transformación y en el código limpio como base de sistemas sostenibles.
+                </p>
+                <div class="d-flex flex-wrap gap-3 mt-3">
+                    <span class="badge bg-primary rounded-pill px-3 py-2" style="background: #6C63FF !important;">Liderazgo técnico</span>
+                    <span class="badge bg-secondary rounded-pill px-3 py-2" style="background: var(--bg-skill) !important; color: var(--text-primary);">Metodologías ágiles</span>
+                    <span class="badge bg-secondary rounded-pill px-3 py-2" style="background: var(--bg-skill) !important; color: var(--text-primary);">Arquitectura cloud</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
+                    <h5><i class="fas fa-map-pin me-2"></i> Ubicación</h5>
+                    <p style="color: var(--text-secondary);">Ciudad de México, MX</p>
+                    <h5><i class="fas fa-calendar-alt me-2"></i> Disponibilidad</h5>
+                    <p style="color: var(--text-secondary);">Inmediata · Remoto / Híbrido</p>
+                    <h5><i class="fas fa-file-alt me-2"></i> CV</h5>
+                    <a href="#" class="text-decoration-none" style="color: #6C63FF;">Descargar PDF <i class="fas fa-download ms-1"></i></a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- ==================== PROYECTOS ==================== -->
-    <section>
-        <h2><i class="fab fa-github"></i> Sistemas Destacados · GitHub</h2>
-        <div class="projects-grid" id="githubProjects"></div>
+    <!-- ==================== HABILIDADES ==================== -->
+    <section id="skills" class="mt-5">
+        <h2 class="section-title"><i class="fas fa-cogs me-2"></i> Stack Tecnológico & Herramientas</h2>
+        <div class="row g-3" id="skillsContainer">
+            <!-- Inyectado por JS -->
+        </div>
+    </section>
+
+    <!-- ==================== EXPERIENCIA LABORAL ==================== -->
+    <section id="experience" class="mt-5">
+        <h2 class="section-title"><i class="fas fa-briefcase me-2"></i> Experiencia Profesional</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="exp-card">
+                    <div class="company">TechSolutions Inc.</div>
+                    <div class="date">2022 - Presente · Arquitecto de Software</div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Liderazgo técnico en migración a microservicios con .NET y Azure. Implementación de pipelines CI/CD con GitHub Actions y monitoreo con Application Insights.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="exp-card">
+                    <div class="company">DataSmart Corp.</div>
+                    <div class="date">2019 - 2022 · Ingeniero Full Stack Senior</div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Desarrollo de plataforma de análisis de datos con React, Node.js y MongoDB. Integración con Power BI y SAP para dashboards ejecutivos.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="exp-card">
+                    <div class="company">AutomatizaTech</div>
+                    <div class="date">2016 - 2019 · Desarrollador de Automatización</div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Creación de frameworks de pruebas con Selenium y Cucumber, integración con Jenkins y Docker. Optimización de procesos RPA con Power Automate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== EDUCACIÓN Y CERTIFICACIONES ==================== -->
+    <section id="education" class="mt-5">
+        <h2 class="section-title"><i class="fas fa-graduation-cap me-2"></i> Educación & Certificaciones</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
+                    <h5><i class="fas fa-university me-2"></i> Ing. en Sistemas Computacionales</h5>
+                    <p style="color: var(--text-secondary);">Instituto Tecnológico de México · 2012 - 2016</p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Especialización en arquitectura de software y bases de datos.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
+                    <h5><i class="fas fa-certificate me-2"></i> Certificaciones</h5>
+                    <ul class="list-unstyled" style="color: var(--text-secondary);">
+                        <li><i class="fas fa-check-circle text-success me-2"></i> AWS Certified Solutions Architect</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> Microsoft Certified: Azure Developer Associate</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> ISTQB Certified Tester (Advanced)</li>
+                        <li><i class="fas fa-check-circle text-success me-2"></i> Scrum Master (PSM I)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICIOS ==================== -->
+    <section id="services" class="mt-5">
+        <h2 class="section-title"><i class="fas fa-concierge-bell me-2"></i> Servicios Profesionales</h2>
+        <div class="row g-4">
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="service-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h5>Desarrollo Full Stack</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Aplicaciones web con React, Node, PHP, .NET y bases de datos SQL/NoSQL.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="service-card">
+                    <i class="fas fa-robot"></i>
+                    <h5>Automatización & QA</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Frameworks de pruebas con Selenium, Cucumber, RPA con Power Automate.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="service-card">
+                    <i class="fas fa-cloud"></i>
+                    <h5>Arquitectura Cloud</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Migración y optimización en AWS, Azure, Docker, Kubernetes y CI/CD.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="service-card">
+                    <i class="fas fa-chart-pie"></i>
+                    <h5>Business Intelligence</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Dashboards con Power BI, integración SAP y análisis de datos avanzado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PROYECTOS DESTACADOS ==================== -->
+    <section id="projects" class="mt-5">
+        <h2 class="section-title"><i class="fab fa-github me-2"></i> Sistemas Destacados · GitHub</h2>
+        <div class="row g-4" id="githubProjects">
+            <!-- Inyectado por JS -->
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIOS ==================== -->
+    <section id="testimonials" class="mt-5 testimonials-section">
+        <h2 class="section-title"><i class="fas fa-quote-right me-2"></i> Testimonios</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="quote">"Elias transformó nuestra estrategia de pruebas, reduciendo los errores en producción en un 70%."</p>
+                    <div class="author">María Fernández</div>
+                    <div class="role">CTO, DataSmart Corp.</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="quote">"Su visión en arquitectura cloud nos permitió escalar sin problemas, optimizando costos y rendimiento."</p>
+                    <div class="author">Carlos Méndez</div>
+                    <div class="role">VP de Ingeniería, TechSolutions Inc.</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card">
+                    <p class="quote">"Un profesional excepcional, con habilidades técnicas y de liderazgo que marcan la diferencia."</p>
+                    <div class="author">Laura Gómez</div>
+                    <div class="role">Gerente de Proyectos, AutomatizaTech</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ESTADÍSTICAS ==================== -->
+    <section id="stats" class="mt-5 stats-section">
+        <div class="row g-4 bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
+            <div class="col-6 col-md-3 stat-item">
+                <div class="number">8+</div>
+                <div class="label">Años de experiencia</div>
+            </div>
+            <div class="col-6 col-md-3 stat-item">
+                <div class="number">25+</div>
+                <div class="label">Proyectos entregados</div>
+            </div>
+            <div class="col-6 col-md-3 stat-item">
+                <div class="number">15+</div>
+                <div class="label">Clientes satisfechos</div>
+            </div>
+            <div class="col-6 col-md-3 stat-item">
+                <div class="number">10+</div>
+                <div class="label">Certificaciones</div>
+            </div>
+        </div>
     </section>
 
     <!-- ==================== CONTACTO ==================== -->
-    <div class="contact-footer">
-        <div class="contact-form">
-            <h3><i class="fas fa-envelope"></i> Envíame un mensaje</h3>
-            <form id="emailForm">
-                <div class="form-group">
-                    <input type="text" placeholder="Tu nombre" id="userName" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Tu correo electrónico" id="userEmail" required>
-                </div>
-                <div class="form-group">
-                    <textarea rows="3" placeholder="Mensaje / Consulta profesional..." id="userMsg" required></textarea>
-                </div>
-                <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar correo</button>
-            </form>
-        </div>
-        <div class="social-block">
-            <h3><i class="fas fa-address-card"></i> Contacto directo</h3>
-            <div class="phone-item"><i class="fas fa-phone-alt"></i> +52 55 7890 1234</div>
-            <div class="mail-direct"><i class="fas fa-inbox"></i> elias.cordero@nexuscore.dev</div>
-            <div class="social-icons">
-                <a href="https://github.com/eliascordero-dev" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-                <a href="https://mi-videojuego-nexus.itch.io" target="_blank" class="social-icon"><i class="fas fa-gamepad"></i></a>
-                <a href="https://linkedin.com/in/elias-cordero-tech" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+    <section id="contact" class="contact-section mt-5">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <h3><i class="fas fa-envelope me-2"></i> Envíame un mensaje</h3>
+                <form id="emailForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Tu nombre" id="userName" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Tu correo electrónico" id="userEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="3" placeholder="Mensaje / Consulta profesional..." id="userMsg" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar correo</button>
+                </form>
             </div>
-            <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-secondary);">
-                <i class="fas fa-code-branch"></i> GitHub: /eliascordero-dev | Videojuego: "Nexus: Overdrive" | LinkedIn activo
-            </p>
+            <div class="col-md-6">
+                <h3><i class="fas fa-address-card me-2"></i> Contacto directo</h3>
+                <div class="phone-item"><i class="fas fa-phone-alt"></i> +52 55 7890 1234</div>
+                <div class="mail-direct"><i class="fas fa-inbox"></i> elias.cordero@nexuscore.dev</div>
+                <div class="d-flex gap-3 my-4 flex-wrap">
+                    <a href="https://github.com/eliascordero-dev" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="https://mi-videojuego-nexus.itch.io" target="_blank" class="social-icon"><i class="fas fa-gamepad"></i></a>
+                    <a href="https://linkedin.com/in/elias-cordero-tech" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://stackoverflow.com/users/elias-cordero" target="_blank" class="social-icon"><i class="fab fa-stack-overflow"></i></a>
+                    <a href="https://dev.to/eliascordero" target="_blank" class="social-icon"><i class="fab fa-dev"></i></a>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.85rem;">
+                    <i class="fas fa-code-branch me-1"></i> GitHub: /eliascordero-dev · Videojuego: "Nexus: Overdrive" · LinkedIn activo
+                </p>
+            </div>
         </div>
-    </div>
+    </section>
 
     <!-- ==================== FOOTER DINÁMICO ==================== -->
-    <footer id="dynamicFooter"></footer>
+    <footer class="footer" id="dynamicFooter"></footer>
 </div>
 
 <!-- ==================== CHATBOT ==================== -->
@@ -760,7 +1046,7 @@
             <i class="fas fa-times" id="closeChat" style="cursor:pointer;"></i>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="bot-msg">🤖 ¡Hola! Soy el bot técnico. Pregúntame sobre PHP, Selenium, React, Docker, Power Platforms, o mi dominio de inglés técnico.</div>
+            <div class="bot-msg">🤖 ¡Hola! Soy el bot técnico. Pregúntame sobre mi experiencia, proyectos, servicios o cualquier duda profesional.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
@@ -769,9 +1055,12 @@
     </div>
 </div>
 
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     // ================================================================
-    // 1. DATOS: HABILIDADES CON ICONOS (sin niveles)
+    // 1. HABILIDADES CON ICONOS
     // ================================================================
     const skillsWithIcons = [
         { name: "PHP", icon: "fab fa-php" },
@@ -793,16 +1082,19 @@
         if (!container) return;
         container.innerHTML = '';
         skillsWithIcons.forEach(skill => {
+            const col = document.createElement('div');
+            col.className = 'col-12 col-sm-6 col-md-4 col-lg-3';
             const div = document.createElement('div');
             div.className = 'skill-item';
             div.innerHTML = `<i class="${skill.icon}"></i><span class="skill-name">${skill.name}</span>`;
-            container.appendChild(div);
+            col.appendChild(div);
+            container.appendChild(col);
         });
     }
     renderSkills();
 
     // ================================================================
-    // 2. DATOS: PROYECTOS DE PORTAFOLIO (GitHub)
+    // 2. PROYECTOS DE PORTAFOLIO (GitHub)
     // ================================================================
     const reposPortfolio = [
         {
@@ -836,23 +1128,28 @@
         if (!container) return;
         container.innerHTML = '';
         reposPortfolio.forEach(proj => {
+            const col = document.createElement('div');
+            col.className = 'col-12 col-md-6 col-lg-4';
             const card = document.createElement('div');
-            card.className = 'project-card';
+            card.className = 'project-card card h-100';
             card.innerHTML = `
-                <div class="project-info">
+                <div class="card-body d-flex flex-column">
                     <div class="project-title"><i class="fab fa-github-alt"></i> ${proj.title}</div>
                     <div class="project-desc">${proj.desc}</div>
                     <div class="tech-tags">${proj.tech.map(t => `<span>${t}</span>`).join('')}</div>
-                    <a href="${proj.repoUrl}" target="_blank" class="github-link"><i class="fab fa-github"></i> Ver repositorio</a>
+                    <div class="mt-auto">
+                        <a href="${proj.repoUrl}" target="_blank" class="github-link"><i class="fab fa-github"></i> Ver repositorio</a>
+                    </div>
                 </div>
             `;
-            container.appendChild(card);
+            col.appendChild(card);
+            container.appendChild(col);
         });
     }
     renderProjects();
 
     // ================================================================
-    // 3. ENVÍO DE CORREO (mailto)
+    // 3. ENVÍO DE CORREO
     // ================================================================
     const emailForm = document.getElementById('emailForm');
     if (emailForm) {
@@ -874,7 +1171,7 @@
     }
 
     // ================================================================
-    // 4. CHATBOT AUTOMATIZADO
+    // 4. CHATBOT AUTOMATIZADO (mejorado)
     // ================================================================
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -893,18 +1190,31 @@
 
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
-        if (q.includes('php')) return "💡 PHP: frameworks Laravel, APIs, sistemas escalables.";
-        if (q.includes('selenium')) return "🧪 Selenium: automatización cross-browser, Grid y Page Object Model.";
-        if (q.includes('wordpress')) return "📌 WordPress: temas avanzados, plugins y optimización.";
-        if (q.includes('react') || q.includes('node')) return "⚛️ React/Node: SPAs, Express, integración con SQL/NoSQL.";
-        if (q.includes('python') || q.includes('java') || q.includes('c#')) return "🐍 Python, Java, C#: microservicios y automatización nivel intermedio.";
-        if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) return "🐳 DevOps: Docker, Jenkins, AWS, Azure - pipelines CI/CD robustos.";
-        if (q.includes('sql') || q.includes('mongodb')) return "🗄️ Bases de datos: SQL Server, MySQL, Oracle, MongoDB - modelado avanzado.";
-        if (q.includes('power bi') || q.includes('sap')) return "📊 Power BI + SAP: dashboards interactivos, DAX, integración empresarial.";
-        if (q.includes('ingles') || q.includes('english') || q.includes('idioma')) return "🇬🇧 Inglés Técnico: Nivel B2-C1 técnico. Reuniones, documentación, code reviews.";
-        if (q.includes('proyecto') || q.includes('portafolio')) return "🚀 Revisa mis proyectos destacados en la sección de GitHub: Selenium, Power Platform, React, microservicios.";
-        if (q.includes('hola')) return "¡Hola! Soy el asistente técnico. Pregúntame sobre PHP, Selenium, React, Docker, Power Platforms o inglés.";
-        return "🔍 Puedes consultar por PHP, Selenium, React, Python, SQL, DevOps, Power BI e inglés técnico. ¿Alguna duda específica?";
+        if (q.includes('experiencia') || q.includes('trayectoria')) {
+            return "👨‍💻 Tengo más de 8 años de experiencia en desarrollo full stack, automatización y arquitectura cloud. He trabajado en banca, retail y salud, liderando equipos y entregando soluciones escalables.";
+        }
+        if (q.includes('proyecto') || q.includes('portafolio')) {
+            return "🚀 Puedes ver mis proyectos destacados en la sección de GitHub: Selenium + Cucumber, Power Platform, React/Node, microservicios con Docker y Azure. Todos con código abierto.";
+        }
+        if (q.includes('servicio') || q.includes('ofrece')) {
+            return "🔧 Ofrezco desarrollo full stack, automatización de pruebas, arquitectura cloud, consultoría en Power BI y SAP, y formación técnica para equipos.";
+        }
+        if (q.includes('php')) return "💡 PHP: frameworks Laravel, Symfony, APIs y sistemas de alta concurrencia.";
+        if (q.includes('selenium')) return "🧪 Selenium: automatización cross-browser, Grid, Page Object Model e integración con Jenkins.";
+        if (q.includes('wordpress')) return "📌 WordPress: temas personalizados, plugins, WooCommerce y optimización de rendimiento.";
+        if (q.includes('react') || q.includes('node')) return "⚛️ React/Node: SPAs, Express, integración con SQL/NoSQL, despliegue en AWS.";
+        if (q.includes('python') || q.includes('java') || q.includes('c#')) return "🐍 Python, Java, C#: microservicios, automatización y aplicaciones empresariales.";
+        if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) return "🐳 DevOps: Docker, Jenkins, AWS, Azure - pipelines CI/CD, infraestructura como código.";
+        if (q.includes('sql') || q.includes('mongodb')) return "🗄️ Bases de datos: SQL Server, MySQL, Oracle, MongoDB - modelado, consultas y optimización.";
+        if (q.includes('power bi') || q.includes('sap')) return "📊 Power BI + SAP: dashboards interactivos, DAX, integración con datos empresariales.";
+        if (q.includes('ingles') || q.includes('english')) return "🇬🇧 Inglés Técnico: Nivel B2-C1. Reuniones, documentación, code reviews y comunicación fluida.";
+        if (q.includes('certificacion') || q.includes('certificado')) {
+            return "🎓 Tengo certificaciones en AWS, Azure, ISTQB y Scrum Master. Puedes verlas en la sección de Educación.";
+        }
+        if (q.includes('hola') || q.includes('buenas')) {
+            return "¡Hola! Soy el asistente técnico. Pregúntame sobre mi experiencia, servicios, proyectos o cualquier otra duda profesional.";
+        }
+        return "🔍 Puedes consultar sobre mi experiencia, servicios, proyectos, certificaciones o tecnologías específicas (PHP, Selenium, React, Python, SQL, DevOps, Power BI, inglés). ¿En qué más puedo ayudarte?";
     }
 
     function addMessage(text, isUser = false) {
@@ -929,13 +1239,13 @@
     chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
 
     // ================================================================
-    // 5. MODO DIURNO / NOCTURNO (TOGGLE)
+    // 5. MODO DIURNO / NOCTURNO
     // ================================================================
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
+    const themeIcon2 = document.getElementById('themeIcon2');
 
-    // Detectar preferencia del sistema (opcional)
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     let currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
 
@@ -945,15 +1255,14 @@
         if (theme === 'light') {
             themeIcon.className = 'fas fa-sun';
             themeLabel.textContent = 'Modo claro';
+            themeIcon2.className = 'fas fa-moon';
         } else {
             themeIcon.className = 'fas fa-moon';
             themeLabel.textContent = 'Modo oscuro';
+            themeIcon2.className = 'fas fa-sun';
         }
-        // Actualizar el icono del toggle (el segundo icono se mantiene fijo)
-        document.getElementById('themeIcon2').className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
     }
 
-    // Aplicar tema inicial
     applyTheme(currentTheme);
 
     themeToggle.addEventListener('click', () => {
@@ -963,7 +1272,7 @@
     });
 
     // ================================================================
-    // 6. FOOTER CON FECHA ACTUAL (año y mes)
+    // 6. FOOTER CON FECHA ACTUAL
     // ================================================================
     function updateFooterDate() {
         const footer = document.getElementById('dynamicFooter');
@@ -972,7 +1281,7 @@
             const year = now.getFullYear();
             const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
             const monthName = months[now.getMonth()];
-            footer.innerHTML = `© ${year} - ${monthName} · Elias Cordero · Portfolio dinámico con modo diurno/nocturno | Automatización, Full Stack & Cloud`;
+            footer.innerHTML = `© ${year} - ${monthName} · Elias Cordero · Portfolio profesional · Automatización, Full Stack & Cloud`;
         }
     }
     updateFooterDate();
