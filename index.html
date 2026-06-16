@@ -130,7 +130,7 @@
             animation: fadeUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
         }
 
-        section, .hero, .contact-section, .stats-section, .testimonials-section {
+        section, .hero, .contact-section {
             opacity: 0;
             animation: fadeUp 0.7s ease forwards;
         }
@@ -138,11 +138,9 @@
         section:nth-child(2) { animation-delay: 0.2s; }
         section:nth-child(3) { animation-delay: 0.25s; }
         .contact-section { animation-delay: 0.3s; }
-        .stats-section { animation-delay: 0.35s; }
-        .testimonials-section { animation-delay: 0.4s; }
 
         /* ============================================================
-                   NAVBAR (sticky con toggle)
+                   NAVBAR
                    ============================================================ */
         .navbar-custom {
             background: var(--bg-secondary);
@@ -289,7 +287,7 @@
         }
 
         /* ============================================================
-                   SKILLS (con logos)
+                   SKILLS
                    ============================================================ */
         .skill-item {
             display: flex;
@@ -328,32 +326,110 @@
         }
 
         /* ============================================================
-                   EXPERIENCIA LABORAL
+                   HITOS (línea de tiempo)
                    ============================================================ */
-        .exp-card {
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 1.8rem;
+            border-left: 2px solid var(--border-color);
+            padding-left: 2rem;
+            position: relative;
+        }
+        .timeline-item:last-child {
+            border-left: none;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #6C63FF;
+            border: 2px solid var(--bg-primary);
+        }
+        .timeline-item .year {
+            font-weight: 700;
+            color: #6C63FF;
+            min-width: 70px;
+        }
+        .timeline-item .content {
+            color: var(--text-secondary);
+        }
+        .timeline-item .content h5 {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ============================================================
+                   CLIENTES
+                   ============================================================ */
+        .client-card {
+            background: var(--bg-skill);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .client-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--glow-color);
+            border-color: var(--card-hover-border);
+        }
+        .client-card i {
+            font-size: 3rem;
+            color: #6C63FF;
+            margin-bottom: 0.5rem;
+        }
+        .client-card .client-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .client-card .client-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================================
+                   RECONOCIMIENTOS
+                   ============================================================ */
+        .award-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 1.5rem;
             transition: all 0.3s ease;
             height: 100%;
+            text-align: center;
         }
-        .exp-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px var(--glow-color);
+        .award-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px var(--glow-color);
             border-color: var(--card-hover-border);
         }
-        .exp-card .company {
-            color: #6C63FF;
+        .award-card i {
+            font-size: 2.5rem;
+            color: #FBBF24;
+            margin-bottom: 0.5rem;
+        }
+        .award-card h5 {
             font-weight: 600;
         }
-        .exp-card .date {
+        .award-card .org {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
         /* ============================================================
-                   PROYECTOS - cards de Bootstrap
+                   PROYECTOS
                    ============================================================ */
         .project-card {
             background: var(--bg-secondary);
@@ -459,49 +535,41 @@
         }
 
         /* ============================================================
-                   ESTADÍSTICAS
+                   EDUCACIÓN Y CERTIFICACIONES
                    ============================================================ */
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-        }
-        .stat-item .number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #6C63FF;
-        }
-        .stat-item .label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        /* ============================================================
-                   TESTIMONIOS
-                   ============================================================ */
-        .testimonial-card {
-            background: var(--bg-secondary);
+        .edu-card {
+            background: var(--bg-skill);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 1.8rem;
+            padding: 1.5rem;
             transition: all 0.3s ease;
             height: 100%;
         }
-        .testimonial-card:hover {
-            transform: scale(1.01);
+        .edu-card:hover {
+            transform: translateY(-4px);
             box-shadow: 0 8px 20px var(--glow-color);
             border-color: var(--card-hover-border);
         }
-        .testimonial-card .quote {
-            font-style: italic;
-            color: var(--text-secondary);
-        }
-        .testimonial-card .author {
+        .edu-card h5 {
             font-weight: 600;
-            margin-top: 1rem;
         }
-        .testimonial-card .role {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        .edu-card .sub {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .edu-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+        .edu-card ul li {
+            padding: 4px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .edu-card ul li i {
+            color: #6C63FF;
+            margin-right: 8px;
         }
 
         /* ============================================================
@@ -744,8 +812,9 @@
                 width: 100px;
                 height: 100px;
             }
-            .stat-item .number {
-                font-size: 2rem;
+            .timeline-item {
+                padding-left: 1.2rem;
+                gap: 1rem;
             }
         }
     </style>
@@ -764,11 +833,12 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="#about">Sobre mí</a></li>
                 <li class="nav-item"><a class="nav-link" href="#skills">Habilidades</a></li>
-                <li class="nav-item"><a class="nav-link" href="#experience">Experiencia</a></li>
+                <li class="nav-item"><a class="nav-link" href="#milestones">Hitos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#education">Educación</a></li>
                 <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
                 <li class="nav-item"><a class="nav-link" href="#projects">Proyectos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#clients">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" href="#awards">Reconocimientos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
             </ul>
         </div>
@@ -849,29 +919,38 @@
         </div>
     </section>
 
-    <!-- ==================== EXPERIENCIA LABORAL ==================== -->
-    <section id="experience" class="mt-5">
-        <h2 class="section-title"><i class="fas fa-briefcase me-2"></i> Experiencia Profesional</h2>
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="exp-card">
-                    <div class="company">TechSolutions Inc.</div>
-                    <div class="date">2022 - Presente · Arquitecto de Software</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Liderazgo técnico en migración a microservicios con .NET y Azure. Implementación de pipelines CI/CD con GitHub Actions y monitoreo con Application Insights.</p>
+    <!-- ==================== HITOS PROFESIONALES (reemplaza experiencia) ==================== -->
+    <section id="milestones" class="mt-5">
+        <h2 class="section-title"><i class="fas fa-flag-checkered me-2"></i> Hitos Profesionales</h2>
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="timeline-item">
+                    <div class="year">2023</div>
+                    <div class="content">
+                        <h5>Arquitectura de microservicios para fintech</h5>
+                        <p>Diseño e implementación de una plataforma de pagos con .NET, Azure Kubernetes Service y MongoDB, procesando más de 10,000 transacciones por minuto.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="exp-card">
-                    <div class="company">DataSmart Corp.</div>
-                    <div class="date">2019 - 2022 · Ingeniero Full Stack Senior</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Desarrollo de plataforma de análisis de datos con React, Node.js y MongoDB. Integración con Power BI y SAP para dashboards ejecutivos.</p>
+                <div class="timeline-item">
+                    <div class="year">2021</div>
+                    <div class="content">
+                        <h5>Automatización de pruebas en entorno bancario</h5>
+                        <p>Lideré la creación de un framework de pruebas con Selenium y Cucumber que redujo en un 60% el tiempo de regresión en una entidad financiera.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="exp-card">
-                    <div class="company">AutomatizaTech</div>
-                    <div class="date">2016 - 2019 · Desarrollador de Automatización</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Creación de frameworks de pruebas con Selenium y Cucumber, integración con Jenkins y Docker. Optimización de procesos RPA con Power Automate.</p>
+                <div class="timeline-item">
+                    <div class="year">2019</div>
+                    <div class="content">
+                        <h5>Migración a la nube de sistemas legacy</h5>
+                        <p>Coordiné la migración de aplicaciones monolíticas a AWS, utilizando Docker y Jenkins, logrando una mejora del 40% en rendimiento y disponibilidad.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2017</div>
+                    <div class="content">
+                        <h5>Implementación de Power BI para retail</h5>
+                        <p>Desarrollé un sistema de dashboards interactivos para una cadena de tiendas, integrando SAP y SQL Server, que permitió la toma de decisiones en tiempo real.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -882,20 +961,20 @@
         <h2 class="section-title"><i class="fas fa-graduation-cap me-2"></i> Educación & Certificaciones</h2>
         <div class="row g-4">
             <div class="col-md-6">
-                <div class="bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
+                <div class="edu-card">
                     <h5><i class="fas fa-university me-2"></i> Ing. en Sistemas Computacionales</h5>
-                    <p style="color: var(--text-secondary);">Instituto Tecnológico de México · 2012 - 2016</p>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Especialización en arquitectura de software y bases de datos.</p>
+                    <div class="sub">Instituto Tecnológico de México · 2012 - 2016</div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Especialización en arquitectura de software y bases de datos.</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
+                <div class="edu-card">
                     <h5><i class="fas fa-certificate me-2"></i> Certificaciones</h5>
-                    <ul class="list-unstyled" style="color: var(--text-secondary);">
-                        <li><i class="fas fa-check-circle text-success me-2"></i> AWS Certified Solutions Architect</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> Microsoft Certified: Azure Developer Associate</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> ISTQB Certified Tester (Advanced)</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> Scrum Master (PSM I)</li>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> AWS Certified Solutions Architect</li>
+                        <li><i class="fas fa-check-circle"></i> Microsoft Certified: Azure Developer Associate</li>
+                        <li><i class="fas fa-check-circle"></i> ISTQB Certified Tester (Advanced)</li>
+                        <li><i class="fas fa-check-circle"></i> Scrum Master (PSM I)</li>
                     </ul>
                 </div>
             </div>
@@ -945,52 +1024,96 @@
         </div>
     </section>
 
-    <!-- ==================== TESTIMONIOS ==================== -->
-    <section id="testimonials" class="mt-5 testimonials-section">
-        <h2 class="section-title"><i class="fas fa-quote-right me-2"></i> Testimonios</h2>
+    <!-- ==================== CLIENTES Y COLABORACIONES (reemplaza testimonios) ==================== -->
+    <section id="clients" class="mt-5">
+        <h2 class="section-title"><i class="fas fa-handshake me-2"></i> Clientes y Colaboraciones</h2>
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <p class="quote">"Elias transformó nuestra estrategia de pruebas, reduciendo los errores en producción en un 70%."</p>
-                    <div class="author">María Fernández</div>
-                    <div class="role">CTO, DataSmart Corp.</div>
+            <div class="col-6 col-md-3">
+                <div class="client-card">
+                    <i class="fas fa-university"></i>
+                    <div class="client-name">Banco FinanTrust</div>
+                    <div class="client-desc">Automatización de pruebas</div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <p class="quote">"Su visión en arquitectura cloud nos permitió escalar sin problemas, optimizando costos y rendimiento."</p>
-                    <div class="author">Carlos Méndez</div>
-                    <div class="role">VP de Ingeniería, TechSolutions Inc.</div>
+            <div class="col-6 col-md-3">
+                <div class="client-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <div class="client-name">Retail Group SA</div>
+                    <div class="client-desc">Dashboards Power BI</div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <p class="quote">"Un profesional excepcional, con habilidades técnicas y de liderazgo que marcan la diferencia."</p>
-                    <div class="author">Laura Gómez</div>
-                    <div class="role">Gerente de Proyectos, AutomatizaTech</div>
+            <div class="col-6 col-md-3">
+                <div class="client-card">
+                    <i class="fas fa-hospital-alt"></i>
+                    <div class="client-name">Salud Integral</div>
+                    <div class="client-desc">Migración a la nube</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="client-card">
+                    <i class="fas fa-industry"></i>
+                    <div class="client-name">Logística Ágil</div>
+                    <div class="client-desc">Microservicios .NET</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="client-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="client-name">Consultora Estratégica</div>
+                    <div class="client-desc">Arquitectura AWS</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="client-card">
+                    <i class="fas fa-robot"></i>
+                    <div class="client-name">AutomatizaTech</div>
+                    <div class="client-desc">RPA con Power Automate</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="client-card">
+                    <i class="fas fa-code"></i>
+                    <div class="client-name">Devs & Co.</div>
+                    <div class="client-desc">Capacitación técnica</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="client-card">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <div class="client-name">CloudMasters</div>
+                    <div class="client-desc">DevOps & CI/CD</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== ESTADÍSTICAS ==================== -->
-    <section id="stats" class="mt-5 stats-section">
-        <div class="row g-4 bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
-            <div class="col-6 col-md-3 stat-item">
-                <div class="number">8+</div>
-                <div class="label">Años de experiencia</div>
+    <!-- ==================== RECONOCIMIENTOS (reemplaza estadísticas) ==================== -->
+    <section id="awards" class="mt-5">
+        <h2 class="section-title"><i class="fas fa-trophy me-2"></i> Reconocimientos</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="award-card">
+                    <i class="fas fa-award"></i>
+                    <h5>Premio a la Innovación Tecnológica</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Por el desarrollo de una plataforma de pagos en tiempo real (2023).</p>
+                    <div class="org">Fintech Summit</div>
+                </div>
             </div>
-            <div class="col-6 col-md-3 stat-item">
-                <div class="number">25+</div>
-                <div class="label">Proyectos entregados</div>
+            <div class="col-md-4">
+                <div class="award-card">
+                    <i class="fas fa-medal"></i>
+                    <h5>Mejor Proyecto de Automatización</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Framework de pruebas que redujo los errores en producción en un 70%.</p>
+                    <div class="org">QA Awards 2022</div>
+                </div>
             </div>
-            <div class="col-6 col-md-3 stat-item">
-                <div class="number">15+</div>
-                <div class="label">Clientes satisfechos</div>
-            </div>
-            <div class="col-6 col-md-3 stat-item">
-                <div class="number">10+</div>
-                <div class="label">Certificaciones</div>
+            <div class="col-md-4">
+                <div class="award-card">
+                    <i class="fas fa-star"></i>
+                    <h5>Reconocimiento al Liderazgo</h5>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Por dirigir exitosamente la migración a la nube de sistemas críticos.</p>
+                    <div class="org">Cloud Excellence 2021</div>
+                </div>
             </div>
         </div>
     </section>
@@ -1171,7 +1294,7 @@
     }
 
     // ================================================================
-    // 4. CHATBOT AUTOMATIZADO (mejorado)
+    // 4. CHATBOT AUTOMATIZADO (actualizado con nuevas secciones)
     // ================================================================
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -1190,6 +1313,15 @@
 
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
+        if (q.includes('hito') || q.includes('logro')) {
+            return "🏆 Algunos de mis hitos: arquitectura de microservicios para fintech (2023), automatización de pruebas en banca (2021), migración a la nube de sistemas legacy (2019) e implementación de Power BI para retail (2017).";
+        }
+        if (q.includes('cliente') || q.includes('colaboración')) {
+            return "🤝 He trabajado con clientes como Banco FinanTrust, Retail Group SA, Salud Integral, Logística Ágil, entre otros. Puedes ver más en la sección 'Clientes y colaboraciones'.";
+        }
+        if (q.includes('reconocimiento') || q.includes('premio')) {
+            return "🏅 He recibido el Premio a la Innovación Tecnológica (2023), Mejor Proyecto de Automatización (2022) y Reconocimiento al Liderazgo (2021).";
+        }
         if (q.includes('experiencia') || q.includes('trayectoria')) {
             return "👨‍💻 Tengo más de 8 años de experiencia en desarrollo full stack, automatización y arquitectura cloud. He trabajado en banca, retail y salud, liderando equipos y entregando soluciones escalables.";
         }
@@ -1212,9 +1344,9 @@
             return "🎓 Tengo certificaciones en AWS, Azure, ISTQB y Scrum Master. Puedes verlas en la sección de Educación.";
         }
         if (q.includes('hola') || q.includes('buenas')) {
-            return "¡Hola! Soy el asistente técnico. Pregúntame sobre mi experiencia, servicios, proyectos o cualquier otra duda profesional.";
+            return "¡Hola! Soy el asistente técnico. Pregúntame sobre mis hitos, clientes, reconocimientos, servicios o cualquier otra duda profesional.";
         }
-        return "🔍 Puedes consultar sobre mi experiencia, servicios, proyectos, certificaciones o tecnologías específicas (PHP, Selenium, React, Python, SQL, DevOps, Power BI, inglés). ¿En qué más puedo ayudarte?";
+        return "🔍 Puedes consultar sobre mis hitos profesionales, clientes, reconocimientos, servicios, proyectos o tecnologías específicas (PHP, Selenium, React, Python, SQL, DevOps, Power BI, inglés). ¿En qué más puedo ayudarte?";
     }
 
     function addMessage(text, isUser = false) {
