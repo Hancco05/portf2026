@@ -2,325 +2,230 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoja de Diagnóstico Informático</title>
+    <title>Hoja de Diagnóstico - Simple</title>
     <style>
         * {
             box-sizing: border-box;
         }
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #e6e9ef;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f2f4f8;
             display: flex;
             justify-content: center;
-            padding: 30px 20px;
+            padding: 25px;
             margin: 0;
         }
         .hoja {
-            max-width: 1000px;
+            max-width: 850px;
             width: 100%;
             background: white;
-            padding: 35px 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 30px 35px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         h1 {
             text-align: center;
-            font-size: 26px;
-            color: #1a2a4a;
-            border-bottom: 3px solid #1a2a4a;
-            padding-bottom: 12px;
-            margin-top: 0;
-            letter-spacing: 1px;
-        }
-        .encabezado {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            margin-bottom: 20px;
-            background: #f0f3f8;
-            padding: 10px 15px;
-            border-radius: 6px;
-        }
-        .seccion {
-            margin: 24px 0 18px 0;
-            border-left: 4px solid #1a2a4a;
-            padding-left: 18px;
-        }
-        .seccion h2 {
-            font-size: 18px;
-            color: #1a2a4a;
-            margin: 0 0 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .seccion h2 span {
-            background: #1a2a4a;
-            color: white;
-            font-size: 14px;
-            border-radius: 50%;
-            width: 26px;
-            height: 26px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 24px;
+            color: #0b2a4a;
+            border-bottom: 2px solid #0b2a4a;
+            padding-bottom: 10px;
+            margin-top: 5px;
         }
         .fila {
             display: flex;
             flex-wrap: wrap;
             align-items: baseline;
-            gap: 6px 12px;
-            margin: 6px 0;
+            gap: 8px 15px;
+            margin: 8px 0;
             padding: 4px 0;
         }
         .fila label {
-            font-weight: 500;
-            min-width: 140px;
-            color: #2c3e50;
+            font-weight: 600;
+            min-width: 120px;
+            color: #1e2f3d;
         }
-        .fila input[type="text"], 
-        .fila input[type="number"] {
+        .fila input, .fila select {
             flex: 1;
-            min-width: 180px;
-            padding: 6px 10px;
+            min-width: 170px;
+            padding: 6px 8px;
             border: none;
-            border-bottom: 1.5px solid #b0bec5;
+            border-bottom: 1.5px solid #bcc3cd;
             background: transparent;
             font-size: 15px;
-            transition: 0.2s;
         }
         .fila input:focus {
             outline: none;
-            border-bottom-color: #1a2a4a;
-        }
-        .fila .etiqueta-corta {
-            min-width: 80px;
+            border-bottom-color: #0b2a4a;
         }
         .check-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px 20px;
-            margin: 8px 0 6px 0;
-            padding: 8px 12px;
-            background: #f8faff;
+            gap: 10px 25px;
+            background: #f6f8fc;
+            padding: 10px 15px;
             border-radius: 6px;
+            margin: 5px 0;
         }
         .check-group label {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-weight: 400;
+            gap: 5px;
+            font-weight: normal;
             cursor: pointer;
         }
         .check-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: #1a2a4a;
-            cursor: pointer;
+            width: 17px;
+            height: 17px;
+            accent-color: #0b2a4a;
         }
         textarea {
             width: 100%;
-            padding: 10px 12px;
-            border: 1.5px solid #d0d7e2;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 15px;
+            padding: 8px 12px;
+            border: 1.5px solid #d6dce6;
+            border-radius: 5px;
+            font-family: Arial;
+            font-size: 14px;
             resize: vertical;
             min-height: 60px;
-            margin: 6px 0 0 0;
-            transition: 0.2s;
+            margin-top: 4px;
         }
         textarea:focus {
-            outline: none;
-            border-color: #1a2a4a;
-            box-shadow: 0 0 0 3px rgba(26,42,74,0.1);
+            border-color: #0b2a4a;
+        }
+        .seccion {
+            margin: 22px 0 15px 0;
+            border-left: 4px solid #0b2a4a;
+            padding-left: 18px;
+        }
+        .seccion h2 {
+            font-size: 17px;
+            color: #0b2a4a;
+            margin: 0 0 8px 0;
         }
         .firma-area {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            gap: 30px;
+            gap: 25px;
             margin-top: 10px;
         }
-        .firma-area .firma-item {
+        .firma-item {
             flex: 1;
-            min-width: 200px;
+            min-width: 180px;
         }
-        .firma-area .firma-item input {
+        .firma-item input {
             width: 100%;
         }
         .botones {
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
+            margin: 30px 0 10px 0;
         }
         .botones button {
-            padding: 12px 32px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 10px 30px;
+            font-size: 15px;
+            font-weight: bold;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: 0.2s;
         }
-        .btn-imprimir {
-            background: #1a2a4a;
+        .btn-pdf {
+            background: #0b2a4a;
             color: white;
         }
-        .btn-imprimir:hover {
-            background: #0f1b30;
-            transform: scale(1.02);
+        .btn-pdf:hover {
+            background: #061a2e;
         }
         .btn-limpiar {
-            background: #e0e5ed;
-            color: #1a2a4a;
-        }
-        .btn-limpiar:hover {
-            background: #d0d7e2;
+            background: #dce1ea;
+            color: #1a2a3a;
         }
         @media print {
             body { background: white; padding: 0; }
-            .hoja { box-shadow: none; border-radius: 0; padding: 25px 30px; }
+            .hoja { box-shadow: none; padding: 15px 25px; }
             .botones { display: none; }
-            .fila input, textarea { border-color: #999; }
-            .check-group { background: #f5f5f5; }
-        }
-        /* Ajustes para que se vea bien en Word al abrir el HTML */
-        @media screen and (max-width: 600px) {
-            .hoja { padding: 18px; }
-            .fila { flex-direction: column; align-items: stretch; }
-            .fila label { min-width: auto; }
         }
     </style>
 </head>
 <body>
 <div class="hoja">
 
-    <h1>🔧 HOJA DE DIAGNÓSTICO INFORMÁTICO</h1>
-
-    <div class="encabezado">
-        <span>Nº de orden: <input type="text" style="width:120px;border:none;border-bottom:1px solid #999;background:transparent;"></span>
-        <span>Fecha: <input type="text" placeholder="DD/MM/AAAA" style="width:120px;border:none;border-bottom:1px solid #999;background:transparent;"></span>
+    <h1>🛠 DIAGNÓSTICO TÉCNICO INFORMÁTICO</h1>
+    <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-weight:bold;">
+        <span>Nº Orden: <input type="text" style="width:120px;border:none;border-bottom:1px solid #999;"></span>
+        <span>Fecha: <input type="text" placeholder="DD/MM/AAAA" style="width:130px;border:none;border-bottom:1px solid #999;"></span>
     </div>
 
-    <!-- SECCIÓN 1 -->
+    <!-- 1. CLIENTE -->
     <div class="seccion">
-        <h2><span>1</span> DATOS DEL CLIENTE</h2>
+        <h2>📋 1. Datos del Cliente</h2>
         <div class="fila"><label>Nombre y apellidos:</label><input type="text"></div>
-        <div class="fila"><label>NIF / CIF:</label><input type="text" style="flex:0.5;min-width:150px;"><label style="min-width:50px;">Teléfono:</label><input type="text" style="flex:0.5;min-width:150px;"></div>
-        <div class="fila"><label>Correo electrónico:</label><input type="text"></div>
-        <div class="fila"><label>Dirección:</label><input type="text"></div>
+        <div class="fila"><label>Teléfono / móvil:</label><input type="text" style="flex:0.6;"><label style="min-width:60px;">Correo:</label><input type="text" style="flex:1;"></div>
     </div>
 
-    <!-- SECCIÓN 2 -->
+    <!-- 2. EQUIPO -->
     <div class="seccion">
-        <h2><span>2</span> DATOS DEL EQUIPO</h2>
-        <div class="fila"><label>Marca:</label><input type="text" style="flex:0.4;"><label style="min-width:60px;">Modelo:</label><input type="text" style="flex:0.4;"></div>
-        <div class="fila">
-            <label>Tipo:</label>
-            <label><input type="checkbox"> PC sobremesa</label>
-            <label><input type="checkbox"> Portátil</label>
-            <label><input type="checkbox"> Mac</label>
-            <label><input type="checkbox"> Otro: <input type="text" style="width:100px;border:none;border-bottom:1px solid #999;background:transparent;"></label>
-        </div>
-        <div class="fila"><label>Nº de serie:</label><input type="text" style="flex:0.4;"><label style="min-width:70px;">Año compra:</label><input type="text" style="flex:0.3;"></div>
-        <div class="fila"><label>Sistema operativo:</label><input type="text" style="flex:0.3;"><label style="min-width:60px;">Versión:</label><input type="text" style="flex:0.3;"></div>
-        <div class="fila"><label>Accesorios entregados:</label><input type="text"></div>
+        <h2>💻 2. Datos del Equipo</h2>
+        <div class="fila"><label>Marca y modelo:</label><input type="text"></div>
+        <div class="fila"><label>Sistema Operativo:</label><input type="text" style="flex:0.6;"><label style="min-width:60px;">Accesorios:</label><input type="text" style="flex:1;"></div>
+        <div class="fila"><label>Problema que presenta:</label><input type="text" placeholder="Ej: No enciende, pantalla azul, lento..."></div>
     </div>
 
-    <!-- SECCIÓN 3 -->
+    <!-- 3. REVISIÓN TÉCNICA (Diagnóstico rápido) -->
     <div class="seccion">
-        <h2><span>3</span> DESCRIPCIÓN DEL PROBLEMA (según el cliente)</h2>
-        <textarea rows="3"></textarea>
-    </div>
-
-    <!-- SECCIÓN 4 -->
-    <div class="seccion">
-        <h2><span>4</span> PRUEBAS Y COMPROBACIONES REALIZADAS</h2>
+        <h2>🔍 3. Revisión y Diagnóstico</h2>
         <div class="check-group">
-            <label><input type="checkbox"> Diagnóstico de hardware (disco, RAM, placa, fuente)</label>
-            <label><input type="checkbox"> Análisis de virus / malware</label>
-            <label><input type="checkbox"> Revisión de software / configuraciones</label>
-            <label><input type="checkbox"> Prueba de periféricos (teclado, ratón, pantalla)</label>
-            <label><input type="checkbox"> Comprobación de red / Wi-Fi</label>
-            <label><input type="checkbox"> Pruebas de estrés / temperatura</label>
-            <label><input type="checkbox"> Otros: <input type="text" style="width:150px;border:none;border-bottom:1px solid #999;background:transparent;"></label>
+            <label><input type="checkbox"> Problema de Hardware</label>
+            <label><input type="checkbox"> Virus / Malware</label>
+            <label><input type="checkbox"> Fallo de Software</label>
+            <label><input type="checkbox"> Problema de Red / Wifi</label>
+            <label><input type="checkbox"> Sobrecalentamiento</label>
+            <label><input type="checkbox"> Otro:</label>
+            <input type="text" style="flex:1;min-width:100px;border:none;border-bottom:1px solid #999;">
         </div>
-        <div class="fila" style="margin-top:8px;"><label style="min-width:auto;">Resultados de las pruebas:</label></div>
-        <textarea rows="2"></textarea>
+        <div class="fila"><label>Diagnóstico / Observaciones:</label></div>
+        <textarea rows="2" placeholder="Aquí el técnico escribe el diagnóstico encontrado..."></textarea>
     </div>
 
-    <!-- SECCIÓN 5 -->
-    <div class="seccion">
-        <h2><span>5</span> DIAGNÓSTICO TÉCNICO (conclusión)</h2>
-        <textarea rows="3"></textarea>
+    <!-- 4. DATOS DE LA PERSONA QUE REVISA (TÉCNICO) - ¡NUEVO Y DESTACADO! -->
+    <div class="seccion" style="border-left-color: #d97706; background: #fffbeb; padding: 12px 18px; border-radius: 0 6px 6px 0;">
+        <h2 style="color: #b45309;">👤 4. Datos de la Persona que Revisa (Técnico)</h2>
+        <div class="fila"><label>Nombre completo:</label><input type="text" placeholder="Técnico responsable"></div>
+        <div class="fila"><label>Documento / Nº Empleado:</label><input type="text" style="flex:0.5;"><label style="min-width:80px;">Teléfono contacto:</label><input type="text" style="flex:0.6;"></div>
+        <div class="fila"><label>Correo electrónico:</label><input type="text" style="flex:0.8;"><label style="min-width:60px;">Fecha rev.:</label><input type="text" placeholder="DD/MM/AAAA" style="flex:0.4;"></div>
+        <div class="fila"><label>Firma del Técnico:</label><input type="text" placeholder="Firma o nombre completo" style="flex:1;"></div>
     </div>
 
-    <!-- SECCIÓN 6 -->
+    <!-- 5. FIRMAS Y CIERRE -->
     <div class="seccion">
-        <h2><span>6</span> ACCIONES RECOMENDADAS / REPARACIONES</h2>
-        <div class="check-group">
-            <label><input type="checkbox"> Reparación de software (especificar): <input type="text" style="width:140px;border:none;border-bottom:1px solid #999;background:transparent;"></label>
-            <label><input type="checkbox"> Reparación de hardware: <input type="text" style="width:140px;border:none;border-bottom:1px solid #999;background:transparent;"></label>
-            <label><input type="checkbox"> Reemplazo de piezas: <input type="text" style="width:140px;border:none;border-bottom:1px solid #999;background:transparent;"></label>
-            <label><input type="checkbox"> Formateo / reinstalación de sistema</label>
-            <label><input type="checkbox"> Copia de seguridad de datos</label>
-            <label><input type="checkbox"> Actualización de drivers / firmware</label>
-            <label><input type="checkbox"> Limpieza interna</label>
-            <label><input type="checkbox"> Otros: <input type="text" style="width:150px;border:none;border-bottom:1px solid #999;background:transparent;"></label>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 7 -->
-    <div class="seccion">
-        <h2><span>7</span> PRESUPUESTO ESTIMADO</h2>
-        <div class="fila"><label>Mano de obra:</label><input type="text" style="width:120px;"> $</div>
-        <div class="fila"><label>Piezas / repuestos:</label><input type="text" style="width:120px;"> $</div>
-        <div class="fila" style="font-weight:bold;font-size:1.1em;"><label>Total (IVA no incluido):</label><input type="text" style="width:140px;border-bottom:3px solid #1a2a4a;"> $</div>
-        <div class="fila"><label>Tiempo estimado de reparación:</label><input type="text" style="width:150px;"> días / horas</div>
-    </div>
-
-    <!-- SECCIÓN 8 -->
-    <div class="seccion">
-        <h2><span>8</span> OBSERVACIONES Y CONDICIONES</h2>
-        <textarea rows="2" placeholder="Plazos, garantía, autorización del cliente, etc."></textarea>
-    </div>
-
-    <!-- SECCIÓN 9: FIRMAS -->
-    <div class="seccion">
-        <h2><span>9</span> FIRMAS</h2>
+        <h2>✍️ 5. Cierre y Firmas</h2>
+        <div class="fila"><label>Acción a realizar / Presupuesto:</label><input type="text" placeholder="Ej: Formateo, cambio de disco, limpieza..."></div>
+        <div class="fila"><label>Coste estimado (€):</label><input type="text" style="width:120px;flex:none;"> <span style="color:#555;">(IVA no incluido)</span></div>
         <div class="firma-area">
             <div class="firma-item">
-                <label><strong>Cliente:</strong></label>
-                <input type="text" style="width:100%;">
-                <div style="margin-top:6px;"><label>Fecha: <input type="text" style="width:140px;border:none;border-bottom:1px solid #999;background:transparent;"></label></div>
+                <label><strong>Firma del Cliente:</strong></label>
+                <input type="text" placeholder="Nombre y fecha">
             </div>
             <div class="firma-item">
-                <label><strong>Técnico:</strong></label>
-                <input type="text" style="width:100%;">
-                <div style="margin-top:6px;"><label>Fecha: <input type="text" style="width:140px;border:none;border-bottom:1px solid #999;background:transparent;"></label></div>
+                <label><strong>Firma del Técnico:</strong></label>
+                <input type="text" placeholder="Nombre y fecha">
             </div>
         </div>
     </div>
 
     <!-- BOTONES -->
     <div class="botones">
-        <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir / Guardar como PDF</button>
-        <button class="btn-limpiar" onclick="limpiarFormulario()">🗑️ Limpiar todo</button>
+        <button class="btn-pdf" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+        <button class="btn-limpiar" onclick="limpiar()">🧹 Limpiar todo</button>
     </div>
 
 </div>
 
 <script>
-    function limpiarFormulario() {
-        // Limpia todos los inputs de texto
-        document.querySelectorAll('input[type="text"], input[type="number"]').forEach(inp => inp.value = '');
-        // Limpia textareas
+    function limpiar() {
+        document.querySelectorAll('input[type="text"]').forEach(inp => inp.value = '');
         document.querySelectorAll('textarea').forEach(ta => ta.value = '');
-        // Desmarca todos los checkboxes
         document.querySelectorAll('input[type="checkbox"]').forEach(chk => chk.checked = false);
     }
 </script>
