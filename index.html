@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>NexusCore | Portfolio Profesional · SOAP + Animaciones</title>
+    <title>NexusCore | Portfolio Profesional · Seguro</title>
     <!-- Bootstrap 5 + Font Awesome 6 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -73,9 +73,7 @@
             overflow-x: hidden;
         }
 
-        /* ============================================================
-           PARTÍCULAS FLOTANTES MEJORADAS
-           ============================================================ */
+        /* Partículas flotantes */
         .particles-container {
             position: fixed;
             top: 0;
@@ -117,9 +115,7 @@
             padding-top: 1rem;
         }
 
-        /* ============================================================
-           ANIMACIONES AVANZADAS (Scroll Reveal + Efectos)
-           ============================================================ */
+        /* Animaciones */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -130,7 +126,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
         .reveal-left {
             opacity: 0;
             transform: translateX(-50px);
@@ -141,7 +136,6 @@
             opacity: 1;
             transform: translateX(0);
         }
-
         .reveal-right {
             opacity: 0;
             transform: translateX(50px);
@@ -151,138 +145,6 @@
         .reveal-right.visible {
             opacity: 1;
             transform: translateX(0);
-        }
-
-        .scale-glow {
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
-        }
-        .scale-glow:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 40px var(--glow-color);
-        }
-
-        /* Contador animado */
-        .counter-number {
-            display: inline-block;
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #6C63FF;
-        }
-
-        /* ============================================================
-           NAVBAR CON EFECTO
-           ============================================================ */
-        .navbar-custom {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-            transition: background 0.3s;
-        }
-        .navbar-custom .nav-link {
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: color 0.2s;
-            position: relative;
-        }
-        .navbar-custom .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: #6C63FF;
-            transition: width 0.3s ease, left 0.3s ease;
-        }
-        .navbar-custom .nav-link:hover::after {
-            width: 100%;
-            left: 0;
-        }
-        .navbar-custom .nav-link:hover {
-            color: #6C63FF;
-        }
-        .navbar-custom .navbar-brand {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        /* ============================================================
-           TOGGLE DE TEMA
-           ============================================================ */
-        .theme-toggle-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 1rem;
-        }
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--toggle-bg);
-            padding: 6px 14px;
-            border-radius: 40px;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            user-select: none;
-            box-shadow: 0 4px 12px var(--shadow-color);
-        }
-        .theme-toggle:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 18px var(--glow-color);
-        }
-        .theme-toggle i {
-            font-size: 1.1rem;
-            color: var(--toggle-icon);
-            transition: transform 0.4s ease;
-        }
-        .theme-toggle span {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-        .theme-toggle .toggle-track {
-            width: 36px;
-            height: 20px;
-            background: var(--border-color);
-            border-radius: 30px;
-            position: relative;
-            transition: background 0.3s ease;
-        }
-        .theme-toggle .toggle-track .toggle-thumb {
-            width: 16px;
-            height: 16px;
-            background: #6C63FF;
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-        [data-theme="light"] .theme-toggle .toggle-track .toggle-thumb {
-            transform: translateX(16px);
-        }
-        [data-theme="light"] .theme-toggle .toggle-track {
-            background: #C0C8D8;
-        }
-
-        /* ============================================================
-           HERO CON ESCRITURA AUTOMÁTICA
-           ============================================================ */
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            background: var(--gradient-hero);
-            background-size: 200% auto;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: shimmer 5s linear infinite;
-        }
-        @keyframes shimmer {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 0%; }
         }
 
         .typewriter {
@@ -295,18 +157,6 @@
         @keyframes blink-caret {
             from, to { border-color: transparent; }
             50% { border-color: #6C63FF; }
-        }
-
-        .badge-role {
-            background: var(--bg-skill);
-            display: inline-block;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-left: 2px solid #6C63FF;
-            backdrop-filter: blur(4px);
-            color: var(--text-secondary);
         }
 
         .profile-img {
@@ -323,9 +173,6 @@
             50% { transform: translateY(-8px); }
         }
 
-        /* ============================================================
-           TÍTULOS DE SECCIÓN CON ONDA
-           ============================================================ */
         .section-title {
             font-size: 2rem;
             font-weight: 700;
@@ -353,9 +200,6 @@
             width: 100%;
         }
 
-        /* ============================================================
-           SKILLS
-           ============================================================ */
         .skill-item {
             display: flex;
             align-items: center;
@@ -389,9 +233,6 @@
             color: #A78BFA;
         }
 
-        /* ============================================================
-           PROYECTOS (cards con efecto glass y brillo)
-           ============================================================ */
         .project-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -476,9 +317,6 @@
             color: #6C63FF;
         }
 
-        /* ============================================================
-           EDUCACIÓN, SERVICIOS, CLIENTES, RECONOCIMIENTOS
-           ============================================================ */
         .edu-card, .client-card, .award-card, .service-card {
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
             background: var(--bg-skill);
@@ -496,9 +334,7 @@
             transform: scale(1.15) rotate(3deg);
         }
 
-        /* ============================================================
-           DEMOSTRACIÓN SOAP
-           ============================================================ */
+        /* SOAP Demo */
         .soap-demo {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -522,9 +358,7 @@
             color: var(--text-secondary);
         }
 
-        /* ============================================================
-           CONTACTO
-           ============================================================ */
+        /* Contacto */
         .contact-section {
             background: var(--bg-secondary);
             border-radius: 32px;
@@ -587,9 +421,6 @@
             border-color: #6C63FF;
         }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
         .footer {
             text-align: center;
             margin-top: 2.5rem;
@@ -600,9 +431,7 @@
             transition: color 0.3s, border-color 0.3s;
         }
 
-        /* ============================================================
-           CHATBOT
-           ============================================================ */
+        /* Chatbot */
         .chatbot-container {
             position: fixed;
             bottom: 24px;
@@ -713,9 +542,6 @@
             background: #877eff;
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
         @media (max-width: 576px) {
             .hero h1 {
                 font-size: 2.2rem;
@@ -734,18 +560,15 @@
                 width: 100px;
                 height: 100px;
             }
-            .counter-number {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
 <body>
 
-<!-- ==================== PARTÍCULAS FLOTANTES ==================== -->
+<!-- Partículas -->
 <div class="particles-container" id="particlesContainer"></div>
 
-<!-- ==================== NAVBAR ==================== -->
+<!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-custom sticky-top">
     <div class="container">
         <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>NexusCore</a>
@@ -767,7 +590,7 @@
 </nav>
 
 <div class="container main-container">
-    <!-- ==================== TOGGLE TEMA ==================== -->
+    <!-- Toggle tema -->
     <div class="theme-toggle-wrapper">
         <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Cambiar tema">
             <i class="fas fa-sun" id="themeIcon"></i>
@@ -779,7 +602,7 @@
         </div>
     </div>
 
-    <!-- ==================== HERO ==================== -->
+    <!-- Hero -->
     <div class="hero reveal" style="animation-delay: 0s;">
         <div class="row align-items-center g-4">
             <div class="col-md-8">
@@ -801,7 +624,7 @@
         </div>
     </div>
 
-    <!-- ==================== SOBRE MÍ ==================== -->
+    <!-- Sobre mí -->
     <section id="about" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-user-astronaut me-2"></i> Sobre Mí</h2>
         <div class="row g-4">
@@ -834,23 +657,19 @@
         </div>
     </section>
 
-    <!-- ==================== HABILIDADES ==================== -->
+    <!-- Habilidades -->
     <section id="skills" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-cogs me-2"></i> Stack Tecnológico & Herramientas</h2>
-        <div class="row g-3" id="skillsContainer">
-            <!-- Inyectado por JS -->
-        </div>
+        <div class="row g-3" id="skillsContainer"></div>
     </section>
 
-    <!-- ==================== PROYECTOS DESTACADOS ==================== -->
+    <!-- Proyectos -->
     <section id="projects" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-code-branch me-2"></i> Proyectos Destacados</h2>
-        <div class="row g-4" id="projectsContainer">
-            <!-- Inyectado por JS -->
-        </div>
+        <div class="row g-4" id="projectsContainer"></div>
     </section>
 
-    <!-- ==================== EDUCACIÓN Y CERTIFICACIONES ==================== -->
+    <!-- Educación -->
     <section id="education" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-graduation-cap me-2"></i> Educación & Certificaciones</h2>
         <div class="row g-4">
@@ -875,7 +694,7 @@
         </div>
     </section>
 
-    <!-- ==================== SERVICIOS ==================== -->
+    <!-- Servicios -->
     <section id="services" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-concierge-bell me-2"></i> Servicios Profesionales</h2>
         <div class="row g-4">
@@ -910,7 +729,7 @@
         </div>
     </section>
 
-    <!-- ==================== DEMOSTRACIÓN SOAP (NUEVO) ==================== -->
+    <!-- SOAP Demo -->
     <section id="soap-demo" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-exchange-alt me-2"></i> Demostración SOAP</h2>
         <div class="soap-demo">
@@ -940,18 +759,19 @@
                     <a href="https://www.w3schools.com/xml/tempconvert.asmx?wsdl" target="_blank" style="color: #6C63FF;">
                         tempconvert.asmx
                     </a> 
-                    (público, sin CORS, usando proxy)
+                    (público, usando proxy CORS)
                 </small>
             </div>
         </div>
     </section>
 
-    <!-- ==================== CONTACTO ==================== -->
+    <!-- Contacto con CSRF -->
     <section id="contact" class="contact-section mt-5 reveal">
         <div class="row g-4">
             <div class="col-md-6">
                 <h3><i class="fas fa-envelope me-2"></i> Envíame un mensaje</h3>
                 <form id="emailForm">
+                    <input type="hidden" name="csrf_token" id="csrfToken" value="">
                     <div class="mb-3">
                         <input type="text" class="form-control" placeholder="Tu nombre" id="userName" required>
                     </div>
@@ -961,7 +781,7 @@
                     <div class="mb-3">
                         <textarea class="form-control" rows="3" placeholder="Mensaje / Consulta profesional..." id="userMsg" required></textarea>
                     </div>
-                    <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar correo (SOAP simulado)</button>
+                    <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar correo</button>
                 </form>
                 <div id="emailFeedback" class="mt-3" style="display:none;"></div>
             </div>
@@ -983,11 +803,11 @@
         </div>
     </section>
 
-    <!-- ==================== FOOTER DINÁMICO ==================== -->
+    <!-- Footer -->
     <footer class="footer" id="dynamicFooter"></footer>
 </div>
 
-<!-- ==================== CHATBOT ==================== -->
+<!-- Chatbot -->
 <div class="chatbot-container">
     <div class="chat-toggle" id="chatToggleBtn">
         <i class="fas fa-robot"></i>
@@ -1033,7 +853,7 @@
     })();
 
     // ================================================================
-    // 2. EFECTO TYPEWRITER EN EL TÍTULO
+    // 2. TYPEWRITER
     // ================================================================
     (function typewriter() {
         const el = document.getElementById('typewriterText');
@@ -1052,7 +872,7 @@
     })();
 
     // ================================================================
-    // 3. SCROLL REVEAL (Intersection Observer)
+    // 3. SCROLL REVEAL
     // ================================================================
     (function scrollReveal() {
         const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
@@ -1067,7 +887,7 @@
     })();
 
     // ================================================================
-    // 4. HABILIDADES CON ICONOS
+    // 4. HABILIDADES
     // ================================================================
     const skillsWithIcons = [
         { name: "PHP", icon: "fab fa-php" },
@@ -1101,7 +921,7 @@
     renderSkills();
 
     // ================================================================
-    // 5. PROYECTOS DESTACADOS
+    // 5. PROYECTOS
     // ================================================================
     const projectsData = [
         {
@@ -1190,7 +1010,7 @@
     renderProjects();
 
     // ================================================================
-    // 6. DEMOSTRACIÓN SOAP (CONSUMO REAL)
+    // 6. SOAP DEMO
     // ================================================================
     document.getElementById('soapConvertBtn').addEventListener('click', function() {
         const celsius = document.getElementById('celsiusInput').value.trim();
@@ -1202,7 +1022,6 @@
         const resultBox = document.getElementById('soapResult');
         resultBox.innerHTML = '<span class="text-muted">⏳ Enviando petición SOAP...</span>';
 
-        // Construir el envelope SOAP para el servicio de conversión de temperatura
         const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
         <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
             <soap:Body>
@@ -1212,7 +1031,6 @@
             </soap:Body>
         </soap:Envelope>`;
 
-        // Usamos un proxy CORS público para evitar bloqueos de CORS
         const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
         const targetUrl = 'https://www.w3schools.com/xml/tempconvert.asmx';
 
@@ -1226,7 +1044,6 @@
         })
         .then(response => response.text())
         .then(xmlText => {
-            // Parsear la respuesta XML
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
             const resultNode = xmlDoc.getElementsByTagName('CelsiusToFahrenheitResult')[0];
@@ -1239,30 +1056,38 @@
                     </div>
                 `;
             } else {
-                resultBox.innerHTML = '<span style="color: #ff6b6b;">❌ No se pudo obtener el resultado de la conversión.</span>';
+                resultBox.innerHTML = '<span style="color: #ff6b6b;">❌ No se pudo obtener el resultado.</span>';
             }
         })
         .catch(error => {
-            console.error('Error SOAP:', error);
-            resultBox.innerHTML = `
-                <span style="color: #ff6b6b;">❌ Error al conectar con el servicio SOAP. 
-                <br><small>${error.message}</small></span>
-            `;
+            resultBox.innerHTML = `<span style="color: #ff6b6b;">❌ Error: ${error.message}</span>`;
         });
     });
 
     // ================================================================
-    // 7. ENVÍO DE CORREO (SIMULACIÓN SOAP)
+    // 7. ENVÍO DE CORREO CON CSRF Y SEGURIDAD (Frontend)
     // ================================================================
     const emailForm = document.getElementById('emailForm');
     const emailFeedback = document.getElementById('emailFeedback');
 
+    // Obtener token CSRF del backend al cargar la página
+    fetch('send_email.php?action=get_csrf')
+        .then(response => response.json())
+        .then(data => {
+            if (data.csrf_token) {
+                document.getElementById('csrfToken').value = data.csrf_token;
+            }
+        })
+        .catch(() => {});
+
     if (emailForm) {
         emailForm.addEventListener('submit', function(e) {
             e.preventDefault();
+
             const name = document.getElementById('userName').value.trim();
             const senderEmail = document.getElementById('userEmail').value.trim();
             const message = document.getElementById('userMsg').value.trim();
+            const csrfToken = document.getElementById('csrfToken').value;
 
             if (!name || !senderEmail || !message) {
                 emailFeedback.style.display = 'block';
@@ -1270,41 +1095,60 @@
                 return;
             }
 
-            // Simular envío SOAP con una promesa
             emailFeedback.style.display = 'block';
-            emailFeedback.innerHTML = '<div class="alert alert-info">⏳ Enviando mensaje vía SOAP...</div>';
+            emailFeedback.innerHTML = '<div class="alert alert-info">⏳ Enviando mensaje... por favor espera.</div>';
 
-            // Construcción del SOAP envelope (simulado)
-            const soapEnvelope = `
-                <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-                    <soap:Body>
-                        <SendMessage xmlns="http://example.com/contact">
-                            <name>${name}</name>
-                            <email>${senderEmail}</email>
-                            <message>${message}</message>
-                        </SendMessage>
-                    </soap:Body>
-                </soap:Envelope>
-            `;
+            const formData = new URLSearchParams();
+            formData.append('name', name);
+            formData.append('email', senderEmail);
+            formData.append('message', message);
+            formData.append('csrf_token', csrfToken);
 
-            // Simulamos una llamada SOAP exitosa después de 1.5s
-            setTimeout(() => {
+            fetch('send_email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    emailFeedback.innerHTML = `
+                        <div class="alert alert-success">
+                            ✅ ${data.message}
+                            <br><small>Te responderé a la brevedad.</small>
+                        </div>
+                    `;
+                    document.getElementById('userName').value = '';
+                    document.getElementById('userEmail').value = '';
+                    document.getElementById('userMsg').value = '';
+                    // Regenerar token CSRF
+                    if (data.new_csrf) {
+                        document.getElementById('csrfToken').value = data.new_csrf;
+                    }
+                } else {
+                    emailFeedback.innerHTML = `
+                        <div class="alert alert-danger">
+                            ❌ ${data.message}
+                            ${data.retry_after ? `<br><small>Espera ${data.retry_after} segundos antes de reintentar.</small>` : ''}
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
                 emailFeedback.innerHTML = `
-                    <div class="alert alert-success">
-                        ✅ ¡Mensaje enviado correctamente vía SOAP (simulado)!
-                        <br><small>Nombre: ${name} · Email: ${senderEmail}</small>
+                    <div class="alert alert-danger">
+                        ❌ Error de conexión: ${error.message}
+                        <br><small>Por favor, revisa tu conexión a internet.</small>
                     </div>
                 `;
-                // Resetear formulario
-                document.getElementById('userName').value = '';
-                document.getElementById('userEmail').value = '';
-                document.getElementById('userMsg').value = '';
-            }, 1500);
+            });
         });
     }
 
     // ================================================================
-    // 8. CHATBOT AUTOMATIZADO
+    // 8. CHATBOT
     // ================================================================
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -1324,7 +1168,7 @@
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
         if (q.includes('soap')) {
-            return "🔁 En la sección 'Demostración SOAP' puedes probar una conversión de temperatura usando un servicio SOAP público. También el formulario de contacto simula el envío vía SOAP.";
+            return "🔁 En la sección 'Demostración SOAP' puedes probar una conversión de temperatura usando un servicio SOAP público. También el formulario de contacto usa CSRF y rate limiting para seguridad.";
         }
         if (q.includes('growhealthyhabit') || q.includes('healthy')) {
             return "🌱 growhealthyhabit es una aplicación PHP con Laravel y MySQL enfocada en hábitos saludables. Código en GitHub.";
@@ -1353,6 +1197,9 @@
         if (q.includes('servicio') || q.includes('ofrece')) {
             return "🔧 Ofrezco desarrollo full stack, automatización de pruebas, arquitectura cloud, consultoría Power BI/SAP y formación técnica.";
         }
+        if (q.includes('seguridad') || q.includes('csrf') || q.includes('protección')) {
+            return "🛡️ El formulario de contacto incluye token CSRF, rate limiting por IP, validación y sanitización de datos, y uso de PHPMailer con SMTP para un envío seguro.";
+        }
         if (q.includes('php')) return "💡 PHP: Laravel, Symfony, APIs de alto rendimiento.";
         if (q.includes('selenium')) return "🧪 Selenium: automatización cross-browser, Grid, Page Object Model.";
         if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) {
@@ -1365,9 +1212,9 @@
             return "🎓 Certificaciones: AWS, Azure, ISTQB, Scrum Master. Ver sección Educación.";
         }
         if (q.includes('hola') || q.includes('buenas')) {
-            return "¡Hola! Pregúntame sobre proyectos, SOAP, experiencia o servicios.";
+            return "¡Hola! Pregúntame sobre proyectos, SOAP, seguridad, experiencia o servicios.";
         }
-        return "🔍 Puedes preguntar sobre mis proyectos, la demo SOAP, experiencia, servicios o tecnologías específicas. ¿En qué más puedo ayudarte?";
+        return "🔍 Puedes preguntar sobre mis proyectos, la demo SOAP, las medidas de seguridad, experiencia o tecnologías específicas. ¿En qué más puedo ayudarte?";
     }
 
     function addMessage(text, isUser = false) {
@@ -1392,7 +1239,7 @@
     chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
 
     // ================================================================
-    // 9. MODO DIURNO / NOCTURNO
+    // 9. MODO OSCURO/CLARO
     // ================================================================
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
@@ -1425,7 +1272,7 @@
     });
 
     // ================================================================
-    // 10. FOOTER CON FECHA ACTUAL
+    // 10. FOOTER CON FECHA
     // ================================================================
     function updateFooterDate() {
         const footer = document.getElementById('dynamicFooter');
@@ -1434,7 +1281,7 @@
             const year = now.getFullYear();
             const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
             const monthName = months[now.getMonth()];
-            footer.innerHTML = `© ${year} - ${monthName} · Elias Cordero · Portfolio con SOAP · Automatización, Full Stack & Cloud`;
+            footer.innerHTML = `© ${year} - ${monthName} · Elias Cordero · Portfolio con seguridad · Automatización, Full Stack & Cloud`;
         }
     }
     updateFooterDate();
