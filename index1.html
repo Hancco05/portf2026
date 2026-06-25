@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Hoja de Diagnóstico - Simple</title>
+    <title>Hoja de Diagnóstico</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,10 +16,10 @@
             margin: 0;
         }
         .hoja {
-            max-width: 850px;
+            max-width: 900px;
             width: 100%;
             background: white;
-            padding: 30px 35px;
+            padding: 35px 40px;
             border-radius: 10px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
@@ -36,18 +36,18 @@
             flex-wrap: wrap;
             align-items: baseline;
             gap: 8px 15px;
-            margin: 8px 0;
+            margin: 10px 0;
             padding: 4px 0;
         }
         .fila label {
             font-weight: 600;
-            min-width: 120px;
+            min-width: 130px;
             color: #1e2f3d;
         }
         .fila input, .fila select {
             flex: 1;
-            min-width: 170px;
-            padding: 6px 8px;
+            min-width: 200px;
+            padding: 10px 12px;
             border: none;
             border-bottom: 1.5px solid #bcc3cd;
             background: transparent;
@@ -62,7 +62,7 @@
             flex-wrap: wrap;
             gap: 10px 25px;
             background: #f6f8fc;
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-radius: 6px;
             margin: 5px 0;
         }
@@ -74,33 +74,42 @@
             cursor: pointer;
         }
         .check-group input[type="checkbox"] {
-            width: 17px;
-            height: 17px;
+            width: 18px;
+            height: 18px;
             accent-color: #0b2a4a;
         }
         textarea {
             width: 100%;
-            padding: 8px 12px;
+            padding: 12px 14px;
             border: 1.5px solid #d6dce6;
             border-radius: 5px;
             font-family: Arial;
-            font-size: 14px;
+            font-size: 15px;
             resize: vertical;
-            min-height: 60px;
+            min-height: 80px;
             margin-top: 4px;
         }
         textarea:focus {
             border-color: #0b2a4a;
         }
         .seccion {
-            margin: 22px 0 15px 0;
+            margin: 25px 0 18px 0;
             border-left: 4px solid #0b2a4a;
             padding-left: 18px;
         }
         .seccion h2 {
             font-size: 17px;
             color: #0b2a4a;
-            margin: 0 0 8px 0;
+            margin: 0 0 10px 0;
+        }
+        .seccion-tecnico {
+            border-left-color: #d97706;
+            background: #fffbeb;
+            padding: 15px 18px;
+            border-radius: 0 6px 6px 0;
+        }
+        .seccion-tecnico h2 {
+            color: #b45309;
         }
         .firma-area {
             display: flex;
@@ -115,15 +124,16 @@
         }
         .firma-item input {
             width: 100%;
+            padding: 10px 12px;
         }
         .botones {
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin: 30px 0 10px 0;
+            margin: 35px 0 10px 0;
         }
         .botones button {
-            padding: 10px 30px;
+            padding: 12px 35px;
             font-size: 15px;
             font-weight: bold;
             border: none;
@@ -152,65 +162,62 @@
 <div class="hoja">
 
     <h1>🛠 DIAGNÓSTICO TÉCNICO INFORMÁTICO</h1>
-    <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-weight:bold;">
-        <span>Nº Orden: <input type="text" style="width:120px;border:none;border-bottom:1px solid #999;"></span>
-        <span>Fecha: <input type="text" placeholder="DD/MM/AAAA" style="width:130px;border:none;border-bottom:1px solid #999;"></span>
+    <div style="display:flex; justify-content:space-between; margin-bottom:20px; font-weight:bold; gap:20px;">
+        <span style="display:flex; align-items:center; gap:8px;">Nº Orden: <input type="text" style="width:140px;border:none;border-bottom:1px solid #999;padding:8px;"></span>
+        <span style="display:flex; align-items:center; gap:8px;">Fecha: <input type="text" placeholder="DD/MM/AAAA" style="width:150px;border:none;border-bottom:1px solid #999;padding:8px;"></span>
     </div>
 
     <!-- 1. CLIENTE -->
     <div class="seccion">
         <h2>📋 1. Datos del Cliente</h2>
-        <div class="fila"><label>Nombre y apellidos:</label><input type="text"></div>
-        <div class="fila"><label>Teléfono / móvil:</label><input type="text" style="flex:0.6;"><label style="min-width:60px;">Correo:</label><input type="text" style="flex:1;"></div>
+        <div class="fila"><label>Nombre y apellidos:</label><input type="text" placeholder="Nombre completo"></div>
+        <div class="fila"><label>Teléfono / móvil:</label><input type="text" placeholder="Número de contacto" style="flex:0.6;"><label style="min-width:60px;">Correo:</label><input type="text" placeholder="Email" style="flex:1;"></div>
     </div>
 
     <!-- 2. EQUIPO -->
     <div class="seccion">
         <h2>💻 2. Datos del Equipo</h2>
-        <div class="fila"><label>Marca y modelo:</label><input type="text"></div>
-        <div class="fila"><label>Sistema Operativo:</label><input type="text" style="flex:0.6;"><label style="min-width:60px;">Accesorios:</label><input type="text" style="flex:1;"></div>
-        <div class="fila"><label>Problema que presenta:</label><input type="text" placeholder="Ej: No enciende, pantalla azul, lento..."></div>
+        <div class="fila"><label>Marca y modelo:</label><input type="text" placeholder="Ej: HP Pavilion 15"></div>
+        <div class="fila"><label>Sistema Operativo:</label><input type="text" placeholder="Ej: Windows 10, macOS..." style="flex:0.6;"><label style="min-width:60px;">Accesorios:</label><input type="text" placeholder="Cargador, ratón, etc." style="flex:1;"></div>
+        <!-- AHORA CON 6 LÍNEAS -->
+        <div class="fila" style="align-items:flex-start;"><label>Problema que presenta:</label></div>
+        <textarea rows="6" placeholder="Describe detalladamente el problema (ej: no enciende, pantalla azul, va muy lento, no conecta a internet...)"></textarea>
     </div>
 
-    <!-- 3. REVISIÓN TÉCNICA (Diagnóstico rápido) -->
+    <!-- 3. REVISIÓN Y DIAGNÓSTICO -->
     <div class="seccion">
-        <h2>🔍 3. Revisión y Diagnóstico</h2>
+        <h2>🔍 3. Revisión y Diagnóstico (Técnico)</h2>
         <div class="check-group">
-            <label><input type="checkbox"> Problema de Hardware</label>
+            <label><input type="checkbox"> Hardware</label>
             <label><input type="checkbox"> Virus / Malware</label>
-            <label><input type="checkbox"> Fallo de Software</label>
-            <label><input type="checkbox"> Problema de Red / Wifi</label>
+            <label><input type="checkbox"> Software / Configuración</label>
+            <label><input type="checkbox"> Red / Wifi</label>
             <label><input type="checkbox"> Sobrecalentamiento</label>
             <label><input type="checkbox"> Otro:</label>
-            <input type="text" style="flex:1;min-width:100px;border:none;border-bottom:1px solid #999;">
+            <input type="text" placeholder="Especificar..." style="flex:1;min-width:120px;border:none;border-bottom:1px solid #999;padding:8px;">
         </div>
-        <div class="fila"><label>Diagnóstico / Observaciones:</label></div>
-        <textarea rows="2" placeholder="Aquí el técnico escribe el diagnóstico encontrado..."></textarea>
+        <div class="fila" style="align-items:flex-start;"><label>Diagnóstico detallado:</label></div>
+        <textarea rows="5" placeholder="Aquí el técnico escribe todo el diagnóstico encontrado, pruebas realizadas y conclusiones..."></textarea>
     </div>
 
-    <!-- 4. DATOS DE LA PERSONA QUE REVISA (TÉCNICO) - ¡NUEVO Y DESTACADO! -->
-    <div class="seccion" style="border-left-color: #d97706; background: #fffbeb; padding: 12px 18px; border-radius: 0 6px 6px 0;">
-        <h2 style="color: #b45309;">👤 4. Datos de la Persona que Revisa (Técnico)</h2>
-        <div class="fila"><label>Nombre completo:</label><input type="text" placeholder="Técnico responsable"></div>
-        <div class="fila"><label>Documento / Nº Empleado:</label><input type="text" style="flex:0.5;"><label style="min-width:80px;">Teléfono contacto:</label><input type="text" style="flex:0.6;"></div>
-        <div class="fila"><label>Correo electrónico:</label><input type="text" style="flex:0.8;"><label style="min-width:60px;">Fecha rev.:</label><input type="text" placeholder="DD/MM/AAAA" style="flex:0.4;"></div>
+    <!-- 4. DATOS DEL TÉCNICO -->
+    <div class="seccion seccion-tecnico">
+        <h2>👤 4. Datos de la Persona que Revisa (Técnico)</h2>
+        <div class="fila"><label>Nombre completo:</label><input type="text" placeholder="Técnico responsable" style="flex:1;"></div>
+        <div class="fila"><label>Documento / Nº Empleado:</label><input type="text" placeholder="DNI o legajo" style="flex:0.5;"><label style="min-width:80px;">Teléfono:</label><input type="text" placeholder="Contacto" style="flex:0.6;"></div>
+        <div class="fila"><label>Correo electrónico:</label><input type="text" placeholder="Email del técnico" style="flex:0.8;"><label style="min-width:60px;">Fecha rev.:</label><input type="text" placeholder="DD/MM/AAAA" style="flex:0.4;"></div>
         <div class="fila"><label>Firma del Técnico:</label><input type="text" placeholder="Firma o nombre completo" style="flex:1;"></div>
+        <div class="fila" style="align-items:flex-start; margin-top:8px;"><label>Notas adicionales:</label></div>
+        <textarea rows="3" placeholder="Cualquier otra observación relevante (material usado, tiempo invertido, etc.)"></textarea>
     </div>
 
-    <!-- 5. FIRMAS Y CIERRE -->
+    <!-- 5. CIERRE Y PRESUPUESTO -->
     <div class="seccion">
         <h2>✍️ 5. Cierre y Firmas</h2>
-        <div class="fila"><label>Acción a realizar / Presupuesto:</label><input type="text" placeholder="Ej: Formateo, cambio de disco, limpieza..."></div>
-        <div class="fila"><label>Coste estimado (€):</label><input type="text" style="width:120px;flex:none;"> <span style="color:#555;">(IVA no incluido)</span></div>
+        <!-- AHORA CON 6 LÍNEAS -->
+        <div class="fila" style="align-items:flex-start;"><label>Acción a realizar / Presupuesto:</label></div>
+        <textarea rows="6" placeholder="Ej: Formateo completo + instalación de programas, cambio de disco duro por SSD, limpieza interna, coste aproximado..."></textarea>
         <div class="firma-area">
-            <div class="firma-item">
-                <label><strong>Firma del Cliente:</strong></label>
-                <input type="text" placeholder="Nombre y fecha">
-            </div>
-            <div class="firma-item">
-                <label><strong>Firma del Técnico:</strong></label>
-                <input type="text" placeholder="Nombre y fecha">
-            </div>
         </div>
     </div>
 
