@@ -13,7 +13,7 @@ $csrfToken = $_SESSION['csrf_token'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Hancco · Portafolio Profesional</title>
+    <title>Sebastián Ignacio Carmona Wright · Portafolio Profesional</title>
     <!-- Bootstrap 5 + Font Awesome 6 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -663,7 +663,7 @@ $csrfToken = $_SESSION['csrf_token'];
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-custom sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>Hancco.dev</a>
+        <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>SICW.dev</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
@@ -700,7 +700,7 @@ $csrfToken = $_SESSION['csrf_token'];
             <div class="col-md-8">
                 <div class="badge-role mb-3"><i class="fas fa-microchip"></i>  Ingeniero en Informática · Desarrollador Full Stack</div>
                 <h1 class="display-4 fw-bold">
-                    <span class="typewriter" id="typewriterText">Hancco</span>
+                    <span class="typewriter" id="typewriterText">Sebastián Ignacio Carmona Wright</span>
                 </h1>
                 <p class="fs-5" style="color: var(--text-secondary);">
                     Especialista en desarrollo de software, automatización de procesos, soporte TI y marketing digital. <br>
@@ -943,7 +943,7 @@ $csrfToken = $_SESSION['csrf_token'];
             <div class="col-md-6">
                 <h3><i class="fas fa-address-card me-2"></i> Contacto directo</h3>
                 <div class="phone-item"><i class="fas fa-phone-alt"></i> (56 9) 76654966</div>
-                <div class="mail-direct"><i class="fas fa-inbox"></i> hancco@email.com</div>
+                <div class="mail-direct"><i class="fas fa-inbox"></i> s.carmonawright@email.com</div>
                 <div class="d-flex gap-3 my-4 flex-wrap">
                     <a href="https://github.com/Hancco05" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
                     <a href="#" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
@@ -971,7 +971,7 @@ $csrfToken = $_SESSION['csrf_token'];
             <i class="fas fa-times" id="closeChat" style="cursor:pointer;"></i>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="bot-msg">🤖 ¡Hola! Soy el bot de Hancco. Pregúntame sobre su experiencia, habilidades o proyectos.</div>
+            <div class="bot-msg">🤖 ¡Hola! Soy el bot de Sebastián Carmona Wright. Pregúntame sobre su experiencia, habilidades o proyectos.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
@@ -1221,7 +1221,7 @@ $csrfToken = $_SESSION['csrf_token'];
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
         if (q.includes('experiencia') || q.includes('trayectoria')) {
-            return "👨‍💻 Hancco tiene experiencia como desarrollador freelance, en Collins y en Textil las Américas. Ha trabajado con PHP, Laravel, Java, Python, Power Platform y más.";
+            return "👨‍💻 Sebastián Ignacio Carmona Wright tiene experiencia como desarrollador freelance, en Collins y en Textil las Américas. Ha trabajado con PHP, Laravel, Java, Python, Power Platform y más.";
         }
         if (q.includes('habilidades') || q.includes('tecnologías')) {
             return "🔧 Maneja PHP (avanzado), Power Platforms, Selenium, WordPress, y nivel intermedio en React, Node, Python, Java, SQL, Docker, Git y más.";
@@ -1239,7 +1239,7 @@ $csrfToken = $_SESSION['csrf_token'];
             return "🔁 En la sección 'Demostración SOAP' puedes probar una conversión de temperatura usando un servicio SOAP público.";
         }
         if (q.includes('hola') || q.includes('buenas')) {
-            return "¡Hola! Soy el asistente de Hancco. Pregúntame sobre su experiencia, habilidades, educación o intereses.";
+            return "¡Hola! Soy el asistente de Sebastián. Pregúntame sobre su experiencia, habilidades, educación o intereses.";
         }
         return "🔍 Puedes preguntar sobre experiencia laboral, tecnologías, educación, intereses o contacto. ¿En qué más puedo ayudarte?";
     }
@@ -1308,7 +1308,7 @@ $csrfToken = $_SESSION['csrf_token'];
             const year = now.getFullYear();
             const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
             const monthName = months[now.getMonth()];
-            footer.innerHTML = `© ${year} - ${monthName} · Hancco · Portafolio profesional · Disponibilidad inmediata`;
+            footer.innerHTML = `© ${year} - ${monthName} · Sebastián Ignacio Carmona Wright · Portafolio profesional · Disponibilidad inmediata`;
         }
     }
     updateFooterDate();
