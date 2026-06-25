@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>NexusCore | Portfolio Profesional · Animado</title>
+    <title>NexusCore | Portfolio Profesional · SOAP + Animaciones</title>
     <!-- Bootstrap 5 + Font Awesome 6 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -74,7 +74,7 @@
         }
 
         /* ============================================================
-           PARTÍCULAS FLOTANTES (más dinámicas)
+           PARTÍCULAS FLOTANTES MEJORADAS
            ============================================================ */
         .particles-container {
             position: fixed;
@@ -88,17 +88,16 @@
         }
         .particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--particles-color1);
             border-radius: 50%;
+            background: var(--particles-color1);
             animation: floatParticle linear infinite;
+            box-shadow: 0 0 6px var(--particles-color1);
         }
         @keyframes floatParticle {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+            0% { transform: translateY(100vh) scale(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1) rotate(720deg); opacity: 0; }
         }
 
         ::-webkit-scrollbar {
@@ -119,13 +118,13 @@
         }
 
         /* ============================================================
-           ANIMACIONES DE APARICIÓN CON SCROLL REVEAL
+           ANIMACIONES AVANZADAS (Scroll Reveal + Efectos)
            ============================================================ */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1),
-                        transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
+            transform: translateY(50px);
+            transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1),
+                        transform 0.9s cubic-bezier(0.2, 0.9, 0.4, 1);
         }
         .reveal.visible {
             opacity: 1;
@@ -134,9 +133,9 @@
 
         .reveal-left {
             opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1),
-                        transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
+            transform: translateX(-50px);
+            transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1),
+                        transform 0.9s cubic-bezier(0.2, 0.9, 0.4, 1);
         }
         .reveal-left.visible {
             opacity: 1;
@@ -145,26 +144,33 @@
 
         .reveal-right {
             opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1),
-                        transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1);
+            transform: translateX(50px);
+            transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1),
+                        transform 0.9s cubic-bezier(0.2, 0.9, 0.4, 1);
         }
         .reveal-right.visible {
             opacity: 1;
             transform: translateX(0);
         }
 
-        /* Efecto de escala con brillo */
         .scale-glow {
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
         }
         .scale-glow:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px var(--glow-color);
+            transform: scale(1.03);
+            box-shadow: 0 0 40px var(--glow-color);
+        }
+
+        /* Contador animado */
+        .counter-number {
+            display: inline-block;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #6C63FF;
         }
 
         /* ============================================================
-           NAVBAR
+           NAVBAR CON EFECTO
            ============================================================ */
         .navbar-custom {
             background: var(--bg-secondary);
@@ -262,7 +268,7 @@
         }
 
         /* ============================================================
-           HERO CON ESCRITURA AUTOMÁTICA (typewriter)
+           HERO CON ESCRITURA AUTOMÁTICA
            ============================================================ */
         .hero h1 {
             font-size: 3.2rem;
@@ -475,18 +481,45 @@
            ============================================================ */
         .edu-card, .client-card, .award-card, .service-card {
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+            background: var(--bg-skill);
+            border: 1px solid var(--border-color);
         }
         .edu-card:hover, .client-card:hover, .award-card:hover, .service-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 12px 24px var(--glow-color);
             border-color: var(--card-hover-border);
         }
-
         .service-card i, .client-card i, .award-card i {
             transition: transform 0.4s;
         }
         .service-card:hover i, .client-card:hover i, .award-card:hover i {
             transform: scale(1.15) rotate(3deg);
+        }
+
+        /* ============================================================
+           DEMOSTRACIÓN SOAP
+           ============================================================ */
+        .soap-demo {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .soap-demo:hover {
+            border-color: var(--card-hover-border);
+            box-shadow: 0 8px 20px var(--glow-color);
+        }
+        .soap-demo .result-box {
+            background: var(--bg-input);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid var(--border-color);
+            min-height: 60px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         /* ============================================================
@@ -701,6 +734,9 @@
                 width: 100px;
                 height: 100px;
             }
+            .counter-number {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -723,8 +759,7 @@
                 <li class="nav-item"><a class="nav-link" href="#projects">Proyectos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#education">Educación</a></li>
                 <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
-                <li class="nav-item"><a class="nav-link" href="#clients">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link" href="#awards">Reconocimientos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#soap-demo">SOAP</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
             </ul>
         </div>
@@ -820,14 +855,14 @@
         <h2 class="section-title"><i class="fas fa-graduation-cap me-2"></i> Educación & Certificaciones</h2>
         <div class="row g-4">
             <div class="col-md-6">
-                <div class="edu-card bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
+                <div class="edu-card p-4 rounded-4">
                     <h5><i class="fas fa-university me-2"></i> Ing. en Sistemas Computacionales</h5>
                     <div class="sub" style="color: var(--text-secondary);">Instituto Tecnológico de México · 2012 - 2016</div>
                     <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Especialización en arquitectura de software y bases de datos.</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="edu-card bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
+                <div class="edu-card p-4 rounded-4">
                     <h5><i class="fas fa-certificate me-2"></i> Certificaciones</h5>
                     <ul class="list-unstyled" style="color: var(--text-secondary);">
                         <li><i class="fas fa-check-circle text-success me-2"></i> AWS Certified Solutions Architect</li>
@@ -845,28 +880,28 @@
         <h2 class="section-title"><i class="fas fa-concierge-bell me-2"></i> Servicios Profesionales</h2>
         <div class="row g-4">
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="service-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-secondary); border: 1px solid var(--border-color);">
+                <div class="service-card p-4 rounded-4 text-center">
                     <i class="fas fa-laptop-code" style="font-size: 2.8rem; color: #6C63FF; margin-bottom: 1rem;"></i>
                     <h5>Desarrollo Full Stack</h5>
                     <p style="color: var(--text-secondary); font-size: 0.85rem;">Aplicaciones web con React, Node, PHP, .NET y bases de datos SQL/NoSQL.</p>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="service-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-secondary); border: 1px solid var(--border-color);">
+                <div class="service-card p-4 rounded-4 text-center">
                     <i class="fas fa-robot" style="font-size: 2.8rem; color: #6C63FF; margin-bottom: 1rem;"></i>
                     <h5>Automatización & QA</h5>
                     <p style="color: var(--text-secondary); font-size: 0.85rem;">Frameworks de pruebas con Selenium, Cucumber, RPA con Power Automate.</p>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="service-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-secondary); border: 1px solid var(--border-color);">
+                <div class="service-card p-4 rounded-4 text-center">
                     <i class="fas fa-cloud" style="font-size: 2.8rem; color: #6C63FF; margin-bottom: 1rem;"></i>
                     <h5>Arquitectura Cloud</h5>
                     <p style="color: var(--text-secondary); font-size: 0.85rem;">Migración y optimización en AWS, Azure, Docker, Kubernetes y CI/CD.</p>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="service-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-secondary); border: 1px solid var(--border-color);">
+                <div class="service-card p-4 rounded-4 text-center">
                     <i class="fas fa-chart-pie" style="font-size: 2.8rem; color: #6C63FF; margin-bottom: 1rem;"></i>
                     <h5>Business Intelligence</h5>
                     <p style="color: var(--text-secondary); font-size: 0.85rem;">Dashboards con Power BI, integración SAP y análisis de datos avanzado.</p>
@@ -875,96 +910,38 @@
         </div>
     </section>
 
-    <!-- ==================== CLIENTES Y COLABORACIONES ==================== -->
-    <section id="clients" class="mt-5 reveal">
-        <h2 class="section-title"><i class="fas fa-handshake me-2"></i> Clientes y Colaboraciones</h2>
-        <div class="row g-4">
-            <div class="col-6 col-md-3">
-                <div class="client-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-skill); border: 1px solid var(--border-color);">
-                    <i class="fas fa-university" style="font-size: 3rem; color: #6C63FF; margin-bottom: 0.5rem;"></i>
-                    <div class="client-name" style="font-weight: 600; color: var(--text-primary);">Banco FinanTrust</div>
-                    <div class="client-desc" style="font-size: 0.8rem; color: var(--text-secondary);">Automatización de pruebas</div>
+    <!-- ==================== DEMOSTRACIÓN SOAP (NUEVO) ==================== -->
+    <section id="soap-demo" class="mt-5 reveal">
+        <h2 class="section-title"><i class="fas fa-exchange-alt me-2"></i> Demostración SOAP</h2>
+        <div class="soap-demo">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-8">
+                    <p style="color: var(--text-secondary);">
+                        <i class="fas fa-code me-2"></i> Este ejemplo consume el servicio SOAP público de 
+                        <strong>conversión de temperatura</strong> (Celsius ↔ Fahrenheit). 
+                        Introduce un valor en grados Celsius y obtén su equivalente en Fahrenheit.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <input type="number" id="celsiusInput" class="form-control" style="max-width: 150px;" placeholder="°C" value="25">
+                        <button class="btn btn-primary" id="soapConvertBtn" style="background:#6C63FF; border:none;">
+                            <i class="fas fa-arrow-right"></i> Convertir vía SOAP
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="result-box" id="soapResult">
+                        <span class="text-muted">Resultado aparecerá aquí</span>
+                    </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
-                <div class="client-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-skill); border: 1px solid var(--border-color);">
-                    <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #6C63FF; margin-bottom: 0.5rem;"></i>
-                    <div class="client-name" style="font-weight: 600; color: var(--text-primary);">Retail Group SA</div>
-                    <div class="client-desc" style="font-size: 0.8rem; color: var(--text-secondary);">Dashboards Power BI</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="client-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-skill); border: 1px solid var(--border-color);">
-                    <i class="fas fa-hospital-alt" style="font-size: 3rem; color: #6C63FF; margin-bottom: 0.5rem;"></i>
-                    <div class="client-name" style="font-weight: 600; color: var(--text-primary);">Salud Integral</div>
-                    <div class="client-desc" style="font-size: 0.8rem; color: var(--text-secondary);">Migración a la nube</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="client-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-skill); border: 1px solid var(--border-color);">
-                    <i class="fas fa-industry" style="font-size: 3rem; color: #6C63FF; margin-bottom: 0.5rem;"></i>
-                    <div class="client-name" style="font-weight: 600; color: var(--text-primary);">Logística Ágil</div>
-                    <div class="client-desc" style="font-size: 0.8rem; color: var(--text-secondary);">Microservicios .NET</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="client-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-skill); border: 1px solid var(--border-color);">
-                    <i class="fas fa-chart-line" style="font-size: 3rem; color: #6C63FF; margin-bottom: 0.5rem;"></i>
-                    <div class="client-name" style="font-weight: 600; color: var(--text-primary);">Consultora Estratégica</div>
-                    <div class="client-desc" style="font-size: 0.8rem; color: var(--text-secondary);">Arquitectura AWS</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="client-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-skill); border: 1px solid var(--border-color);">
-                    <i class="fas fa-robot" style="font-size: 3rem; color: #6C63FF; margin-bottom: 0.5rem;"></i>
-                    <div class="client-name" style="font-weight: 600; color: var(--text-primary);">AutomatizaTech</div>
-                    <div class="client-desc" style="font-size: 0.8rem; color: var(--text-secondary);">RPA con Power Automate</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="client-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-skill); border: 1px solid var(--border-color);">
-                    <i class="fas fa-code" style="font-size: 3rem; color: #6C63FF; margin-bottom: 0.5rem;"></i>
-                    <div class="client-name" style="font-weight: 600; color: var(--text-primary);">Devs & Co.</div>
-                    <div class="client-desc" style="font-size: 0.8rem; color: var(--text-secondary);">Capacitación técnica</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="client-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-skill); border: 1px solid var(--border-color);">
-                    <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #6C63FF; margin-bottom: 0.5rem;"></i>
-                    <div class="client-name" style="font-weight: 600; color: var(--text-primary);">CloudMasters</div>
-                    <div class="client-desc" style="font-size: 0.8rem; color: var(--text-secondary);">DevOps & CI/CD</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== RECONOCIMIENTOS ==================== -->
-    <section id="awards" class="mt-5 reveal">
-        <h2 class="section-title"><i class="fas fa-trophy me-2"></i> Reconocimientos</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="award-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-secondary); border: 1px solid var(--border-color);">
-                    <i class="fas fa-award" style="font-size: 2.5rem; color: #FBBF24; margin-bottom: 0.5rem;"></i>
-                    <h5>Premio a la Innovación Tecnológica</h5>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Por el desarrollo de una plataforma de pagos en tiempo real (2023).</p>
-                    <div class="org" style="font-size: 0.85rem; color: var(--text-muted);">Fintech Summit</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="award-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-secondary); border: 1px solid var(--border-color);">
-                    <i class="fas fa-medal" style="font-size: 2.5rem; color: #FBBF24; margin-bottom: 0.5rem;"></i>
-                    <h5>Mejor Proyecto de Automatización</h5>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Framework de pruebas que redujo los errores en producción en un 70%.</p>
-                    <div class="org" style="font-size: 0.85rem; color: var(--text-muted);">QA Awards 2022</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="award-card bg-secondary p-4 rounded-4 text-center" style="background: var(--bg-secondary); border: 1px solid var(--border-color);">
-                    <i class="fas fa-star" style="font-size: 2.5rem; color: #FBBF24; margin-bottom: 0.5rem;"></i>
-                    <h5>Reconocimiento al Liderazgo</h5>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Por dirigir exitosamente la migración a la nube de sistemas críticos.</p>
-                    <div class="org" style="font-size: 0.85rem; color: var(--text-muted);">Cloud Excellence 2021</div>
-                </div>
+            <div class="mt-3">
+                <small class="text-muted">
+                    <i class="fas fa-info-circle"></i> Servicio: 
+                    <a href="https://www.w3schools.com/xml/tempconvert.asmx?wsdl" target="_blank" style="color: #6C63FF;">
+                        tempconvert.asmx
+                    </a> 
+                    (público, sin CORS, usando proxy)
+                </small>
             </div>
         </div>
     </section>
@@ -984,8 +961,9 @@
                     <div class="mb-3">
                         <textarea class="form-control" rows="3" placeholder="Mensaje / Consulta profesional..." id="userMsg" required></textarea>
                     </div>
-                    <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar correo</button>
+                    <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar correo (SOAP simulado)</button>
                 </form>
+                <div id="emailFeedback" class="mt-3" style="display:none;"></div>
             </div>
             <div class="col-md-6">
                 <h3><i class="fas fa-address-card me-2"></i> Contacto directo</h3>
@@ -1020,7 +998,7 @@
             <i class="fas fa-times" id="closeChat" style="cursor:pointer;"></i>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="bot-msg">🤖 ¡Hola! Soy el bot técnico. Pregúntame sobre mis proyectos, experiencia o cualquier duda profesional.</div>
+            <div class="bot-msg">🤖 ¡Hola! Soy el bot técnico. Pregúntame sobre mis proyectos, experiencia, o la demostración SOAP.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
@@ -1039,16 +1017,17 @@
     (function createParticles() {
         const container = document.getElementById('particlesContainer');
         if (!container) return;
-        const count = 40;
+        const count = 50;
         for (let i = 0; i < count; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
-            const size = Math.random() * 4 + 2;
+            const size = Math.random() * 5 + 2;
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
             particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
+            particle.style.animationDuration = (Math.random() * 25 + 15) + 's';
             particle.style.animationDelay = (Math.random() * 20) + 's';
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
             container.appendChild(particle);
         }
     })();
@@ -1066,11 +1045,10 @@
             if (index < text.length) {
                 el.textContent += text.charAt(index);
                 index++;
-                setTimeout(type, 80);
+                setTimeout(type, 70);
             }
         }
-        // Iniciar después de un breve retraso
-        setTimeout(type, 600);
+        setTimeout(type, 500);
     })();
 
     // ================================================================
@@ -1123,7 +1101,7 @@
     renderSkills();
 
     // ================================================================
-    // 5. PROYECTOS DESTACADOS (desde la imagen)
+    // 5. PROYECTOS DESTACADOS
     // ================================================================
     const projectsData = [
         {
@@ -1212,29 +1190,121 @@
     renderProjects();
 
     // ================================================================
-    // 6. ENVÍO DE CORREO
+    // 6. DEMOSTRACIÓN SOAP (CONSUMO REAL)
+    // ================================================================
+    document.getElementById('soapConvertBtn').addEventListener('click', function() {
+        const celsius = document.getElementById('celsiusInput').value.trim();
+        if (!celsius || isNaN(celsius)) {
+            document.getElementById('soapResult').innerHTML = '<span style="color: #ff6b6b;">❌ Ingresa un número válido</span>';
+            return;
+        }
+
+        const resultBox = document.getElementById('soapResult');
+        resultBox.innerHTML = '<span class="text-muted">⏳ Enviando petición SOAP...</span>';
+
+        // Construir el envelope SOAP para el servicio de conversión de temperatura
+        const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
+        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+            <soap:Body>
+                <CelsiusToFahrenheit xmlns="https://www.w3schools.com/xml/">
+                    <Celsius>${celsius}</Celsius>
+                </CelsiusToFahrenheit>
+            </soap:Body>
+        </soap:Envelope>`;
+
+        // Usamos un proxy CORS público para evitar bloqueos de CORS
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+        const targetUrl = 'https://www.w3schools.com/xml/tempconvert.asmx';
+
+        fetch(proxyUrl + targetUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/xml; charset=utf-8',
+                'SOAPAction': 'https://www.w3schools.com/xml/CelsiusToFahrenheit'
+            },
+            body: soapRequest
+        })
+        .then(response => response.text())
+        .then(xmlText => {
+            // Parsear la respuesta XML
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+            const resultNode = xmlDoc.getElementsByTagName('CelsiusToFahrenheitResult')[0];
+            if (resultNode) {
+                const fahrenheit = resultNode.textContent.trim();
+                resultBox.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                        <span style="font-weight:600; color:var(--text-primary);">🌡️ Resultado:</span>
+                        <span style="font-size:1.2rem; color:#6C63FF;">${celsius}°C = ${fahrenheit}°F</span>
+                    </div>
+                `;
+            } else {
+                resultBox.innerHTML = '<span style="color: #ff6b6b;">❌ No se pudo obtener el resultado de la conversión.</span>';
+            }
+        })
+        .catch(error => {
+            console.error('Error SOAP:', error);
+            resultBox.innerHTML = `
+                <span style="color: #ff6b6b;">❌ Error al conectar con el servicio SOAP. 
+                <br><small>${error.message}</small></span>
+            `;
+        });
+    });
+
+    // ================================================================
+    // 7. ENVÍO DE CORREO (SIMULACIÓN SOAP)
     // ================================================================
     const emailForm = document.getElementById('emailForm');
+    const emailFeedback = document.getElementById('emailFeedback');
+
     if (emailForm) {
-        emailForm.addEventListener('submit', (e) => {
+        emailForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('userName').value.trim();
             const senderEmail = document.getElementById('userEmail').value.trim();
             const message = document.getElementById('userMsg').value.trim();
+
             if (!name || !senderEmail || !message) {
-                alert("Completa todos los campos.");
+                emailFeedback.style.display = 'block';
+                emailFeedback.innerHTML = '<div class="alert alert-danger">❌ Completa todos los campos.</div>';
                 return;
             }
-            const recipient = "elias.cordero@nexuscore.dev";
-            const subject = `Contacto portfolio: ${name}`;
-            const body = `Nombre: ${name}%0AEmail: ${senderEmail}%0AMensaje:%0A${message}%0A%0A-- Enviado desde el portafolio web --`;
-            window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${body}`;
-            alert("Se abrirá tu cliente de correo. ¡Gracias por tu mensaje!");
+
+            // Simular envío SOAP con una promesa
+            emailFeedback.style.display = 'block';
+            emailFeedback.innerHTML = '<div class="alert alert-info">⏳ Enviando mensaje vía SOAP...</div>';
+
+            // Construcción del SOAP envelope (simulado)
+            const soapEnvelope = `
+                <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                    <soap:Body>
+                        <SendMessage xmlns="http://example.com/contact">
+                            <name>${name}</name>
+                            <email>${senderEmail}</email>
+                            <message>${message}</message>
+                        </SendMessage>
+                    </soap:Body>
+                </soap:Envelope>
+            `;
+
+            // Simulamos una llamada SOAP exitosa después de 1.5s
+            setTimeout(() => {
+                emailFeedback.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ ¡Mensaje enviado correctamente vía SOAP (simulado)!
+                        <br><small>Nombre: ${name} · Email: ${senderEmail}</small>
+                    </div>
+                `;
+                // Resetear formulario
+                document.getElementById('userName').value = '';
+                document.getElementById('userEmail').value = '';
+                document.getElementById('userMsg').value = '';
+            }, 1500);
         });
     }
 
     // ================================================================
-    // 7. CHATBOT AUTOMATIZADO
+    // 8. CHATBOT AUTOMATIZADO
     // ================================================================
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -1253,50 +1323,51 @@
 
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
-        // Proyectos específicos
+        if (q.includes('soap')) {
+            return "🔁 En la sección 'Demostración SOAP' puedes probar una conversión de temperatura usando un servicio SOAP público. También el formulario de contacto simula el envío vía SOAP.";
+        }
         if (q.includes('growhealthyhabit') || q.includes('healthy')) {
-            return "🌱 growhealthyhabit es una aplicación PHP con Laravel y MySQL enfocada en hábitos saludables. Puedes ver el código en mi GitHub.";
+            return "🌱 growhealthyhabit es una aplicación PHP con Laravel y MySQL enfocada en hábitos saludables. Código en GitHub.";
         }
         if (q.includes('notifask')) {
-            return "📋 Notifask es un sistema de recordatorios y notificaciones desarrollado en C++. Ideal para gestión de tareas.";
+            return "📋 Notifask es un sistema de recordatorios y notificaciones en C++.";
         }
         if (q.includes('ticket') || q.includes('concierto')) {
-            return "🎫 Venta-de-ticket-PSC-Concierto-VIP es un proyecto de venta de tickets para conciertos VIP, desarrollado con Papyrus.";
+            return "🎫 Venta-de-ticket-PSC-Concierto-VIP es un proyecto de venta de tickets para conciertos VIP, con Papyrus.";
         }
         if (q.includes('website1')) {
-            return "🌐 Website1 es un sitio web construido con Maven y JavaScript. Un proyecto de portafolio básico.";
+            return "🌐 Website1 es un sitio web con Maven y JavaScript.";
         }
         if (q.includes('animals-safe')) {
-            return "🐾 animals-safe es un proyecto de protección animal con Python y Django. Utiliza HTML en el frontend.";
+            return "🐾 animals-safe es un proyecto de protección animal con Python y Django.";
         }
         if (q.includes('pc_assistant') || q.includes('assistant')) {
-            return "💻 PC_Assistant es un bot en Python que monitorea la actividad de la PC y responde preguntas usando ChatGPT.";
+            return "💻 PC_Assistant es un bot en Python que monitorea la PC y responde con ChatGPT.";
         }
         if (q.includes('proyecto') || q.includes('portafolio')) {
-            return "🚀 Mis proyectos destacados son: growhealthyhabit (PHP), Notifask (C++), Venta-de-ticket (Papyrus), Website1 (JS), animals-safe (Python/Django) y PC_Assistant (Python). Todos están en GitHub.";
+            return "🚀 Mis proyectos: growhealthyhabit (PHP), Notifask (C++), Venta-de-ticket (Papyrus), Website1 (JS), animals-safe (Python/Django), PC_Assistant (Python). Todos en GitHub.";
         }
         if (q.includes('experiencia') || q.includes('trayectoria')) {
-            return "👨‍💻 Tengo más de 8 años de experiencia en desarrollo full stack, automatización y arquitectura cloud. He trabajado en banca, retail y salud, liderando equipos y entregando soluciones escalables.";
+            return "👨‍💻 +8 años en desarrollo full stack, automatización y arquitectura cloud. He trabajado en banca, retail y salud.";
         }
         if (q.includes('servicio') || q.includes('ofrece')) {
-            return "🔧 Ofrezco desarrollo full stack, automatización de pruebas, arquitectura cloud, consultoría en Power BI y SAP, y formación técnica para equipos.";
+            return "🔧 Ofrezco desarrollo full stack, automatización de pruebas, arquitectura cloud, consultoría Power BI/SAP y formación técnica.";
         }
-        if (q.includes('php')) return "💡 PHP: frameworks Laravel, Symfony, APIs y sistemas de alta concurrencia.";
-        if (q.includes('selenium')) return "🧪 Selenium: automatización cross-browser, Grid, Page Object Model e integración con Jenkins.";
-        if (q.includes('wordpress')) return "📌 WordPress: temas personalizados, plugins, WooCommerce y optimización de rendimiento.";
-        if (q.includes('react') || q.includes('node')) return "⚛️ React/Node: SPAs, Express, integración con SQL/NoSQL, despliegue en AWS.";
-        if (q.includes('python') || q.includes('java') || q.includes('c#')) return "🐍 Python, Java, C#: microservicios, automatización y aplicaciones empresariales.";
-        if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) return "🐳 DevOps: Docker, Jenkins, AWS, Azure - pipelines CI/CD, infraestructura como código.";
-        if (q.includes('sql') || q.includes('mongodb')) return "🗄️ Bases de datos: SQL Server, MySQL, Oracle, MongoDB - modelado, consultas y optimización.";
-        if (q.includes('power bi') || q.includes('sap')) return "📊 Power BI + SAP: dashboards interactivos, DAX, integración con datos empresariales.";
-        if (q.includes('ingles') || q.includes('english')) return "🇬🇧 Inglés Técnico: Nivel B2-C1. Reuniones, documentación, code reviews y comunicación fluida.";
+        if (q.includes('php')) return "💡 PHP: Laravel, Symfony, APIs de alto rendimiento.";
+        if (q.includes('selenium')) return "🧪 Selenium: automatización cross-browser, Grid, Page Object Model.";
+        if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) {
+            return "🐳 DevOps: Docker, Jenkins, AWS, Azure - pipelines CI/CD.";
+        }
+        if (q.includes('sql') || q.includes('mongodb')) return "🗄️ SQL Server, MySQL, Oracle, MongoDB - modelado y optimización.";
+        if (q.includes('power bi') || q.includes('sap')) return "📊 Power BI + SAP: dashboards interactivos, DAX, integración empresarial.";
+        if (q.includes('ingles') || q.includes('english')) return "🇬🇧 Inglés técnico B2-C1. Reuniones, documentación, code reviews.";
         if (q.includes('certificacion') || q.includes('certificado')) {
-            return "🎓 Tengo certificaciones en AWS, Azure, ISTQB y Scrum Master. Puedes verlas en la sección de Educación.";
+            return "🎓 Certificaciones: AWS, Azure, ISTQB, Scrum Master. Ver sección Educación.";
         }
         if (q.includes('hola') || q.includes('buenas')) {
-            return "¡Hola! Soy el asistente técnico. Pregúntame sobre mis proyectos (growhealthyhabit, Notifask, PC_Assistant, etc.), experiencia, servicios o cualquier otra duda profesional.";
+            return "¡Hola! Pregúntame sobre proyectos, SOAP, experiencia o servicios.";
         }
-        return "🔍 Puedes consultar sobre mis proyectos destacados (growhealthyhabit, Notifask, Venta-de-ticket, Website1, animals-safe, PC_Assistant), experiencia, servicios o tecnologías específicas. ¿En qué más puedo ayudarte?";
+        return "🔍 Puedes preguntar sobre mis proyectos, la demo SOAP, experiencia, servicios o tecnologías específicas. ¿En qué más puedo ayudarte?";
     }
 
     function addMessage(text, isUser = false) {
@@ -1315,13 +1386,13 @@
         setTimeout(() => {
             const reply = getBotResponse(userMsg);
             addMessage(reply, false);
-        }, 280);
+        }, 300);
     }
     chatSendBtn.addEventListener('click', handleUserMessage);
     chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
 
     // ================================================================
-    // 8. MODO DIURNO / NOCTURNO
+    // 9. MODO DIURNO / NOCTURNO
     // ================================================================
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
@@ -1354,7 +1425,7 @@
     });
 
     // ================================================================
-    // 9. FOOTER CON FECHA ACTUAL
+    // 10. FOOTER CON FECHA ACTUAL
     // ================================================================
     function updateFooterDate() {
         const footer = document.getElementById('dynamicFooter');
@@ -1363,7 +1434,7 @@
             const year = now.getFullYear();
             const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
             const monthName = months[now.getMonth()];
-            footer.innerHTML = `© ${year} - ${monthName} · Elias Cordero · Portfolio profesional · Automatización, Full Stack & Cloud`;
+            footer.innerHTML = `© ${year} - ${monthName} · Elias Cordero · Portfolio con SOAP · Automatización, Full Stack & Cloud`;
         }
     }
     updateFooterDate();
