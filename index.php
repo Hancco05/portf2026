@@ -1,9 +1,19 @@
+<?php
+// ============================================================
+// INICIO DE SESIÓN PARA CSRF (se genera token)
+// ============================================================
+session_start();
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrfToken = $_SESSION['csrf_token'];
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>NexusCore | Portfolio Profesional · Seguro</title>
+    <title>Hancco · Portafolio Profesional</title>
     <!-- Bootstrap 5 + Font Awesome 6 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -11,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           VARIABLES Y ESTILOS GLOBALES
+           VARIABLES Y ESTILOS GLOBALES (oscuro por defecto)
            ============================================================ */
         :root {
             --bg-primary: #0A0C0F;
@@ -115,7 +125,7 @@
             padding-top: 1rem;
         }
 
-        /* Animaciones */
+        /* Animaciones de revelado */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -147,6 +157,7 @@
             transform: translateX(0);
         }
 
+        /* Typewriter */
         .typewriter {
             display: inline-block;
             overflow: hidden;
@@ -200,6 +211,7 @@
             width: 100%;
         }
 
+        /* Skill items */
         .skill-item {
             display: flex;
             align-items: center;
@@ -233,6 +245,7 @@
             color: #A78BFA;
         }
 
+        /* Project cards (se mantienen como ejemplo, pero puedes reemplazar con tus proyectos reales) */
         .project-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -317,21 +330,100 @@
             color: #6C63FF;
         }
 
-        .edu-card, .client-card, .award-card, .service-card {
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+        /* Experiencia laboral */
+        .exp-card {
             background: var(--bg-skill);
             border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.4s;
+            height: 100%;
         }
-        .edu-card:hover, .client-card:hover, .award-card:hover, .service-card:hover {
-            transform: translateY(-6px);
+        .exp-card:hover {
+            transform: translateY(-4px);
             box-shadow: 0 12px 24px var(--glow-color);
             border-color: var(--card-hover-border);
         }
-        .service-card i, .client-card i, .award-card i {
-            transition: transform 0.4s;
+        .exp-card .company {
+            font-weight: 700;
+            color: #6C63FF;
         }
-        .service-card:hover i, .client-card:hover i, .award-card:hover i {
-            transform: scale(1.15) rotate(3deg);
+        .exp-card .date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .exp-card ul {
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .exp-card ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Educación */
+        .edu-card {
+            background: var(--bg-skill);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.4s;
+            height: 100%;
+        }
+        .edu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--glow-color);
+            border-color: var(--card-hover-border);
+        }
+        .edu-card h5 {
+            font-weight: 600;
+        }
+        .edu-card .sub {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .edu-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+        .edu-card ul li {
+            padding: 4px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .edu-card ul li i {
+            color: #6C63FF;
+            margin-right: 8px;
+        }
+
+        /* Intereses / Actividades */
+        .interest-card {
+            background: var(--bg-skill);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .interest-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px var(--glow-color);
+            border-color: var(--card-hover-border);
+        }
+        .interest-card i {
+            font-size: 2.5rem;
+            color: #6C63FF;
+            margin-bottom: 0.5rem;
+        }
+        .interest-card span {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         /* SOAP Demo */
@@ -571,7 +663,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-custom sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>NexusCore</a>
+        <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>Hancco.dev</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
@@ -579,9 +671,9 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="#about">Sobre mí</a></li>
                 <li class="nav-item"><a class="nav-link" href="#skills">Habilidades</a></li>
-                <li class="nav-item"><a class="nav-link" href="#projects">Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#experience">Experiencia</a></li>
                 <li class="nav-item"><a class="nav-link" href="#education">Educación</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+                <li class="nav-item"><a class="nav-link" href="#interests">Intereses</a></li>
                 <li class="nav-item"><a class="nav-link" href="#soap-demo">SOAP</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
             </ul>
@@ -602,134 +694,196 @@
         </div>
     </div>
 
-    <!-- Hero -->
+    <!-- ==================== HERO ==================== -->
     <div class="hero reveal" style="animation-delay: 0s;">
         <div class="row align-items-center g-4">
             <div class="col-md-8">
-                <div class="badge-role mb-3"><i class="fas fa-microchip"></i>  Ingeniero Full Stack & Automatización</div>
+                <div class="badge-role mb-3"><i class="fas fa-microchip"></i>  Ingeniero en Informática · Desarrollador Full Stack</div>
                 <h1 class="display-4 fw-bold">
-                    <span class="typewriter" id="typewriterText">Elias M. Cordero</span>
+                    <span class="typewriter" id="typewriterText">Hancco</span>
                 </h1>
                 <p class="fs-5" style="color: var(--text-secondary);">
-                    Especialista en ecosistemas Microsoft, pruebas automatizadas, desarrollo cloud y arquitectura DevOps. <br> +8 años integrando soluciones empresariales de alto rendimiento.
+                    Especialista en desarrollo de software, automatización de procesos, soporte TI y marketing digital. <br>
+                    +2 años de experiencia en soluciones web, intranets y aplicaciones de escritorio.
                 </p>
                 <div class="d-flex gap-3 mt-3 flex-wrap">
                     <a href="#contact" class="btn btn-primary rounded-pill px-4" style="background:#6C63FF; border:none;">Contáctame</a>
-                    <a href="#projects" class="btn btn-outline-secondary rounded-pill px-4" style="border-color: var(--border-color); color: var(--text-secondary);">Ver proyectos</a>
+                    <a href="#experience" class="btn btn-outline-secondary rounded-pill px-4" style="border-color: var(--border-color); color: var(--text-secondary);">Ver experiencia</a>
                 </div>
             </div>
             <div class="col-md-4 text-center">
-                <img src="https://ui-avatars.com/api/?name=Elias+Cordero&size=150&background=6C63FF&color=fff&bold=true" alt="Elias Cordero" class="profile-img">
+                <img src="https://ui-avatars.com/api/?name=Hancco&size=150&background=6C63FF&color=fff&bold=true" alt="Hancco" class="profile-img">
             </div>
         </div>
     </div>
 
-    <!-- Sobre mí -->
+    <!-- ==================== SOBRE MÍ ==================== -->
     <section id="about" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-user-astronaut me-2"></i> Sobre Mí</h2>
         <div class="row g-4">
             <div class="col-lg-8">
                 <p style="color: var(--text-secondary); font-size: 1.05rem;">
-                    Ingeniero en Sistemas con más de 8 años de experiencia en el desarrollo de soluciones tecnológicas integrales. 
-                    Apasionado por la automatización, la optimización de procesos y la arquitectura de software escalable. 
-                    He liderado equipos multidisciplinarios y he implementado proyectos en sectores como banca, retail y salud.
-                </p>
-                <p style="color: var(--text-secondary);">
-                    <strong>Valores:</strong> Calidad, innovación, trabajo en equipo y mejora continua. 
-                    Creo en la tecnología como motor de transformación y en el código limpio como base de sistemas sostenibles.
+                    Ingeniero en Informática titulado de Duoc UC con experiencia en formulación, desarrollo de software, automatización de procesos, soporte TI y marketing digital. Especializado en el desarrollo de programación para sitios web, aplicaciones de escritorio, sistemas intranet, aplicaciones móviles y flujos automatizados. Posee conocimientos técnicos avanzados en PHP y herramientas de automatización, con dominio intermedio en Python, Java, React, Node y bases de datos SQL. Profesional autónomo, proactivo, perseverante ante nuevas ideas, con alta capacidad de aprendizaje continuo y adaptabilidad a equipos de trabajo.
                 </p>
                 <div class="d-flex flex-wrap gap-3 mt-3">
-                    <span class="badge bg-primary rounded-pill px-3 py-2" style="background: #6C63FF !important;">Liderazgo técnico</span>
-                    <span class="badge bg-secondary rounded-pill px-3 py-2" style="background: var(--bg-skill) !important; color: var(--text-primary);">Metodologías ágiles</span>
-                    <span class="badge bg-secondary rounded-pill px-3 py-2" style="background: var(--bg-skill) !important; color: var(--text-primary);">Arquitectura cloud</span>
+                    <span class="badge bg-primary rounded-pill px-3 py-2" style="background: #6C63FF !important;">Desarrollo Full Stack</span>
+                    <span class="badge bg-secondary rounded-pill px-3 py-2" style="background: var(--bg-skill) !important; color: var(--text-primary);">Automatización</span>
+                    <span class="badge bg-secondary rounded-pill px-3 py-2" style="background: var(--bg-skill) !important; color: var(--text-primary);">Soporte TI</span>
+                    <span class="badge bg-secondary rounded-pill px-3 py-2" style="background: var(--bg-skill) !important; color: var(--text-primary);">Marketing Digital</span>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="bg-secondary p-4 rounded-4" style="background: var(--bg-skill) !important; border: 1px solid var(--border-color);">
                     <h5><i class="fas fa-map-pin me-2"></i> Ubicación</h5>
-                    <p style="color: var(--text-secondary);">Ciudad de México, MX</p>
-                    <h5><i class="fas fa-calendar-alt me-2"></i> Disponibilidad</h5>
-                    <p style="color: var(--text-secondary);">Inmediata · Remoto / Híbrido</p>
-                    <h5><i class="fas fa-file-alt me-2"></i> CV</h5>
-                    <a href="#" class="text-decoration-none" style="color: #6C63FF;">Descargar PDF <i class="fas fa-download ms-1"></i></a>
+                    <p style="color: var(--text-secondary);">Santiago, Chile</p>
+                    <h5><i class="fas fa-flag me-2"></i> Nacionalidad</h5>
+                    <p style="color: var(--text-secondary);">Chilena</p>
+                    <h5><i class="fas fa-phone me-2"></i> Teléfono</h5>
+                    <p style="color: var(--text-secondary);">(56 9) 76654966</p>
+                    <h5><i class="fab fa-github me-2"></i> GitHub</h5>
+                    <a href="https://github.com/Hancco05" target="_blank" style="color: #6C63FF; text-decoration: none;">github.com/Hancco05</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Habilidades -->
+    <!-- ==================== HABILIDADES ==================== -->
     <section id="skills" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-cogs me-2"></i> Stack Tecnológico & Herramientas</h2>
         <div class="row g-3" id="skillsContainer"></div>
     </section>
 
-    <!-- Proyectos -->
-    <section id="projects" class="mt-5 reveal">
-        <h2 class="section-title"><i class="fas fa-code-branch me-2"></i> Proyectos Destacados</h2>
-        <div class="row g-4" id="projectsContainer"></div>
-    </section>
-
-    <!-- Educación -->
-    <section id="education" class="mt-5 reveal">
-        <h2 class="section-title"><i class="fas fa-graduation-cap me-2"></i> Educación & Certificaciones</h2>
+    <!-- ==================== EXPERIENCIA LABORAL ==================== -->
+    <section id="experience" class="mt-5 reveal">
+        <h2 class="section-title"><i class="fas fa-briefcase me-2"></i> Experiencia Profesional</h2>
         <div class="row g-4">
-            <div class="col-md-6">
-                <div class="edu-card p-4 rounded-4">
-                    <h5><i class="fas fa-university me-2"></i> Ing. en Sistemas Computacionales</h5>
-                    <div class="sub" style="color: var(--text-secondary);">Instituto Tecnológico de México · 2012 - 2016</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Especialización en arquitectura de software y bases de datos.</p>
+            <div class="col-md-6 col-lg-4">
+                <div class="exp-card">
+                    <div class="company">Particular Freelance · Santiago</div>
+                    <div class="date">Dic 2024 - Abr 2026</div>
+                    <p style="color: var(--text-secondary); font-weight: 600; font-size:0.9rem;">Desarrollo de Software y Soporte TI</p>
+                    <ul>
+                        <li>Diseño e implementación de sitios web y sistemas intranet con PHP, Python y Java Spring, integrados con bases de datos SQL.</li>
+                        <li>Desarrollo de aplicaciones de escritorio con Java JSP y SQL Server.</li>
+                        <li>Automatización con Microsoft Power Platform (Power Apps, Power Automate).</li>
+                        <li>Pruebas automatizadas con Laravel, Selenium IDE, Gherkin y Behave.</li>
+                        <li>Consultorías técnicas, soporte TI, mantenimiento de hardware y redes.</li>
+                        <li>Gestión de código con Git, despliegue en 000webhosting y pasarelas de pago.</li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="edu-card p-4 rounded-4">
-                    <h5><i class="fas fa-certificate me-2"></i> Certificaciones</h5>
-                    <ul class="list-unstyled" style="color: var(--text-secondary);">
-                        <li><i class="fas fa-check-circle text-success me-2"></i> AWS Certified Solutions Architect</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> Microsoft Certified: Azure Developer Associate</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> ISTQB Certified Tester (Advanced)</li>
-                        <li><i class="fas fa-check-circle text-success me-2"></i> Scrum Master (PSM I)</li>
+            <div class="col-md-6 col-lg-4">
+                <div class="exp-card">
+                    <div class="company">Collins · Santiago</div>
+                    <div class="date">Jun 2024 - Dic 2024</div>
+                    <p style="color: var(--text-secondary); font-weight: 600; font-size:0.9rem;">Desarrollador y Soporte TI</p>
+                    <ul>
+                        <li>Desarrollo de aplicaciones web con PHP (Laravel) y MySQL para sistema intranet.</li>
+                        <li>Automatización de procesos para optimizar flujos de trabajo y reducir carga operativa.</li>
+                        <li>Pruebas de código y depuración para garantizar estabilidad del sistema.</li>
+                        <li>Soporte técnico a departamentos, resolución de problemas de infraestructura.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="exp-card">
+                    <div class="company">Textil las Américas · Santiago</div>
+                    <div class="date">Ene 2023 - Oct 2023</div>
+                    <p style="color: var(--text-secondary); font-weight: 600; font-size:0.9rem;">Soporte de Páginas Web y Marketing Digital</p>
+                    <ul>
+                        <li>Solución de incidencias en sistemas de pago y formularios del sitio web comercial.</li>
+                        <li>Mejora en usabilidad de compras, motor de búsqueda y enlaces a redes sociales.</li>
+                        <li>Planificación y ejecución de versiones de prueba y políticas de backup.</li>
+                        <li>Trabajo coordinado con marketing digital para solventar necesidades del cliente.</li>
+                        <li>Mantenimiento y actualización de sitio WordPress.</li>
+                        <li>Soporte TI preventivo ante caídas del sitio y problemas técnicos.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Servicios -->
-    <section id="services" class="mt-5 reveal">
-        <h2 class="section-title"><i class="fas fa-concierge-bell me-2"></i> Servicios Profesionales</h2>
+    <!-- ==================== EDUCACIÓN Y CERTIFICACIONES ==================== -->
+    <section id="education" class="mt-5 reveal">
+        <h2 class="section-title"><i class="fas fa-graduation-cap me-2"></i> Educación & Certificaciones</h2>
         <div class="row g-4">
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="service-card p-4 rounded-4 text-center">
-                    <i class="fas fa-laptop-code" style="font-size: 2.8rem; color: #6C63FF; margin-bottom: 1rem;"></i>
-                    <h5>Desarrollo Full Stack</h5>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Aplicaciones web con React, Node, PHP, .NET y bases de datos SQL/NoSQL.</p>
+            <div class="col-md-6">
+                <div class="edu-card">
+                    <h5><i class="fas fa-university me-2"></i> Ingeniería en Informática</h5>
+                    <div class="sub">Instituto Profesional Duoc UC, Maipú · Titulado 2026</div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Formación integral en desarrollo de software, bases de datos, redes y proyectos.</p>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="service-card p-4 rounded-4 text-center">
-                    <i class="fas fa-robot" style="font-size: 2.8rem; color: #6C63FF; margin-bottom: 1rem;"></i>
-                    <h5>Automatización & QA</h5>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Frameworks de pruebas con Selenium, Cucumber, RPA con Power Automate.</p>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="service-card p-4 rounded-4 text-center">
-                    <i class="fas fa-cloud" style="font-size: 2.8rem; color: #6C63FF; margin-bottom: 1rem;"></i>
-                    <h5>Arquitectura Cloud</h5>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Migración y optimización en AWS, Azure, Docker, Kubernetes y CI/CD.</p>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="service-card p-4 rounded-4 text-center">
-                    <i class="fas fa-chart-pie" style="font-size: 2.8rem; color: #6C63FF; margin-bottom: 1rem;"></i>
-                    <h5>Business Intelligence</h5>
-                    <p style="color: var(--text-secondary); font-size: 0.85rem;">Dashboards con Power BI, integración SAP y análisis de datos avanzado.</p>
+            <div class="col-md-6">
+                <div class="edu-card">
+                    <h5><i class="fas fa-certificate me-2"></i> Seminarios y Cursos</h5>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Spring Boot y Angular (2025)</li>
+                        <li><i class="fas fa-check-circle"></i> C# Angular SPA (2025)</li>
+                        <li><i class="fas fa-check-circle"></i> Desarrollo en Microsoft Power Apps (2024)</li>
+                        <li><i class="fas fa-check-circle"></i> PL/SQL Oracle (2023)</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SOAP Demo -->
+    <!-- ==================== INTERESES Y ACTIVIDADES ==================== -->
+    <section id="interests" class="mt-5 reveal">
+        <h2 class="section-title"><i class="fas fa-heart me-2"></i> Actividades e Intereses</h2>
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <div class="interest-card">
+                    <i class="fas fa-tools"></i>
+                    <span>Mantenimiento preventivo/correctivo de hardware</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="interest-card">
+                    <i class="fas fa-video"></i>
+                    <span>Instalación de sistemas de cámaras de seguridad</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="interest-card">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Coach de videojuegos (Rocket League)</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="interest-card">
+                    <i class="fas fa-bicycle"></i>
+                    <span>Ciclismo y viajes</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="interest-card">
+                    <i class="fas fa-language"></i>
+                    <span>Inglés oral y escrito (nivel intermedio)</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="interest-card">
+                    <i class="fas fa-code"></i>
+                    <span>Desarrollo de soluciones innovadoras</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="interest-card">
+                    <i class="fas fa-users"></i>
+                    <span>Trabajo en equipo y aprendizaje continuo</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="interest-card">
+                    <i class="fas fa-rocket"></i>
+                    <span>Disponibilidad inmediata</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DEMOSTRACIÓN SOAP ==================== -->
     <section id="soap-demo" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-exchange-alt me-2"></i> Demostración SOAP</h2>
         <div class="soap-demo">
@@ -765,13 +919,14 @@
         </div>
     </section>
 
-    <!-- Contacto con CSRF -->
+    <!-- ==================== CONTACTO ==================== -->
     <section id="contact" class="contact-section mt-5 reveal">
         <div class="row g-4">
             <div class="col-md-6">
                 <h3><i class="fas fa-envelope me-2"></i> Envíame un mensaje</h3>
                 <form id="emailForm">
-                    <input type="hidden" name="csrf_token" id="csrfToken" value="">
+                    <!-- Token CSRF generado desde PHP -->
+                    <input type="hidden" name="csrf_token" id="csrfToken" value="<?php echo $csrfToken; ?>">
                     <div class="mb-3">
                         <input type="text" class="form-control" placeholder="Tu nombre" id="userName" required>
                     </div>
@@ -787,17 +942,15 @@
             </div>
             <div class="col-md-6">
                 <h3><i class="fas fa-address-card me-2"></i> Contacto directo</h3>
-                <div class="phone-item"><i class="fas fa-phone-alt"></i> +52 55 7890 1234</div>
-                <div class="mail-direct"><i class="fas fa-inbox"></i> elias.cordero@nexuscore.dev</div>
+                <div class="phone-item"><i class="fas fa-phone-alt"></i> (56 9) 76654966</div>
+                <div class="mail-direct"><i class="fas fa-inbox"></i> hancco@email.com</div>
                 <div class="d-flex gap-3 my-4 flex-wrap">
-                    <a href="https://github.com/eliascordero-dev" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-                    <a href="https://mi-videojuego-nexus.itch.io" target="_blank" class="social-icon"><i class="fas fa-gamepad"></i></a>
-                    <a href="https://linkedin.com/in/elias-cordero-tech" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://stackoverflow.com/users/elias-cordero" target="_blank" class="social-icon"><i class="fab fa-stack-overflow"></i></a>
-                    <a href="https://dev.to/eliascordero" target="_blank" class="social-icon"><i class="fab fa-dev"></i></a>
+                    <a href="https://github.com/Hancco05" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" class="social-icon"><i class="fab fa-dev"></i></a>
                 </div>
                 <p style="color: var(--text-secondary); font-size: 0.85rem;">
-                    <i class="fas fa-code-branch me-1"></i> GitHub: /eliascordero-dev · Videojuego: "Nexus: Overdrive" · LinkedIn activo
+                    <i class="fas fa-code-branch me-1"></i> GitHub: /Hancco05 · Disponibilidad inmediata
                 </p>
             </div>
         </div>
@@ -818,7 +971,7 @@
             <i class="fas fa-times" id="closeChat" style="cursor:pointer;"></i>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="bot-msg">🤖 ¡Hola! Soy el bot técnico. Pregúntame sobre mis proyectos, experiencia, o la demostración SOAP.</div>
+            <div class="bot-msg">🤖 ¡Hola! Soy el bot de Hancco. Pregúntame sobre su experiencia, habilidades o proyectos.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
@@ -887,21 +1040,21 @@
     })();
 
     // ================================================================
-    // 4. HABILIDADES
+    // 4. HABILIDADES (actualizadas con los datos del CV)
     // ================================================================
     const skillsWithIcons = [
-        { name: "PHP", icon: "fab fa-php" },
-        { name: "MS Office", icon: "fas fa-file-excel" },
-        { name: "Power Platforms", icon: "fas fa-chalkboard-user" },
-        { name: "WordPress", icon: "fab fa-wordpress" },
-        { name: "Selenium", icon: "fas fa-robot" },
-        { name: "Gherkin / Cucumber", icon: "fas fa-comment-dots" },
-        { name: "React / Node / JS / HTML5-CSS3", icon: "fab fa-react" },
-        { name: "Python / Java / C#", icon: "fab fa-python" },
-        { name: "SQL Server / MySQL / Oracle / MongoDB", icon: "fas fa-database" },
-        { name: "Git / GitHub / Docker / Jenkins / AWS / Azure", icon: "fab fa-docker" },
-        { name: "MS Power BI / SAP", icon: "fas fa-chart-line" },
-        { name: "Inglés Técnico (Intermedio/Avanzado)", icon: "fas fa-language" }
+        { name: "PHP (Avanzado)", icon: "fab fa-php" },
+        { name: "MS Office (Avanzado)", icon: "fas fa-file-excel" },
+        { name: "Power Platforms (Avanzado)", icon: "fas fa-chalkboard-user" },
+        { name: "WordPress (Avanzado)", icon: "fab fa-wordpress" },
+        { name: "Selenium (Avanzado)", icon: "fas fa-robot" },
+        { name: "Gherkin / Cucumber (Intermedio)", icon: "fas fa-comment-dots" },
+        { name: "React / Node / JS / HTML5-CSS3 (Intermedio)", icon: "fab fa-react" },
+        { name: "Python / Java / C# (Intermedio)", icon: "fab fa-python" },
+        { name: "SQL Server / MySQL / Oracle / MongoDB (Intermedio)", icon: "fas fa-database" },
+        { name: "Git / GitHub / Docker / Jenkins / AWS / Azure (Intermedio)", icon: "fab fa-docker" },
+        { name: "MS Power BI / SAP (Intermedio)", icon: "fas fa-chart-line" },
+        { name: "Inglés (Intermedio)", icon: "fas fa-language" }
     ];
 
     function renderSkills() {
@@ -921,96 +1074,7 @@
     renderSkills();
 
     // ================================================================
-    // 5. PROYECTOS
-    // ================================================================
-    const projectsData = [
-        {
-            name: "growhealthyhabit",
-            desc: "Aplicación PHP con Laravel y MySQL para hábitos saludables.",
-            tech: "PHP",
-            techIcon: "fab fa-php",
-            stars: 1,
-            lang: "PHP",
-            repo: "https://github.com/eliascordero-dev/growhealthyhabit"
-        },
-        {
-            name: "Notifask",
-            desc: "Sistema de recordatorios, tareas y notificaciones en C++.",
-            tech: "C++",
-            techIcon: "fas fa-code",
-            stars: 1,
-            lang: "C++",
-            repo: "https://github.com/eliascordero-dev/Notifask"
-        },
-        {
-            name: "Venta-de-ticket-PSC-Concierto-VIP",
-            desc: "Proyecto de venta de tickets para conciertos VIP (Papyrus).",
-            tech: "Papyrus",
-            techIcon: "fas fa-ticket-alt",
-            stars: 1,
-            lang: "Papyrus",
-            repo: "https://github.com/eliascordero-dev/Venta-de-ticket-PSC-Concierto-VIP"
-        },
-        {
-            name: "Website1",
-            desc: "Sitio web desarrollado con Maven y JavaScript.",
-            tech: "JavaScript",
-            techIcon: "fab fa-js",
-            stars: 1,
-            lang: "JavaScript",
-            repo: "https://github.com/eliascordero-dev/Website1"
-        },
-        {
-            name: "animals-safe",
-            desc: "Proyecto de protección animal con Python y Django.",
-            tech: "Python, Django",
-            techIcon: "fab fa-python",
-            stars: 1,
-            lang: "HTML",
-            repo: "https://github.com/eliascordero-dev/animals-safe"
-        },
-        {
-            name: "PC_Assistant",
-            desc: "Bot que monitorea actividad de PC y responde con ChatGPT.",
-            tech: "Python",
-            techIcon: "fab fa-python",
-            stars: 1,
-            lang: "Python",
-            repo: "https://github.com/eliascordero-dev/PC_Assistant"
-        }
-    ];
-
-    function renderProjects() {
-        const container = document.getElementById('projectsContainer');
-        if (!container) return;
-        container.innerHTML = '';
-        projectsData.forEach(proj => {
-            const col = document.createElement('div');
-            col.className = 'col-12 col-md-6 col-lg-4';
-            const card = document.createElement('div');
-            card.className = 'project-card card h-100';
-            card.innerHTML = `
-                <div class="card-body d-flex flex-column">
-                    <div class="project-title">
-                        <i class="${proj.techIcon} tech-icon"></i>
-                        ${proj.name}
-                    </div>
-                    <div class="project-desc">${proj.desc}</div>
-                    <div class="project-meta mt-auto">
-                        <span><i class="fas fa-star stars"></i> ${proj.stars}</span>
-                        <span class="lang">${proj.lang}</span>
-                        <a href="${proj.repo}" target="_blank" class="github-link-sm"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            `;
-            col.appendChild(card);
-            container.appendChild(col);
-        });
-    }
-    renderProjects();
-
-    // ================================================================
-    // 6. SOAP DEMO
+    // 5. SOAP DEMO
     // ================================================================
     document.getElementById('soapConvertBtn').addEventListener('click', function() {
         const celsius = document.getElementById('celsiusInput').value.trim();
@@ -1065,20 +1129,10 @@
     });
 
     // ================================================================
-    // 7. ENVÍO DE CORREO CON CSRF Y SEGURIDAD (Frontend)
+    // 6. ENVÍO DE CORREO CON CSRF
     // ================================================================
     const emailForm = document.getElementById('emailForm');
     const emailFeedback = document.getElementById('emailFeedback');
-
-    // Obtener token CSRF del backend al cargar la página
-    fetch('send_email.php?action=get_csrf')
-        .then(response => response.json())
-        .then(data => {
-            if (data.csrf_token) {
-                document.getElementById('csrfToken').value = data.csrf_token;
-            }
-        })
-        .catch(() => {});
 
     if (emailForm) {
         emailForm.addEventListener('submit', function(e) {
@@ -1123,7 +1177,6 @@
                     document.getElementById('userName').value = '';
                     document.getElementById('userEmail').value = '';
                     document.getElementById('userMsg').value = '';
-                    // Regenerar token CSRF
                     if (data.new_csrf) {
                         document.getElementById('csrfToken').value = data.new_csrf;
                     }
@@ -1148,7 +1201,7 @@
     }
 
     // ================================================================
-    // 8. CHATBOT
+    // 7. CHATBOT (actualizado con datos de Hancco)
     // ================================================================
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -1167,54 +1220,28 @@
 
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
-        if (q.includes('soap')) {
-            return "🔁 En la sección 'Demostración SOAP' puedes probar una conversión de temperatura usando un servicio SOAP público. También el formulario de contacto usa CSRF y rate limiting para seguridad.";
-        }
-        if (q.includes('growhealthyhabit') || q.includes('healthy')) {
-            return "🌱 growhealthyhabit es una aplicación PHP con Laravel y MySQL enfocada en hábitos saludables. Código en GitHub.";
-        }
-        if (q.includes('notifask')) {
-            return "📋 Notifask es un sistema de recordatorios y notificaciones en C++.";
-        }
-        if (q.includes('ticket') || q.includes('concierto')) {
-            return "🎫 Venta-de-ticket-PSC-Concierto-VIP es un proyecto de venta de tickets para conciertos VIP, con Papyrus.";
-        }
-        if (q.includes('website1')) {
-            return "🌐 Website1 es un sitio web con Maven y JavaScript.";
-        }
-        if (q.includes('animals-safe')) {
-            return "🐾 animals-safe es un proyecto de protección animal con Python y Django.";
-        }
-        if (q.includes('pc_assistant') || q.includes('assistant')) {
-            return "💻 PC_Assistant es un bot en Python que monitorea la PC y responde con ChatGPT.";
-        }
-        if (q.includes('proyecto') || q.includes('portafolio')) {
-            return "🚀 Mis proyectos: growhealthyhabit (PHP), Notifask (C++), Venta-de-ticket (Papyrus), Website1 (JS), animals-safe (Python/Django), PC_Assistant (Python). Todos en GitHub.";
-        }
         if (q.includes('experiencia') || q.includes('trayectoria')) {
-            return "👨‍💻 +8 años en desarrollo full stack, automatización y arquitectura cloud. He trabajado en banca, retail y salud.";
+            return "👨‍💻 Hancco tiene experiencia como desarrollador freelance, en Collins y en Textil las Américas. Ha trabajado con PHP, Laravel, Java, Python, Power Platform y más.";
         }
-        if (q.includes('servicio') || q.includes('ofrece')) {
-            return "🔧 Ofrezco desarrollo full stack, automatización de pruebas, arquitectura cloud, consultoría Power BI/SAP y formación técnica.";
+        if (q.includes('habilidades') || q.includes('tecnologías')) {
+            return "🔧 Maneja PHP (avanzado), Power Platforms, Selenium, WordPress, y nivel intermedio en React, Node, Python, Java, SQL, Docker, Git y más.";
         }
-        if (q.includes('seguridad') || q.includes('csrf') || q.includes('protección')) {
-            return "🛡️ El formulario de contacto incluye token CSRF, rate limiting por IP, validación y sanitización de datos, y uso de PHPMailer con SMTP para un envío seguro.";
+        if (q.includes('educación') || q.includes('estudios')) {
+            return "🎓 Ingeniero en Informática titulado de Duoc UC (2026). Cursos en Spring Boot, Angular, C#, Power Apps y PL/SQL.";
         }
-        if (q.includes('php')) return "💡 PHP: Laravel, Symfony, APIs de alto rendimiento.";
-        if (q.includes('selenium')) return "🧪 Selenium: automatización cross-browser, Grid, Page Object Model.";
-        if (q.includes('docker') || q.includes('jenkins') || q.includes('aws') || q.includes('azure')) {
-            return "🐳 DevOps: Docker, Jenkins, AWS, Azure - pipelines CI/CD.";
+        if (q.includes('interés') || q.includes('actividad')) {
+            return "🏋️‍♂️ Le gusta el mantenimiento de hardware, instalación de cámaras, coach de Rocket League, ciclismo y viajes.";
         }
-        if (q.includes('sql') || q.includes('mongodb')) return "🗄️ SQL Server, MySQL, Oracle, MongoDB - modelado y optimización.";
-        if (q.includes('power bi') || q.includes('sap')) return "📊 Power BI + SAP: dashboards interactivos, DAX, integración empresarial.";
-        if (q.includes('ingles') || q.includes('english')) return "🇬🇧 Inglés técnico B2-C1. Reuniones, documentación, code reviews.";
-        if (q.includes('certificacion') || q.includes('certificado')) {
-            return "🎓 Certificaciones: AWS, Azure, ISTQB, Scrum Master. Ver sección Educación.";
+        if (q.includes('contacto') || q.includes('teléfono')) {
+            return "📞 Teléfono: (56 9) 76654966. También puedes contactarlo por el formulario de la página.";
+        }
+        if (q.includes('soap')) {
+            return "🔁 En la sección 'Demostración SOAP' puedes probar una conversión de temperatura usando un servicio SOAP público.";
         }
         if (q.includes('hola') || q.includes('buenas')) {
-            return "¡Hola! Pregúntame sobre proyectos, SOAP, seguridad, experiencia o servicios.";
+            return "¡Hola! Soy el asistente de Hancco. Pregúntame sobre su experiencia, habilidades, educación o intereses.";
         }
-        return "🔍 Puedes preguntar sobre mis proyectos, la demo SOAP, las medidas de seguridad, experiencia o tecnologías específicas. ¿En qué más puedo ayudarte?";
+        return "🔍 Puedes preguntar sobre experiencia laboral, tecnologías, educación, intereses o contacto. ¿En qué más puedo ayudarte?";
     }
 
     function addMessage(text, isUser = false) {
@@ -1239,7 +1266,7 @@
     chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
 
     // ================================================================
-    // 9. MODO OSCURO/CLARO
+    // 8. MODO OSCURO/CLARO
     // ================================================================
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
@@ -1272,7 +1299,7 @@
     });
 
     // ================================================================
-    // 10. FOOTER CON FECHA
+    // 9. FOOTER CON FECHA
     // ================================================================
     function updateFooterDate() {
         const footer = document.getElementById('dynamicFooter');
@@ -1281,7 +1308,7 @@
             const year = now.getFullYear();
             const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
             const monthName = months[now.getMonth()];
-            footer.innerHTML = `© ${year} - ${monthName} · Elias Cordero · Portfolio con seguridad · Automatización, Full Stack & Cloud`;
+            footer.innerHTML = `© ${year} - ${monthName} · Hancco · Portafolio profesional · Disponibilidad inmediata`;
         }
     }
     updateFooterDate();

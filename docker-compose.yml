@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8081:80"   # Cambia 8080 por 8081
+    volumes:
+      - .:/var/www/html
