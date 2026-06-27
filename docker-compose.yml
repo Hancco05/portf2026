@@ -1,7 +1,11 @@
+version: '3.8'
+
 services:
   web:
     build: .
+    container_name: portafolio
     ports:
-      - "8081:80"   # Cambia 8080 por 8081
+      - "8081:80"   # Cambia 8081 por el puerto que quieras
     volumes:
       - .:/var/www/html
+    restart: unless-stopped

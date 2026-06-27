@@ -1,13 +1,22 @@
+<?php
+// ============================================================
+// INICIO DE SESIÓN PARA CSRF (se genera token)
+// ============================================================
+session_start();
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrfToken = $_SESSION['csrf_token'];
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Sebastián Ignacio Carmona · Portafolio</title>
+    <title>Sebastián Ignacio Carmona Wright · Portafolio Profesional</title>
     <!-- Bootstrap 5 + Font Awesome 6 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="https://ui-avatars.com/api/?name=SC&size=64&background=6C63FF&color=fff&bold=true&format=png">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -33,6 +42,8 @@
             --toggle-icon: #C084FC;
             --particles-color1: rgba(108, 99, 255, 0.08);
             --particles-color2: rgba(192, 132, 252, 0.06);
+            --bs-body-bg: var(--bg-primary);
+            --bs-body-color: var(--text-primary);
         }
 
         [data-theme="light"] {
@@ -54,6 +65,8 @@
             --toggle-icon: #6C63FF;
             --particles-color1: rgba(108, 99, 255, 0.06);
             --particles-color2: rgba(90, 80, 200, 0.04);
+            --bs-body-bg: var(--bg-primary);
+            --bs-body-color: var(--text-primary);
         }
 
         * {
@@ -123,6 +136,26 @@
             opacity: 1;
             transform: translateY(0);
         }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1),
+                        transform 0.9s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1),
+                        transform 0.9s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
         /* Typewriter */
         .typewriter {
@@ -178,18 +211,6 @@
             width: 100%;
         }
 
-        .badge-role {
-            background: var(--bg-skill);
-            display: inline-block;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            border-left: 2px solid #6C63FF;
-            backdrop-filter: blur(4px);
-            color: var(--text-secondary);
-        }
-
         /* Skill items */
         .skill-item {
             display: flex;
@@ -224,7 +245,92 @@
             color: #A78BFA;
         }
 
-        /* Experiencia */
+        /* Project cards (se mantienen como ejemplo, pero puedes reemplazar con tus proyectos reales) */
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+            height: 100%;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            position: relative;
+            backdrop-filter: blur(2px);
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, var(--glow-color), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+        .project-card:hover::before {
+            opacity: 0.5;
+        }
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 35px -8px var(--glow-color);
+            border-color: var(--card-hover-border);
+        }
+        .project-card .card-body {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+        .project-title .tech-icon {
+            font-size: 1.4rem;
+            color: #6C63FF;
+            transition: transform 0.4s;
+        }
+        .project-card:hover .project-title .tech-icon {
+            transform: rotate(8deg) scale(1.1);
+        }
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin: 0.5rem 0 0.8rem;
+        }
+        .project-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .project-meta .stars {
+            color: #FBBF24;
+        }
+        .project-meta .lang {
+            background: var(--bg-skill);
+            padding: 2px 12px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+        }
+        .github-link-sm {
+            color: var(--text-secondary);
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        .github-link-sm:hover {
+            color: #6C63FF;
+        }
+
+        /* Experiencia laboral */
         .exp-card {
             background: var(--bg-skill);
             border: 1px solid var(--border-color);
@@ -291,7 +397,7 @@
             margin-right: 8px;
         }
 
-        /* Intereses */
+        /* Intereses / Actividades */
         .interest-card {
             background: var(--bg-skill);
             border: 1px solid var(--border-color);
@@ -353,6 +459,20 @@
             backdrop-filter: blur(4px);
             transition: background 0.3s, border-color 0.3s;
         }
+        .form-control {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 20px;
+            padding: 12px 16px;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .form-control:focus {
+            border-color: #6C63FF;
+            box-shadow: 0 0 0 3px var(--glow-color);
+            background: var(--bg-input);
+            color: var(--text-primary);
+        }
         .btn-send {
             background: #6C63FF;
             border: none;
@@ -365,7 +485,6 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            text-decoration: none;
         }
         .btn-send:hover {
             background: #877eff;
@@ -402,65 +521,6 @@
             color: var(--text-muted);
             font-size: 0.8rem;
             transition: color 0.3s, border-color 0.3s;
-        }
-
-        /* Toggle tema */
-        .theme-toggle-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 1rem;
-        }
-        .theme-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--toggle-bg);
-            padding: 6px 14px;
-            border-radius: 40px;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            user-select: none;
-            box-shadow: 0 4px 12px var(--shadow-color);
-        }
-        .theme-toggle:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 18px var(--glow-color);
-        }
-        .theme-toggle i {
-            font-size: 1.1rem;
-            color: var(--toggle-icon);
-            transition: transform 0.4s ease;
-        }
-        .theme-toggle span {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-        .theme-toggle .toggle-track {
-            width: 36px;
-            height: 20px;
-            background: var(--border-color);
-            border-radius: 30px;
-            position: relative;
-            transition: background 0.3s ease;
-        }
-        .theme-toggle .toggle-track .toggle-thumb {
-            width: 16px;
-            height: 16px;
-            background: #6C63FF;
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-        [data-theme="light"] .theme-toggle .toggle-track .toggle-thumb {
-            transform: translateX(16px);
-        }
-        [data-theme="light"] .theme-toggle .toggle-track {
-            background: #C0C8D8;
         }
 
         /* Chatbot */
@@ -601,20 +661,20 @@
 <div class="particles-container" id="particlesContainer"></div>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-md navbar-custom sticky-top" style="background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(10px);">
+<nav class="navbar navbar-expand-md navbar-custom sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#" style="color: var(--text-primary); font-weight: 700;"><i class="fas fa-code me-2"></i>Sebastián.dev</a>
+        <a class="navbar-brand" href="#"><i class="fas fa-code me-2"></i>SICW.dev</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#about" style="color: var(--text-secondary);">Sobre mí</a></li>
-                <li class="nav-item"><a class="nav-link" href="#skills" style="color: var(--text-secondary);">Habilidades</a></li>
-                <li class="nav-item"><a class="nav-link" href="#experience" style="color: var(--text-secondary);">Experiencia</a></li>
-                <li class="nav-item"><a class="nav-link" href="#education" style="color: var(--text-secondary);">Educación</a></li>
-                <li class="nav-item"><a class="nav-link" href="#interests" style="color: var(--text-secondary);">Intereses</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact" style="color: var(--text-secondary);">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">Sobre mí</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Habilidades</a></li>
+                <li class="nav-item"><a class="nav-link" href="#experience">Experiencia</a></li>
+                <li class="nav-item"><a class="nav-link" href="#education">Educación</a></li>
+                <li class="nav-item"><a class="nav-link" href="#interests">Intereses</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
             </ul>
         </div>
     </div>
@@ -639,7 +699,7 @@
             <div class="col-md-8">
                 <div class="badge-role mb-3"><i class="fas fa-microchip"></i>  Ingeniero en Informática · Desarrollador Full Stack</div>
                 <h1 class="display-4 fw-bold">
-                    <span class="typewriter" id="typewriterText">Sebastián Carmona Wright</span>
+                    <span class="typewriter" id="typewriterText">Sebastián Ignacio Carmona Wright</span>
                 </h1>
                 <p class="fs-5" style="color: var(--text-secondary);">
                     Especialista en desarrollo de software, automatización de procesos, soporte TI y marketing digital. <br>
@@ -651,7 +711,7 @@
                 </div>
             </div>
             <div class="col-md-4 text-center">
-                <img src="https://ui-avatars.com/api/?name=Sebastián+Carmona&size=150&background=6C63FF&color=fff&bold=true" alt="Sebastián Carmona" class="profile-img">
+                <img src="https://ui-avatars.com/api/?name=Hancco&size=150&background=6C63FF&color=fff&bold=true" alt="Hancco" class="profile-img">
             </div>
         </div>
     </div>
@@ -689,9 +749,7 @@
     <!-- ==================== HABILIDADES ==================== -->
     <section id="skills" class="mt-5 reveal">
         <h2 class="section-title"><i class="fas fa-cogs me-2"></i> Stack Tecnológico & Herramientas</h2>
-        <div class="row g-3" id="skillsContainer">
-            <!-- Inyectado por JS -->
-        </div>
+        <div class="row g-3" id="skillsContainer"></div>
     </section>
 
     <!-- ==================== EXPERIENCIA LABORAL ==================== -->
@@ -824,24 +882,26 @@
         </div>
     </section>
 
-
-    <!-- ==================== CONTACTO (mailto) ==================== -->
+    <!-- ==================== CONTACTO ==================== -->
     <section id="contact" class="contact-section mt-5 reveal">
         <div class="row g-4">
             <div class="col-md-6">
                 <h3><i class="fas fa-envelope me-2"></i> Envíame un mensaje</h3>
-                <p style="color: var(--text-secondary);">
-                    Al hacer clic en el botón, se abrirá tu cliente de correo predeterminado con un mensaje ya preparado.
-                </p>
-                <a href="mailto:s.carmonawright@gmail.com?subject=Contacto%20desde%20portafolio&body=Hola%20Sebastián,%20me%20interesa%20contactarte%20para..." 
-                   class="btn-send" target="_blank">
-                    <i class="fas fa-paper-plane"></i> Abrir correo
-                </a>
-                <div class="mt-3">
-                    <small style="color: var(--text-muted);">
-                        <i class="fas fa-info-circle"></i> Puedes copiar mi correo: <strong>s.carmonawright@gmail.com</strong>
-                    </small>
-                </div>
+                <form id="emailForm">
+                    <!-- Token CSRF generado desde PHP -->
+                    <input type="hidden" name="csrf_token" id="csrfToken" value="<?php echo $csrfToken; ?>">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Tu nombre" id="userName" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Tu correo electrónico" id="userEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="3" placeholder="Mensaje / Consulta profesional..." id="userMsg" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar correo</button>
+                </form>
+                <div id="emailFeedback" class="mt-3" style="display:none;"></div>
             </div>
             <div class="col-md-6">
                 <h3><i class="fas fa-address-card me-2"></i> Contacto directo</h3>
@@ -874,7 +934,7 @@
             <i class="fas fa-times" id="closeChat" style="cursor:pointer;"></i>
         </div>
         <div class="chat-messages" id="chatMessages">
-            <div class="bot-msg">🤖 ¡Hola! Soy el bot de Sebastián. Pregúntame sobre su experiencia, habilidades o proyectos.</div>
+            <div class="bot-msg">🤖 ¡Hola! Soy el bot de Sebastián Carmona Wright. Pregúntame sobre su experiencia, habilidades o proyectos.</div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
@@ -931,7 +991,7 @@
     // 3. SCROLL REVEAL
     // ================================================================
     (function scrollReveal() {
-        const reveals = document.querySelectorAll('.reveal');
+        const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -943,7 +1003,7 @@
     })();
 
     // ================================================================
-    // 4. HABILIDADES
+    // 4. HABILIDADES (actualizadas con los datos del CV)
     // ================================================================
     const skillsWithIcons = [
         { name: "PHP (Avanzado)", icon: "fab fa-php" },
@@ -1026,13 +1086,86 @@
                 resultBox.innerHTML = '<span style="color: #ff6b6b;">❌ No se pudo obtener el resultado.</span>';
             }
         })
-        .catch(error => {
+        echo "© 2026 - Hancco Portafolio version 1.0   // Falta el punto y coma y la comilla de cierre
+        .catch(error => { 
             resultBox.innerHTML = `<span style="color: #ff6b6b;">❌ Error: ${error.message}</span>`;
         });
     });
 
     // ================================================================
-    // 6. CHATBOT
+    // 6. ENVÍO DE CORREO CON CSRF
+    // ================================================================
+    const emailForm = document.getElementById('emailForm');
+    const emailFeedback = document.getElementById('emailFeedback');
+
+    if (emailForm) {
+        emailForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value.trim();
+            const senderEmail = document.getElementById('userEmail').value.trim();
+            const message = document.getElementById('userMsg').value.trim();
+            const csrfToken = document.getElementById('csrfToken').value;
+
+            if (!name || !senderEmail || !message) {
+                emailFeedback.style.display = 'block';
+                emailFeedback.innerHTML = '<div class="alert alert-danger">❌ Completa todos los campos.</div>';
+                return;
+            }
+
+            emailFeedback.style.display = 'block';
+            emailFeedback.innerHTML = '<div class="alert alert-info">⏳ Enviando mensaje... por favor espera.</div>';
+
+            const formData = new URLSearchParams();
+            formData.append('name', name);
+            formData.append('email', senderEmail);
+            formData.append('message', message);
+            formData.append('csrf_token', csrfToken);
+
+            fetch('send_email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    emailFeedback.innerHTML = `
+                        <div class="alert alert-success">
+                            ✅ ${data.message}
+                            <br><small>Te responderé a la brevedad.</small>
+                        </div>
+                    `;
+                    document.getElementById('userName').value = '';
+                    document.getElementById('userEmail').value = '';
+                    document.getElementById('userMsg').value = '';
+                    if (data.new_csrf) {
+                        document.getElementById('csrfToken').value = data.new_csrf;
+                    }
+                } else {
+                    emailFeedback.innerHTML = `
+                        <div class="alert alert-danger">
+                            ❌ ${data.message}
+                            ${data.retry_after ? `<br><small>Espera ${data.retry_after} segundos antes de reintentar.</small>` : ''}
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
+                emailFeedback.innerHTML = `
+                    <div class="alert alert-danger">
+                        ❌ Error de conexión: ${error.message}
+                        <br><small>Por favor, revisa tu conexión a internet.</small>
+                    </div>
+                `;
+            });
+        });
+    }
+
+    // ================================================================
+    // 7. CHATBOT (actualizado con datos de Hancco)
     // ================================================================
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -1052,7 +1185,7 @@
     function getBotResponse(userQuestion) {
         const q = userQuestion.toLowerCase().trim();
         if (q.includes('experiencia') || q.includes('trayectoria')) {
-            return "👨‍💻 Sebastián tiene experiencia como desarrollador freelance, en Collins y en Textil las Américas. Ha trabajado con PHP, Laravel, Java, Python, Power Platform y más.";
+            return "👨‍💻 Sebastián Ignacio Carmona Wright tiene experiencia como desarrollador freelance, en Collins y en Textil las Américas. Ha trabajado con PHP, Laravel, Java, Python, Power Platform y más.";
         }
         if (q.includes('habilidades') || q.includes('tecnologías')) {
             return "🔧 Maneja PHP (avanzado), Power Platforms, Selenium, WordPress, y nivel intermedio en React, Node, Python, Java, SQL, Docker, Git y más.";
@@ -1064,7 +1197,7 @@
             return "🏋️‍♂️ Le gusta el mantenimiento de hardware, instalación de cámaras, coach de Rocket League, ciclismo y viajes.";
         }
         if (q.includes('contacto') || q.includes('teléfono')) {
-            return "📞 Teléfono: (56 9) 76654966. También puedes contactarlo por correo: s.carmonawright@mail.com";
+            return "📞 Teléfono: (56 9) 76654966. También puedes contactarlo por el formulario de la página.";
         }
         if (q.includes('soap')) {
             return "🔁 En la sección 'Demostración SOAP' puedes probar una conversión de temperatura usando un servicio SOAP público.";
@@ -1097,7 +1230,7 @@
     chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
 
     // ================================================================
-    // 7. MODO OSCURO/CLARO
+    // 8. MODO OSCURO/CLARO
     // ================================================================
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
@@ -1130,7 +1263,7 @@
     });
 
     // ================================================================
-    // 8. FOOTER CON FECHA
+    // 9. FOOTER CON FECHA
     // ================================================================
     function updateFooterDate() {
         const footer = document.getElementById('dynamicFooter');
@@ -1139,7 +1272,7 @@
             const year = now.getFullYear();
             const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
             const monthName = months[now.getMonth()];
-            footer.innerHTML = `© ${year} - ${monthName} · Sebastián Carmona · Portafolio profesional · Disponibilidad inmediata`;
+            footer.innerHTML = `© ${year} - ${monthName} · Sebastián Ignacio Carmona Wright · Portafolio profesional · Disponibilidad inmediata`;
         }
     }
     updateFooterDate();
