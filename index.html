@@ -825,7 +825,7 @@
     </section>
 
 
-    <!-- ==================== CONTACTO (mailto) ==================== -->
+    <!-- ==================== CONTACTO (mailto con fallback) ==================== -->
     <section id="contact" class="contact-section mt-5 reveal">
         <div class="row g-4">
             <div class="col-md-6">
@@ -833,15 +833,17 @@
                 <p style="color: var(--text-secondary);">
                     Al hacer clic en el botón, se abrirá tu cliente de correo predeterminado con un mensaje ya preparado.
                 </p>
-                <a href="mailto:s.carmonawright@gmail.com?subject=Contacto%20desde%20portafolio&body=Hola%20Sebastián,%20me%20interesa%20contactarte%20para..." 
-                   class="btn-send" target="_blank">
+                <!-- Botón con doble funcionalidad: mailto + copiar al portapapeles -->
+                <button class="btn-send" id="emailButton" style="background: #6C63FF; border: none; color: white; padding: 10px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border: none;">
                     <i class="fas fa-paper-plane"></i> Abrir correo
-                </a>
+                </button>
                 <div class="mt-3">
                     <small style="color: var(--text-muted);">
-                        <i class="fas fa-info-circle"></i> Puedes copiar mi correo: <strong>s.carmonawright@gmail.com</strong>
+                        <i class="fas fa-info-circle"></i> Correo: <strong id="emailCopy">s.carmonawright@gmail.com</strong>
+                        <button class="btn btn-sm btn-outline-secondary ms-2" id="copyEmailBtn" style="border-color: var(--border-color); color: var(--text-secondary);">Copiar</button>
                     </small>
                 </div>
+                <div id="emailFeedback" class="mt-2" style="display: none;"></div>
             </div>
             <div class="col-md-6">
                 <h3><i class="fas fa-address-card me-2"></i> Contacto directo</h3>
@@ -977,62 +979,62 @@
     renderSkills();
 
     // ================================================================
-    // 5. SOAP DEMO
+    // 5. BOTÓN DE CORREO (con fallback)
     // ================================================================
-    document.getElementById('soapConvertBtn').addEventListener('click', function() {
-        const celsius = document.getElementById('celsiusInput').value.trim();
-        if (!celsius || isNaN(celsius)) {
-            document.getElementById('soapResult').innerHTML = '<span style="color: #ff6b6b;">❌ Ingresa un número válido</span>';
-            return;
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailBtn = document.getElementById('emailButton');
+        const copyBtn = document.getElementById('copyEmailBtn');
+        const emailAddress = document.getElementById('emailCopy').textContent;
+        const feedback = document.getElementById('emailFeedback');
+
+        // Función para abrir el correo (mailto)
+        function openMail() {
+            const subject = encodeURIComponent('Contacto desde portafolio');
+            const body = encodeURIComponent('Hola Sebastián, me interesa contactarte para...');
+            window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+            // Mostrar feedback de que se intentó abrir
+            feedback.style.display = 'block';
+            feedback.innerHTML = '<div class="alert alert-info" style="background: var(--bg-skill); border-color: var(--border-color); color: var(--text-secondary);">📨 Se está abriendo tu cliente de correo...</div>';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 5000);
         }
 
-        const resultBox = document.getElementById('soapResult');
-        resultBox.innerHTML = '<span class="text-muted">⏳ Enviando petición SOAP...</span>';
-
-        const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
-        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-            <soap:Body>
-                <CelsiusToFahrenheit xmlns="https://www.w3schools.com/xml/">
-                    <Celsius>${celsius}</Celsius>
-                </CelsiusToFahrenheit>
-            </soap:Body>
-        </soap:Envelope>`;
-
-        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-        const targetUrl = 'https://www.w3schools.com/xml/tempconvert.asmx';
-
-        fetch(proxyUrl + targetUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'text/xml; charset=utf-8',
-                'SOAPAction': 'https://www.w3schools.com/xml/CelsiusToFahrenheit'
-            },
-            body: soapRequest
-        })
-        .then(response => response.text())
-        .then(xmlText => {
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-            const resultNode = xmlDoc.getElementsByTagName('CelsiusToFahrenheitResult')[0];
-            if (resultNode) {
-                const fahrenheit = resultNode.textContent.trim();
-                resultBox.innerHTML = `
-                    <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                        <span style="font-weight:600; color:var(--text-primary);">🌡️ Resultado:</span>
-                        <span style="font-size:1.2rem; color:#6C63FF;">${celsius}°C = ${fahrenheit}°F</span>
-                    </div>
-                `;
-            } else {
-                resultBox.innerHTML = '<span style="color: #ff6b6b;">❌ No se pudo obtener el resultado.</span>';
-            }
-        })
-        .catch(error => {
-            resultBox.innerHTML = `<span style="color: #ff6b6b;">❌ Error: ${error.message}</span>`;
+        // Evento del botón principal
+        emailBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openMail();
         });
+
+        // Función para copiar al portapapeles
+        copyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(emailAddress).then(() => {
+                feedback.style.display = 'block';
+                feedback.innerHTML = '<div class="alert alert-success" style="background: var(--bg-skill); border-color: var(--border-color); color: var(--text-secondary);">✅ Correo copiado al portapapeles: ' + emailAddress + '</div>';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 4000);
+            }).catch(() => {
+                // Fallback: seleccionar el texto
+                const range = document.createRange();
+                range.selectNode(document.getElementById('emailCopy'));
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                feedback.style.display = 'block';
+                feedback.innerHTML = '<div class="alert alert-success" style="background: var(--bg-skill); border-color: var(--border-color); color: var(--text-secondary);">✅ Correo copiado al portapapeles (método alternativo).</div>';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 4000);
+            });
+        });
+
+        // También abrir correo al hacer clic en la dirección (opcional)
+        document.getElementById('emailCopy').addEventListener('click', openMail);
     });
 
     // ================================================================
-    // 6. CHATBOT
+    // 6. CHATBOT (sin cambios)
     // ================================================================
     const chatToggle = document.getElementById('chatToggleBtn');
     const chatWindow = document.getElementById('chatWindow');
@@ -1064,7 +1066,7 @@
             return "🏋️‍♂️ Le gusta el mantenimiento de hardware, instalación de cámaras, coach de Rocket League, ciclismo y viajes.";
         }
         if (q.includes('contacto') || q.includes('teléfono')) {
-            return "📞 Teléfono: (56 9) 76654966. También puedes contactarlo por correo: s.carmonawright@mail.com";
+            return "📞 Teléfono: (56 9) 76654966. También puedes contactarlo por correo: s.carmonawright@gmail.com";
         }
         if (q.includes('soap')) {
             return "🔁 En la sección 'Demostración SOAP' puedes probar una conversión de temperatura usando un servicio SOAP público.";
@@ -1097,40 +1099,42 @@
     chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
 
     // ================================================================
-    // 7. MODO OSCURO/CLARO
+    // 7. MODO OSCURO/CLARO (mejorado con DOMContentLoaded)
     // ================================================================
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeLabel = document.getElementById('themeLabel');
-    const themeIcon2 = document.getElementById('themeIcon2');
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeLabel = document.getElementById('themeLabel');
+        const themeIcon2 = document.getElementById('themeIcon2');
 
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
 
-    function applyTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        if (theme === 'light') {
-            themeIcon.className = 'fas fa-sun';
-            themeLabel.textContent = 'Modo claro';
-            themeIcon2.className = 'fas fa-moon';
-        } else {
-            themeIcon.className = 'fas fa-moon';
-            themeLabel.textContent = 'Modo oscuro';
-            themeIcon2.className = 'fas fa-sun';
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'light') {
+                themeIcon.className = 'fas fa-sun';
+                themeLabel.textContent = 'Modo claro';
+                themeIcon2.className = 'fas fa-moon';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                themeLabel.textContent = 'Modo oscuro';
+                themeIcon2.className = 'fas fa-sun';
+            }
         }
-    }
 
-    applyTheme(currentTheme);
+        applyTheme(currentTheme);
 
-    themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        const newTheme = current === 'dark' ? 'light' : 'dark';
-        applyTheme(newTheme);
+        themeToggle.addEventListener('click', function() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
     });
 
     // ================================================================
-    // 8. FOOTER CON FECHA
+    // 8. FOOTER CON FECHA (sin cambios)
     // ================================================================
     function updateFooterDate() {
         const footer = document.getElementById('dynamicFooter');
