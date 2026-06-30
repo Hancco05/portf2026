@@ -850,59 +850,23 @@
                 <div class="phone-item"><i class="fas fa-phone-alt"></i> (56 9) 76654966</div>
                 <div class="mail-direct"><i class="fas fa-inbox"></i> s.carmonawright@gmail.com</div>
                 <div class="d-flex gap-3 my-4 flex-wrap">
-                    <a href="#" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-                    <a href="#" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" target="_blank" class="social-icon"><i class="fab fa-dev"></i></a>
+                    <a href="https://github.com/Hancco05" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/sebastian-ignacio-carmona-wright/" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://dev.to/sicw_hancco05" target="_blank" class="social-icon"><i class="fab fa-dev"></i></a>
                 </div>
                 <p style="color: var(--text-secondary); font-size: 0.85rem;">
                     <i class="fas fa-code-branch me-1"></i> GitHub: /Hancco05 · Disponibilidad inmediata
                 </p>
             </div>
+            <div class="mt-4">
+            <a href="doc/cv_sebastian.docx" download id="descargarBtn" class="btn-send" style="background: #6C63FF; border: none; color: white; padding: 10px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+                <i class="fas fa-file-word"></i> Descargar CV (Word)
+            </a>
         </div>
+        </div>
+        
     </section>
 
-    <!-- ==================== CONTACTO (mailto con fallback + descarga Word) ==================== -->
-<section id="contact" class="contact-section mt-5 reveal">
-    <div class="row g-4">
-        <div class="col-md-6">
-            <h3><i class="fas fa-envelope me-2"></i> Envíame un mensaje</h3>
-            <p style="color: var(--text-secondary);">
-                Al hacer clic en el botón, se abrirá tu cliente de correo predeterminado con un mensaje ya preparado.
-            </p>
-            <!-- Botón de correo -->
-            <button class="btn-send" id="emailButton" style="background: #6C63FF; border: none; color: white; padding: 10px 24px; border-radius: 40px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border: none;">
-                <i class="fas fa-paper-plane"></i> Abrir correo
-            </button>
-            <div class="mt-3">
-                <small style="color: var(--text-muted);">
-                    <i class="fas fa-info-circle"></i> Correo: <strong id="emailCopy">s.carmonawright@gmail.com</strong>
-                    <button class="btn btn-sm btn-outline-secondary ms-2" id="copyEmailBtn" style="border-color: var(--border-color); color: var(--text-secondary);">Copiar</button>
-                </small>
-            </div>
-            <div id="emailFeedback" class="mt-2" style="display: none;"></div>
-
-            <!-- Botón de descarga de Word -->
-            <div class="mt-4">
-                <a href="doc/CV_Sebastian_Carmona.docx" download class="btn-send" style="background: #4CAF50; border: none; color: white; padding: 10px 24px; border-radius: 40px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
-                    <i class="fas fa-file-word"></i> Descargar CV (Word)
-                </a>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h3><i class="fas fa-address-card me-2"></i> Contacto directo</h3>
-            <div class="phone-item"><i class="fas fa-phone-alt"></i> (56 9) 76654966</div>
-            <div class="mail-direct"><i class="fas fa-inbox"></i> s.carmonawright@gmail.com</div>
-            <div class="d-flex gap-3 my-4 flex-wrap">
-                <a href="https://github.com/Hancco05" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
-                <a href="#" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" target="_blank" class="social-icon"><i class="fab fa-dev"></i></a>
-            </div>
-            <p style="color: var(--text-secondary); font-size: 0.85rem;">
-                <i class="fas fa-code-branch me-1"></i> GitHub: /Hancco05 · Disponibilidad inmediata
-            </p>
-        </div>
-    </div>
-</section>
 
     <!-- Footer -->
     <footer class="footer" id="dynamicFooter"></footer>
@@ -924,6 +888,32 @@
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu duda..." autocomplete="off">
             <button class="chat-send" id="chatSendBtn"><i class="fas fa-arrow-up"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== MODAL DE CONFIRMACIÓN PARA DESCARGA ==================== -->
+<div class="modal fade" id="confirmarDescargaModal" tabindex="-1" aria-labelledby="confirmarDescargaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 20px;">
+            <div class="modal-header" style="border-bottom: 1px solid var(--border-color);">
+                <h5 class="modal-title" id="confirmarDescargaLabel" style="color: var(--text-primary);">
+                    <i class="fas fa-file-word me-2" style="color: #6C63FF;"></i> Confirmar descarga
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
+            </div>
+            <div class="modal-body" style="color: var(--text-secondary); padding: 2rem 1.5rem;">
+                <p style="font-size: 1.05rem;">¿Estás seguro de que deseas descargar el documento?</p>
+                <small class="text-muted">El archivo se guardará en tu computadora.</small>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid var(--border-color);">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background: var(--bg-skill); border-color: var(--border-color); color: var(--text-secondary); border-radius: 40px; padding: 8px 24px;">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-primary" id="confirmarDescargaBtn" style="background: #6C63FF; border: none; border-radius: 40px; padding: 8px 24px; color: white; font-weight: 600;">
+                    <i class="fas fa-download me-2"></i> Sí, descargar
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -1190,6 +1180,45 @@
         }
     }
     updateFooterDate();
+
+    // ================================================================
+// 9. CONFIRMACIÓN DE DESCARGA CON MODAL
+// ================================================================
+document.addEventListener('DOMContentLoaded', function() {
+    const descargarBtn = document.getElementById('descargarBtn');
+    const confirmarBtn = document.getElementById('confirmarDescargaBtn');
+    const modalElement = document.getElementById('confirmarDescargaModal');
+
+    if (descargarBtn && confirmarBtn && modalElement) {
+        // Crear instancia del modal de Bootstrap
+        const modal = new bootstrap.Modal(modalElement, {
+            backdrop: 'static', // Evita cerrar al hacer clic fuera
+            keyboard: false
+        });
+
+        // Al hacer clic en el botón de descarga, mostrar el modal
+        descargarBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // Evita que el enlace se ejecute directamente
+            modal.show(); // Muestra el modal de confirmación
+        });
+
+        // Al hacer clic en "Sí, descargar" en el modal
+        confirmarBtn.addEventListener('click', function() {
+            // Forzar la descarga usando el href del botón original
+            const url = descargarBtn.href;
+            window.location.href = url; // Esto inicia la descarga
+
+            // Cerrar el modal después de iniciar la descarga
+            modal.hide();
+
+            // (Opcional) Mostrar un pequeño feedback en el botón
+            descargarBtn.innerHTML = '<i class="fas fa-check"></i> Descargando...';
+            setTimeout(() => {
+                descargarBtn.innerHTML = '<i class="fas fa-file-word"></i> Descargar CV (Word)';
+            }, 3000);
+        });
+    }
+});
 </script>
 </body>
 </html>
